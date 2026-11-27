@@ -34,6 +34,7 @@
       display: block;
       z-index: 1;
       background: #87b5d6;
+      touch-action: none;
     }
 
     .hud-top {
@@ -183,7 +184,6 @@
       transform: scale(0.94);
     }
 
-    /* Persistent Chat Box & Input */
     #chat-panel {
       position: fixed;
       top: 74px;
@@ -263,7 +263,6 @@
       flex-shrink: 0;
     }
 
-    /* Visit Request Popup (Accept / Reject) */
     #visit-request-banner {
       position: fixed;
       top: 120px;
@@ -299,10 +298,11 @@
       background: rgba(6, 78, 59, 0.94);
       border: 1.5px solid #34d399;
       border-radius: 12px;
-      padding: 5px 10px;
+      padding: 6px 10px;
       display: none;
+      flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 4px;
       z-index: 145;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
       max-width: 94vw;
@@ -312,7 +312,19 @@
       color: #ecfdf5;
       font-size: 11px;
       font-weight: 800;
-      white-space: nowrap;
+      text-align: center;
+    }
+
+    #birdcam-details {
+      color: #a7f3d0;
+      font-size: 10px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .birdcam-nav-row {
+      display: flex;
+      gap: 6px;
     }
 
     .birdcam-nav-btn {
@@ -354,14 +366,14 @@
       bottom: 150px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(14, 14, 18, 0.95);
+      background: rgba(14, 14, 18, 0.96);
       border: 1.5px solid #dc2626;
       border-radius: 13px;
       padding: 7px 10px;
       display: none;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       z-index: 140;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65);
       max-width: 95vw;
@@ -372,6 +384,14 @@
       font-size: 11px;
       font-weight: 800;
       text-align: center;
+    }
+
+    #held-bird-info {
+      color: #fde68a;
+      font-size: 9.8px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.35;
     }
 
     .held-actions {
@@ -694,6 +714,7 @@
       <div class="hud-pill">الباب: <span id="stat-door">مغلق</span></div>
       <div class="hud-pill save-ok" id="stat-save">حفظ تلقائي ✓</div>
       <button id="btn-visit" class="hud-btn visit-btn" type="button">زيارة سطح</button>
+      <button id="btn-return-home" class="hud-btn visit-btn" type="button" style="display:none;">رجوع لسطحي</button>
       <button id="btn-kick-visitor" class="hud-btn kick-btn" type="button" style="display:none;">طرد زائر</button>
       <button id="btn-leaderboard" class="hud-btn online-btn" type="button">ترتيب اللاعبين</button>
       <button id="btn-market" class="hud-btn market-btn" type="button">السوق</button>
@@ -726,8 +747,11 @@
   <!-- Bird Cam Floating Controls -->
   <div id="birdcam-bar">
     <span id="birdcam-label">مشاهدة طير: زاجل</span>
-    <button id="btn-birdcam-next" class="birdcam-nav-btn" type="button">الطير التالي</button>
-    <button id="btn-birdcam-exit" class="birdcam-nav-btn" style="background:#991b1b; border-color:#fca5a5;" type="button">رجوع للاعب</button>
+    <span id="birdcam-details">النوع: زاجل • الحالة: بالقفص • السرعة: 12.8</span>
+    <div class="birdcam-nav-row">
+      <button id="btn-birdcam-next" class="birdcam-nav-btn" type="button">الطير التالي</button>
+      <button id="btn-birdcam-exit" class="birdcam-nav-btn" style="background:#991b1b; border-color:#fca5a5;" type="button">رجوع للاعب</button>
+    </div>
   </div>
 
   <div id="toast-msg"></div>
@@ -735,6 +759,7 @@
   <!-- Held / Tamed Bird Floating Control Bar -->
   <div id="held-bird-bar">
     <div id="held-bird-title">ماسك طير: زاجل</div>
+    <div id="held-bird-info">النوع: زاجل • الحالة: ممسوك • النمو: 100%</div>
     <div class="held-actions">
       <button id="btn-put-ground" class="held-act-btn" type="button">حطّه بالكاع</button>
       <button id="btn-release-fly" class="held-act-btn" type="button">طيّره بالسماء</button>
@@ -876,20 +901,20 @@
     })();
 
     function initPigeonKingdomOnline() {
-      const SAVE_KEY = 'pigeon_kingdom_online_v2';
+      const SAVE_KEY = 'pigeon_kingdom_online_v3';
       const SERVER_URL = 'wss://Super-octo-happinessmm-production.up.railway.app';
       const canvas = document.getElementById('game-canvas');
       const SKY_COLOR = 0x87b5d6;
 
       const scene = new THREE.Scene();
       scene.background = new THREE.Color(SKY_COLOR);
-      scene.fog = new THREE.FogExp2(SKY_COLOR, 0.0014);
+      scene.fog = new THREE.FogExp2(SKY_COLOR, 0.0012);
 
       const camera = new THREE.PerspectiveCamera(
         56,
         (window.innerWidth || 1280) / (window.innerHeight || 720),
         0.1,
-        1600
+        1800
       );
 
       let renderer;
@@ -926,7 +951,7 @@
         line.appendChild(authSpan);
         line.appendChild(document.createTextNode(text));
         chatMessagesEl.appendChild(line);
-        while (chatMessagesEl.children.length > 45) {
+        while (chatMessagesEl.children.length > 50) {
           chatMessagesEl.removeChild(chatMessagesEl.firstChild);
         }
         chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
@@ -973,9 +998,11 @@
       let leaderboardData = [];
       let pendingVisitRequester = null;
       let currentVisitorId = null;
+      let visitingTarget = null; // { id, slot, name, roofX, roofZ } when visiting another player's roof
 
       const gameState = {
         coins: 250,
+        lastLaunchRewardTime: 0,
         feeds: { qamh: 5, adas: 0, taman: 0, mashboosh: 0 },
         waters: { bori: 3, helo: 0, zamzam: 0 },
         coopLevel: 1,
@@ -993,11 +1020,18 @@
         tamedPerchMode: 'hand',
         activeFeedPile: null,
         activeWaterPile: null,
-        miniTowers: [],
         eggs: [],
         birdCamActive: false,
         birdCamIndex: 0
       };
+
+      function getActiveWorldRoofX() {
+        return visitingTarget ? visitingTarget.roofX : myRoofX;
+      }
+
+      function getActiveWorldRoofZ() {
+        return visitingTarget ? visitingTarget.roofZ : myRoofZ;
+      }
 
       function getTotalFeed() {
         return (gameState.feeds.qamh || 0) + (gameState.feeds.adas || 0) + (gameState.feeds.taman || 0) + (gameState.feeds.mashboosh || 0);
@@ -1036,8 +1070,11 @@
         document.getElementById('stat-chicks').textContent = chicksCount;
         document.getElementById('stat-eggs').textContent = gameState.eggs.length;
         const skinObj = SKINS.find((s) => s.id === gameState.currentSkin) || SKINS[0];
-        document.getElementById('hud-skin-label').textContent = `سطح #${mySlot} • ${skinObj.name}`;
+        document.getElementById('hud-skin-label').textContent = visitingTarget
+          ? `زيارة سطح #${visitingTarget.slot} • ${visitingTarget.name}`
+          : `سطح #${mySlot} • ${skinObj.name}`;
         document.getElementById('btn-kick-visitor').style.display = currentVisitorId ? 'inline-block' : 'none';
+        document.getElementById('btn-return-home').style.display = visitingTarget ? 'inline-block' : 'none';
       }
 
       // Lighting & Clouds
@@ -1197,16 +1234,22 @@
         return sprite;
       }
 
+      const sharedRoofTileTex = createRoofTileTexture();
+      const sharedBrickTex = createBrickTexture();
+      const sharedDiamondTex = createDiamondSteelTexture();
+      const sharedWireTex = createWireMeshTexture();
+      const sharedFlagTex = createIraqiFlagTexture();
+
       // World Ground
       const groundMesh = new THREE.Mesh(
-        new THREE.PlaneGeometry(1800, 1800),
+        new THREE.PlaneGeometry(2400, 2400),
         new THREE.MeshStandardMaterial({ color: 0x57534e, roughness: 0.92 })
       );
       groundMesh.rotation.x = -Math.PI / 2;
       groundMesh.receiveShadow = true;
       scene.add(groundMesh);
 
-      // Realistic Character Builder (Head, Neck, Torso, Shoulders, Arms, Hands, Legs, Shoes/Sandals)
+      // Realistic Character Builder
       function createRealisticCharacterGroup(skinId, scale = 1.0) {
         const g = new THREE.Group();
         g.scale.set(scale, scale, scale);
@@ -1326,81 +1369,142 @@
         return { group: g, headGroup, leftArmPivot, rightArmPivot, leftLegPivot, rightLegPivot };
       }
 
-      // Player's Own Rooftop & House
-      const myHouseGroup = new THREE.Group();
+      // Reusable Complete Rooftop + Coop + Flag + Bowl Builder (for local & remote players)
+      const COOP = {
+        x: 2.0,
+        z: -4.2,
+        w: 7.0,
+        d: 5.5,
+        h: 3.2,
+        isOpen: false,
+        doorXStart: -1.35,
+        doorXEnd: 0.25
+      };
+
+      const beigeSteelMat = new THREE.MeshStandardMaterial({ color: 0xd6ccb8, metalness: 0.35, roughness: 0.45 });
+      const diamondSteelMat = new THREE.MeshStandardMaterial({ map: sharedDiamondTex, metalness: 0.32, roughness: 0.45 });
+      const wireMeshMat = new THREE.MeshStandardMaterial({ map: sharedWireTex, transparent: true, side: THREE.DoubleSide });
+      const houseMat = new THREE.MeshStandardMaterial({ map: sharedBrickTex, roughness: 0.85 });
+      const roofTileMat = new THREE.MeshStandardMaterial({ map: sharedRoofTileTex, roughness: 0.8 });
+
+      function createFullRooftopStructure(isDoorOpenInitial = false) {
+        const root = new THREE.Group();
+
+        const body = new THREE.Mesh(new THREE.BoxGeometry(24, ROOF_Y, 24), houseMat);
+        body.position.set(0, ROOF_Y / 2, 0);
+        body.receiveShadow = true;
+        body.castShadow = true;
+        root.add(body);
+
+        const floor = new THREE.Mesh(new THREE.BoxGeometry(24.2, 0.3, 24.2), roofTileMat);
+        floor.position.set(0, ROOF_Y - 0.12, 0);
+        floor.receiveShadow = true;
+        root.add(floor);
+
+        const wallH = 1.15;
+        const wallT = 0.45;
+        const wN = new THREE.Mesh(new THREE.BoxGeometry(24.4, wallH, wallT), houseMat);
+        wN.position.set(0, ROOF_Y + wallH / 2, -11.8);
+        const wS = new THREE.Mesh(new THREE.BoxGeometry(24.4, wallH, wallT), houseMat);
+        wS.position.set(0, ROOF_Y + wallH / 2, 11.8);
+        const wE = new THREE.Mesh(new THREE.BoxGeometry(wallT, wallH, 24.0), houseMat);
+        wE.position.set(11.8, ROOF_Y + wallH / 2, 0);
+        const wWN = new THREE.Mesh(new THREE.BoxGeometry(wallT, wallH, 16.0), houseMat);
+        wWN.position.set(-11.8, ROOF_Y + wallH / 2, -4.0);
+        const wWS = new THREE.Mesh(new THREE.BoxGeometry(wallT, wallH, 5.0), houseMat);
+        wWS.position.set(-11.8, ROOF_Y + wallH / 2, 9.5);
+        root.add(wN, wS, wE, wWN, wWS);
+
+        // Water bowl
+        const bowlRim = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.55, 0.45, 0.18, 20),
+          new THREE.MeshStandardMaterial({ color: 0x991b1b, roughness: 0.4 })
+        );
+        bowlRim.position.set(-2.2, ROOF_Y + 0.09, 2.4);
+        const waterSurf = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.49, 0.49, 0.04, 20),
+          new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.15, metalness: 0.2 })
+        );
+        waterSurf.position.set(-2.2, ROOF_Y + 0.17, 2.4);
+        waterSurf.visible = false;
+        root.add(bowlRim, waterSurf);
+
+        // Flag pole + Iraqi flag
+        const pole = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.06, 0.08, 5.2, 12),
+          new THREE.MeshStandardMaterial({ color: 0xe5e7eb, metalness: 0.7, roughness: 0.25 })
+        );
+        pole.position.set(-9.6, ROOF_Y + 2.6, -9.6);
+        const flagMesh = new THREE.Mesh(
+          new THREE.PlaneGeometry(2.5, 1.55, 12, 8),
+          new THREE.MeshStandardMaterial({ map: sharedFlagTex, side: THREE.DoubleSide, roughness: 0.55 })
+        );
+        flagMesh.position.set(-8.32, ROOF_Y + 4.35, -9.6);
+        root.add(pole, flagMesh);
+
+        // Full Coop + Door Pivot
+        const cGroup = new THREE.Group();
+        cGroup.position.set(COOP.x, ROOF_Y, COOP.z);
+        root.add(cGroup);
+
+        const cRoof = new THREE.Mesh(new THREE.BoxGeometry(COOP.w + 0.5, 0.16, COOP.d + 0.5), beigeSteelMat);
+        cRoof.position.set(0, COOP.h + 0.08, 0);
+        cGroup.add(cRoof);
+
+        const backW = new THREE.Mesh(new THREE.BoxGeometry(COOP.w, COOP.h, 0.14), diamondSteelMat);
+        backW.position.set(0, COOP.h / 2, -COOP.d / 2);
+        cGroup.add(backW);
+
+        [-1, 1].forEach((side) => {
+          const lp = new THREE.Mesh(new THREE.BoxGeometry(0.14, 1.35, COOP.d), diamondSteelMat);
+          lp.position.set(side * (COOP.w / 2), 0.675, 0);
+          const uw = new THREE.Mesh(new THREE.PlaneGeometry(COOP.d - 0.2, COOP.h - 1.35), wireMeshMat);
+          uw.position.set(side * (COOP.w / 2), 1.35 + (COOP.h - 1.35) / 2, 0);
+          uw.rotation.y = Math.PI / 2;
+          cGroup.add(lp, uw);
+        });
+
+        const frontZ = COOP.d / 2;
+        const leftFrontW = COOP.w / 2 + COOP.doorXStart;
+        const leftFront = new THREE.Mesh(new THREE.BoxGeometry(leftFrontW, COOP.h, 0.14), diamondSteelMat);
+        leftFront.position.set(-COOP.w / 2 + leftFrontW / 2, COOP.h / 2, frontZ);
+        cGroup.add(leftFront);
+
+        const rightFrontW = COOP.w / 2 - COOP.doorXEnd;
+        const rightFront = new THREE.Mesh(new THREE.BoxGeometry(rightFrontW, COOP.h, 0.14), diamondSteelMat);
+        rightFront.position.set(COOP.doorXEnd + rightFrontW / 2, COOP.h / 2, frontZ);
+        cGroup.add(rightFront);
+
+        const doorW = COOP.doorXEnd - COOP.doorXStart;
+        const doorH = 2.25;
+        const doorHeader = new THREE.Mesh(new THREE.BoxGeometry(doorW, COOP.h - doorH, 0.14), beigeSteelMat);
+        doorHeader.position.set(COOP.doorXStart + doorW / 2, doorH + (COOP.h - doorH) / 2, frontZ);
+        cGroup.add(doorHeader);
+
+        const dPivot = new THREE.Group();
+        dPivot.position.set(COOP.doorXStart, 0, frontZ);
+        cGroup.add(dPivot);
+
+        const dLower = new THREE.Mesh(new THREE.BoxGeometry(doorW, 1.1, 0.1), diamondSteelMat);
+        dLower.position.set(doorW / 2, 0.55, 0);
+        const dUpper = new THREE.Mesh(new THREE.PlaneGeometry(doorW - 0.12, doorH - 1.15), wireMeshMat);
+        dUpper.position.set(doorW / 2, 1.1 + (doorH - 1.15) / 2, 0);
+        dPivot.add(dLower, dUpper);
+        dPivot.rotation.y = isDoorOpenInitial ? -Math.PI * 0.62 : 0;
+
+        return { root, doorPivot: dPivot, waterSurf, flagMesh };
+      }
+
+      // Player's Own Complete Rooftop
+      const myStructure = createFullRooftopStructure(false);
+      const myHouseGroup = myStructure.root;
+      const doorPivot = myStructure.doorPivot;
+      const waterSurface = myStructure.waterSurf;
+      const flagMesh = myStructure.flagMesh;
+      const flagBasePositions = Float32Array.from(flagMesh.geometry.attributes.position.array);
       scene.add(myHouseGroup);
 
-      const roofGroup = new THREE.Group();
-      myHouseGroup.add(roofGroup);
-
-      const houseMat = new THREE.MeshStandardMaterial({ map: createBrickTexture(), roughness: 0.85 });
-      const houseBody = new THREE.Mesh(new THREE.BoxGeometry(24, ROOF_Y, 24), houseMat);
-      houseBody.position.set(0, ROOF_Y / 2, 0);
-      houseBody.receiveShadow = true;
-      houseBody.castShadow = true;
-      myHouseGroup.add(houseBody);
-
-      const roofFloor = new THREE.Mesh(
-        new THREE.BoxGeometry(24.2, 0.3, 24.2),
-        new THREE.MeshStandardMaterial({ map: createRoofTileTexture(), roughness: 0.8 })
-      );
-      roofFloor.position.set(0, ROOF_Y - 0.12, 0);
-      roofFloor.receiveShadow = true;
-      roofGroup.add(roofFloor);
-
-      const wallMat = new THREE.MeshStandardMaterial({ map: createBrickTexture(), roughness: 0.85 });
-      const wallH = 1.15;
-      const wallT = 0.45;
-      const wallNorth = new THREE.Mesh(new THREE.BoxGeometry(24.4, wallH, wallT), wallMat);
-      wallNorth.position.set(0, ROOF_Y + wallH / 2, -11.8);
-      const wallSouth = new THREE.Mesh(new THREE.BoxGeometry(24.4, wallH, wallT), wallMat);
-      wallSouth.position.set(0, ROOF_Y + wallH / 2, 11.8);
-      const wallEast = new THREE.Mesh(new THREE.BoxGeometry(wallT, wallH, 24.0), wallMat);
-      wallEast.position.set(11.8, ROOF_Y + wallH / 2, 0);
-      const wallWestNorth = new THREE.Mesh(new THREE.BoxGeometry(wallT, wallH, 16.0), wallMat);
-      wallWestNorth.position.set(-11.8, ROOF_Y + wallH / 2, -4.0);
-      const wallWestSouth = new THREE.Mesh(new THREE.BoxGeometry(wallT, wallH, 5.0), wallMat);
-      wallWestSouth.position.set(-11.8, ROOF_Y + wallH / 2, 9.5);
-      roofGroup.add(wallNorth, wallSouth, wallEast, wallWestNorth, wallWestSouth);
-
-      const waterBowlGroup = new THREE.Group();
-      waterBowlGroup.position.set(-2.2, ROOF_Y, 2.4);
-      const bowlRim = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.55, 0.45, 0.18, 20),
-        new THREE.MeshStandardMaterial({ color: 0x991b1b, roughness: 0.4 })
-      );
-      bowlRim.position.y = 0.09;
-      const waterSurface = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.49, 0.49, 0.04, 20),
-        new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.15, metalness: 0.2 })
-      );
-      waterSurface.position.y = 0.17;
-      waterSurface.visible = false;
-      waterBowlGroup.add(bowlRim, waterSurface);
-      roofGroup.add(waterBowlGroup);
-
-      const flagGroup = new THREE.Group();
-      flagGroup.position.set(-9.6, ROOF_Y, -9.6);
-      const pole = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.06, 0.08, 5.2, 12),
-        new THREE.MeshStandardMaterial({ color: 0xe5e7eb, metalness: 0.7, roughness: 0.25 })
-      );
-      pole.position.y = 2.6;
-      flagGroup.add(pole);
-
-      const flagGeo = new THREE.PlaneGeometry(2.5, 1.55, 18, 10);
-      const flagMat = new THREE.MeshStandardMaterial({
-        map: createIraqiFlagTexture(),
-        side: THREE.DoubleSide,
-        roughness: 0.55
-      });
-      const flagMesh = new THREE.Mesh(flagGeo, flagMat);
-      flagMesh.position.set(1.28, 4.35, 0);
-      flagGroup.add(flagMesh);
-      roofGroup.add(flagGroup);
-      const flagBasePositions = Float32Array.from(flagGeo.attributes.position.array);
-
-      // Falcon & Eagle above player's sky sector
+      // Falcon & Eagle above active sky sector
       const falconGroup = new THREE.Group();
       const falconBody = new THREE.Mesh(new THREE.ConeGeometry(0.26, 0.96, 10), new THREE.MeshStandardMaterial({ color: 0x5c3a21 }));
       falconBody.rotation.x = Math.PI / 2;
@@ -1424,77 +1528,6 @@
       eagleGroup.add(eagleBody, eagleHead, eagleWingL, eagleWingR);
       eagleGroup.visible = false;
       scene.add(eagleGroup);
-
-      // Coop
-      const COOP = {
-        x: 2.0,
-        z: -4.2,
-        w: 7.0,
-        d: 5.5,
-        h: 3.2,
-        isOpen: false,
-        doorXStart: -1.35,
-        doorXEnd: 0.25
-      };
-
-      const beigeSteelMat = new THREE.MeshStandardMaterial({ color: 0xd6ccb8, metalness: 0.35, roughness: 0.45 });
-      const diamondSteelMat = new THREE.MeshStandardMaterial({ map: createDiamondSteelTexture(), metalness: 0.32, roughness: 0.45 });
-      const wireMeshMat = new THREE.MeshStandardMaterial({ map: createWireMeshTexture(), transparent: true, side: THREE.DoubleSide });
-
-      const coopGroup = new THREE.Group();
-      roofGroup.add(coopGroup);
-      let doorPivot = null;
-
-      function buildMainCoopMesh() {
-        while (coopGroup.children.length > 0) coopGroup.remove(coopGroup.children[0]);
-        coopGroup.position.set(COOP.x, ROOF_Y, COOP.z);
-
-        const coopRoof = new THREE.Mesh(new THREE.BoxGeometry(COOP.w + 0.5, 0.16, COOP.d + 0.5), beigeSteelMat);
-        coopRoof.position.set(0, COOP.h + 0.08, 0);
-        coopGroup.add(coopRoof);
-
-        const backWall = new THREE.Mesh(new THREE.BoxGeometry(COOP.w, COOP.h, 0.14), diamondSteelMat);
-        backWall.position.set(0, COOP.h / 2, -COOP.d / 2);
-        coopGroup.add(backWall);
-
-        [-1, 1].forEach((side) => {
-          const lowerPanel = new THREE.Mesh(new THREE.BoxGeometry(0.14, 1.35, COOP.d), diamondSteelMat);
-          lowerPanel.position.set(side * (COOP.w / 2), 0.675, 0);
-          const upperWire = new THREE.Mesh(new THREE.PlaneGeometry(COOP.d - 0.2, COOP.h - 1.35), wireMeshMat);
-          upperWire.position.set(side * (COOP.w / 2), 1.35 + (COOP.h - 1.35) / 2, 0);
-          upperWire.rotation.y = Math.PI / 2;
-          coopGroup.add(lowerPanel, upperWire);
-        });
-
-        const frontZ = COOP.d / 2;
-        const leftFrontW = COOP.w / 2 + COOP.doorXStart;
-        const leftFront = new THREE.Mesh(new THREE.BoxGeometry(leftFrontW, COOP.h, 0.14), diamondSteelMat);
-        leftFront.position.set(-COOP.w / 2 + leftFrontW / 2, COOP.h / 2, frontZ);
-        coopGroup.add(leftFront);
-
-        const rightFrontW = COOP.w / 2 - COOP.doorXEnd;
-        const rightFront = new THREE.Mesh(new THREE.BoxGeometry(rightFrontW, COOP.h, 0.14), diamondSteelMat);
-        rightFront.position.set(COOP.doorXEnd + rightFrontW / 2, COOP.h / 2, frontZ);
-        coopGroup.add(rightFront);
-
-        const doorW = COOP.doorXEnd - COOP.doorXStart;
-        const doorH = 2.25;
-        const doorHeader = new THREE.Mesh(new THREE.BoxGeometry(doorW, COOP.h - doorH, 0.14), beigeSteelMat);
-        doorHeader.position.set(COOP.doorXStart + doorW / 2, doorH + (COOP.h - doorH) / 2, frontZ);
-        coopGroup.add(doorHeader);
-
-        doorPivot = new THREE.Group();
-        doorPivot.position.set(COOP.doorXStart, 0, frontZ);
-        coopGroup.add(doorPivot);
-
-        const doorLower = new THREE.Mesh(new THREE.BoxGeometry(doorW, 1.1, 0.1), diamondSteelMat);
-        doorLower.position.set(doorW / 2, 0.55, 0);
-        const doorUpperWire = new THREE.Mesh(new THREE.PlaneGeometry(doorW - 0.12, doorH - 1.15), wireMeshMat);
-        doorUpperWire.position.set(doorW / 2, 1.1 + (doorH - 1.15) / 2, 0);
-        doorPivot.add(doorLower, doorUpperWire);
-        doorPivot.rotation.y = COOP.isOpen ? -Math.PI * 0.62 : 0;
-      }
-      buildMainCoopMesh();
 
       // Web Audio Whistle
       let audioCtx = null;
@@ -1526,7 +1559,7 @@
         } catch (e) {}
       }
 
-      // Eggs & Realistic Pigeon
+      // Eggs & Realistic Pigeon with Details
       const eggMat = new THREE.MeshStandardMaterial({ color: 0xfefce8, roughness: 0.35 });
       function spawnEggInCoop(breed, lx, lz, savedTimer = 34) {
         const eggMesh = new THREE.Mesh(new THREE.SphereGeometry(0.085, 12, 12), eggMat);
@@ -1559,7 +1592,6 @@
           const eyeIrisMat = new THREE.MeshBasicMaterial({ color: breed.eye });
           const pupilMat = new THREE.MeshBasicMaterial({ color: 0x09090b });
 
-          // Realistic contoured pigeon body + breast
           const torso = new THREE.Mesh(new THREE.SphereGeometry(0.16, 18, 16), bodyMat);
           torso.scale.set(0.86, 0.92, 1.48);
           torso.position.set(0, 0.24, -0.02);
@@ -1568,7 +1600,6 @@
           breast.position.set(0, 0.27, 0.12);
           this.group.add(torso, breast);
 
-          // Head, cere, eyes, beak
           this.headGroup = new THREE.Group();
           this.headGroup.position.set(0, 0.36, 0.14);
           this.group.add(this.headGroup);
@@ -1596,13 +1627,11 @@
           beak.position.set(0, 0.068, 0.145);
           this.headGroup.add(beak);
 
-          // Feathered tail fan
           const tail = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.016, 0.28), wingMat);
           tail.position.set(0, 0.21, -0.29);
           tail.rotation.x = -0.12;
           this.group.add(tail);
 
-          // Articulated legs + toes
           this.leftLeg = new THREE.Group();
           this.leftLeg.position.set(0.056, 0.16, 0.01);
           const lShin = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.01, 0.14, 8), legMat);
@@ -1620,7 +1649,6 @@
           this.rightLeg.add(rShin, rToe);
           this.group.add(this.leftLeg, this.rightLeg);
 
-          // Multi-jointed Wings (inner arm wing + outer primary feather tip)
           this.leftWing = new THREE.Group();
           this.leftWing.position.set(0.105, 0.27, 0.03);
           const lInner = new THREE.Mesh(new THREE.BoxGeometry(0.20, 0.022, 0.22), wingMat);
@@ -1643,7 +1671,6 @@
           this.applyGrowthScale();
 
           this.isInsideCoop = options.isInsideCoop !== undefined ? options.isInsideCoop : true;
-          this.assignedTower = null;
 
           const lx = this.isInsideCoop ? COOP.x + (Math.random() - 0.5) * (COOP.w - 1.4) : -2.0 + (Math.random() - 0.5) * 9.0;
           const lz = this.isInsideCoop ? COOP.z + (Math.random() - 0.5) * (COOP.d - 1.4) : 3.0 + (Math.random() - 0.5) * 7.0;
@@ -1668,6 +1695,18 @@
           if (this.isChick) return `فرخ ${base} ${Math.floor(this.growth)}%`;
           if (this.isTamed) return `★ ${base}`;
           return base;
+        }
+
+        getDetailsText() {
+          let stateAr = 'يمشي على السطح';
+          if (this.state === 'FLYING') stateAr = 'يطير بالسماء';
+          else if (this.state === 'LANDING') stateAr = 'ينزل للسطح';
+          else if (this.state === 'EXITING_DOOR') stateAr = 'خارج من القفص';
+          else if (this.state === 'HELD') stateAr = 'ممسوك باليد';
+          else if (this.state === 'TAMED_PERCHED' || this.state === 'TAMED_FLY_TO_PLAYER') stateAr = 'طير أليف';
+          else if (this.isInsideCoop) stateAr = 'داخل القفص';
+          const title = this.customName ? `${this.customName} • ` : '';
+          return `${title}النوع: ${this.breed.name} • الحالة: ${stateAr} • النمو: ${Math.floor(this.growth)}% • السرعة: ${this.breed.speed}`;
         }
 
         refreshLabel() {
@@ -1714,8 +1753,8 @@
         }
 
         commandLaunch() {
-          if (this.isChick) return;
-          if (this.state === 'FLYING' || this.state === 'HELD' || this.state === 'TAMED_PERCHED') return;
+          if (this.isChick) return false;
+          if (this.state === 'FLYING' || this.state === 'HELD' || this.state === 'TAMED_PERCHED') return false;
           if (this.isInsideCoop) {
             if (!COOP.isOpen) {
               COOP.isOpen = true;
@@ -1725,6 +1764,7 @@
           } else {
             this.startSkyFlight();
           }
+          return true;
         }
 
         commandLand() {
@@ -1925,7 +1965,7 @@
 
         jump() {
           if (this.isGrounded) {
-            this.velY = 8.4;
+            this.velY = 8.8;
             this.isGrounded = false;
           }
         }
@@ -1942,23 +1982,25 @@
         }
 
         resolveCollisions(nx, nz) {
+          const baseRoofX = getActiveWorldRoofX();
+          const baseRoofZ = getActiveWorldRoofZ();
           let x = nx;
           let z = nz;
-          const r = 0.45;
-          const limitXMin = myRoofX - ROOF_HALF + 0.52;
-          const limitXMax = myRoofX + ROOF_HALF - 0.52;
-          const limitZMin = myRoofZ - ROOF_HALF + 0.52;
-          const limitZMax = myRoofZ + ROOF_HALF - 0.52;
+          const r = 0.42;
+          const limitXMin = baseRoofX - ROOF_HALF + 0.52;
+          const limitXMax = baseRoofX + ROOF_HALF - 0.52;
+          const limitZMin = baseRoofZ - ROOF_HALF + 0.52;
+          const limitZMax = baseRoofZ + ROOF_HALF - 0.52;
 
           if (x > limitXMax) x = limitXMax;
           if (x < limitXMin) x = limitXMin;
           if (z > limitZMax) z = limitZMax;
           if (z < limitZMin) z = limitZMin;
 
-          const cMinX = myRoofX + COOP.x - COOP.w / 2;
-          const cMaxX = myRoofX + COOP.x + COOP.w / 2;
-          const cMinZ = myRoofZ + COOP.z - COOP.d / 2;
-          const cMaxZ = myRoofZ + COOP.z + COOP.d / 2;
+          const cMinX = baseRoofX + COOP.x - COOP.w / 2;
+          const cMaxX = baseRoofX + COOP.x + COOP.w / 2;
+          const cMinZ = baseRoofZ + COOP.z - COOP.d / 2;
+          const cMaxZ = baseRoofZ + COOP.z + COOP.d / 2;
           const wallThick = 0.14;
 
           let res = this.pushOutBox(x, z, cMinX - r, cMaxX + r, cMinZ - wallThick - r, cMinZ + wallThick + r);
@@ -1968,8 +2010,8 @@
           res = this.pushOutBox(x, z, cMaxX - wallThick - r, cMaxX + wallThick + r, cMinZ - r, cMaxZ + r);
           x = res.x; z = res.z;
 
-          const doorWorldStart = myRoofX + COOP.x + COOP.doorXStart;
-          const doorWorldEnd = myRoofX + COOP.x + COOP.doorXEnd;
+          const doorWorldStart = baseRoofX + COOP.x + COOP.doorXStart;
+          const doorWorldEnd = baseRoofX + COOP.x + COOP.doorXEnd;
           res = this.pushOutBox(x, z, cMinX - r, doorWorldStart + 0.12, cMaxZ - wallThick - r, cMaxZ + wallThick + r);
           x = res.x; z = res.z;
           res = this.pushOutBox(x, z, doorWorldEnd - 0.12, cMaxX + r, cMaxZ - wallThick - r, cMaxZ + wallThick + r);
@@ -1994,7 +2036,7 @@
           if (wishDir.lengthSq() > 0.002) {
             isMoving = true;
             wishDir.normalize();
-            const stepDist = (5.4 * dt) / 3;
+            const stepDist = (5.6 * dt) / 3;
             for (let s = 0; s < 3; s++) {
               const res = this.resolveCollisions(curX + wishDir.x * stepDist, curZ + wishDir.z * stepDist);
               curX = res.x; curZ = res.z;
@@ -2009,7 +2051,7 @@
           this.group.position.x = curX;
           this.group.position.z = curZ;
 
-          this.velY -= 21.0 * dt;
+          this.velY -= 21.5 * dt;
           this.group.position.y += this.velY * dt;
           if (this.group.position.y <= ROOF_Y) {
             this.group.position.y = ROOF_Y;
@@ -2020,7 +2062,7 @@
           }
 
           if (isMoving && this.isGrounded) {
-            this.walkCycle += dt * 11;
+            this.walkCycle += dt * 11.5;
             const swing = Math.sin(this.walkCycle) * 0.58;
             this.leftLegPivot.rotation.x = swing;
             this.rightLegPivot.rotation.x = -swing;
@@ -2056,7 +2098,7 @@
         myRoofZ = newRoofZ;
         mySlot = newSlot;
         myHouseGroup.position.set(myRoofX, 0, myRoofZ);
-        if (player) {
+        if (player && !visitingTarget) {
           player.group.position.x += dx;
           player.group.position.z += dz;
         }
@@ -2075,8 +2117,8 @@
 
       player = new PlayerCharacter();
 
-      // Remote Players, Their Rooftops & Their Flying/Ground Pigeons
-      const remotePlayers = new Map(); // id -> { data, group, house, birdMeshes }
+      // Remote Players, Their FULL Rooftops + Coops + Flags + Flying & Ground Pigeons
+      const remotePlayers = new Map();
 
       function createRemoteBirdMesh(breedId) {
         const breed = BREEDS.find((b) => b.id === breedId) || BREEDS[0];
@@ -2088,6 +2130,10 @@
         const torso = new THREE.Mesh(new THREE.SphereGeometry(0.16, 14, 12), bodyMat);
         torso.scale.set(0.86, 0.92, 1.48);
         torso.position.set(0, 0.24, -0.02);
+
+        const breast = new THREE.Mesh(new THREE.SphereGeometry(0.135, 12, 12), neckMat);
+        breast.scale.set(0.88, 1.05, 1.0);
+        breast.position.set(0, 0.27, 0.12);
 
         const head = new THREE.Mesh(new THREE.SphereGeometry(0.078, 12, 12), neckMat);
         head.position.set(0, 0.44, 0.17);
@@ -2101,13 +2147,17 @@
 
         const lWing = new THREE.Group();
         lWing.position.set(0.105, 0.27, 0.03);
-        lWing.add(new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.02, 0.2), wingMat).translateX(0.18));
+        const lWingPanel = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.02, 0.2), wingMat);
+        lWingPanel.position.set(0.18, 0, 0);
+        lWing.add(lWingPanel);
 
         const rWing = new THREE.Group();
         rWing.position.set(-0.105, 0.27, 0.03);
-        rWing.add(new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.02, 0.2), wingMat).translateX(-0.18));
+        const rWingPanel = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.02, 0.2), wingMat);
+        rWingPanel.position.set(-0.18, 0, 0);
+        rWing.add(rWingPanel);
 
-        bg.add(torso, head, beak, tail, lWing, rWing);
+        bg.add(torso, breast, head, beak, tail, lWing, rWing);
         scene.add(bg);
         return { group: bg, lWing, rWing };
       }
@@ -2119,15 +2169,17 @@
           scene.remove(old.group);
         }
         while (entry.birdMeshes.length < list.length) {
-          entry.birdMeshes.push(createRemoteBirdMesh('zajil'));
+          entry.birdMeshes.push(createRemoteBirdMesh(list[entry.birdMeshes.length].breedId || 'zajil'));
         }
         for (let i = 0; i < list.length; i++) {
           const pd = list[i];
           const bm = entry.birdMeshes[i];
           bm.group.position.set(pd.x || 0, pd.y || ROOF_Y, pd.z || 0);
           bm.group.rotation.y = pd.yaw || 0;
-          if (pd.state === 'FLYING' || pd.state === 'LANDING') {
-            const flap = Math.sin((pd.flapPhase || 0)) * 0.78;
+          const s = pd.isChick ? 0.52 + ((pd.growth || 0) / 100) * 0.48 : 1.0;
+          bm.group.scale.set(s, s, s);
+          if (pd.state === 'FLYING' || pd.state === 'LANDING' || pd.state === 'TAMED_FLY_TO_PLAYER') {
+            const flap = Math.sin(pd.flapPhase || 0) * 0.78;
             bm.lWing.rotation.set(0.08, 0.12, flap);
             bm.rWing.rotation.set(0.08, -0.12, -flap);
           } else {
@@ -2141,14 +2193,9 @@
         if (!pData || !pData.id) return;
         let entry = remotePlayers.get(pData.id);
         if (!entry) {
-          const rHouse = new THREE.Group();
-          rHouse.position.set(pData.roofX || 0, 0, pData.roofZ || 0);
-          const rBody = new THREE.Mesh(new THREE.BoxGeometry(24, ROOF_Y, 24), houseMat);
-          rBody.position.y = ROOF_Y / 2;
-          const rRoof = new THREE.Mesh(new THREE.BoxGeometry(24.2, 0.3, 24.2), new THREE.MeshStandardMaterial({ map: createRoofTileTexture() }));
-          rRoof.position.y = ROOF_Y - 0.12;
-          rHouse.add(rBody, rRoof);
-          scene.add(rHouse);
+          const rStruct = createFullRooftopStructure(!!pData.doorOpen);
+          rStruct.root.position.set(pData.roofX || 0, 0, pData.roofZ || 0);
+          scene.add(rStruct.root);
 
           const rig = createRealisticCharacterGroup(pData.skin || 'baghdadi', 1.0);
           const tag = createBirdLabelSprite(`${pData.name || 'لاعب'} (سطح #${pData.slot || '?'})`, false, true);
@@ -2156,10 +2203,22 @@
           rig.group.add(tag);
           scene.add(rig.group);
 
-          entry = { data: Object.assign({}, pData), house: rHouse, group: rig.group, birdMeshes: [] };
+          entry = {
+            data: Object.assign({}, pData),
+            house: rStruct.root,
+            doorPivot: rStruct.doorPivot,
+            group: rig.group,
+            birdMeshes: []
+          };
           remotePlayers.set(pData.id, entry);
         } else {
           entry.data = Object.assign({}, entry.data, pData);
+          if (typeof pData.roofX === 'number' && typeof pData.roofZ === 'number') {
+            entry.house.position.set(pData.roofX, 0, pData.roofZ);
+          }
+          if (entry.doorPivot && typeof pData.doorOpen === 'boolean') {
+            entry.doorPivot.rotation.y = pData.doorOpen ? -Math.PI * 0.62 : 0;
+          }
         }
         entry.group.position.set(pData.x || 0, pData.y || ROOF_Y, pData.z || 0);
         entry.group.rotation.y = pData.yaw || 0;
@@ -2178,13 +2237,30 @@
           currentVisitorId = null;
           updateHudStats();
         }
+        if (visitingTarget && visitingTarget.id === id) {
+          visitingTarget = null;
+          player.group.position.set(myRoofX + 1.2, ROOF_Y, myRoofZ + 5.2);
+          updateHudStats();
+        }
       }
 
-      // Visit & Kick Logic
+      // Visit & Return & Kick Logic
       const visitModal = document.getElementById('visit-modal');
       const visitListEl = document.getElementById('visit-players-list');
       const visitReqBanner = document.getElementById('visit-request-banner');
       const visitReqText = document.getElementById('visit-request-text');
+
+      function returnToOwnRoof(msg) {
+        visitingTarget = null;
+        player.velY = 0;
+        player.group.position.set(myRoofX + 1.2, ROOF_Y, myRoofZ + 5.2);
+        updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
+        if (msg) showToast(msg);
+      }
+
+      document.getElementById('btn-return-home').addEventListener('click', () => {
+        returnToOwnRoof('رجعت إلى سطحك الخاص.');
+      });
 
       document.getElementById('btn-visit').addEventListener('click', () => {
         visitListEl.innerHTML = '';
@@ -2206,9 +2282,11 @@
                 wsClient.send(JSON.stringify({ type: 'VISIT_REQUEST', targetId: d.id }));
                 showToast(`تم إرسال طلب زيارة إلى ${d.name}...`);
               } else {
-                // Local/offline preview fallback
-                player.group.position.set((d.roofX || 0) + 1.5, ROOF_Y, (d.roofZ || 0) + 4.5);
-                showToast(`انتقلت إلى سطح #${d.slot}`);
+                visitingTarget = { id: d.id, slot: d.slot, name: d.name, roofX: d.roofX || 0, roofZ: d.roofZ || 0 };
+                player.velY = 0;
+                player.group.position.set(visitingTarget.roofX + 1.2, ROOF_Y, visitingTarget.roofZ + 5.2);
+                updateHudStats();
+                showToast(`أنت الآن في سطح #${d.slot}`);
               }
             };
             visitListEl.appendChild(row);
@@ -2235,7 +2313,8 @@
             accepted: true,
             roofX: myRoofX,
             roofZ: myRoofZ,
-            slot: mySlot
+            slot: mySlot,
+            ownerName: `مطيرجي #${mySlot}`
           }));
         }
         showToast(`وافقت على زيارة (${req.fromName}) لسطحك.`);
@@ -2319,14 +2398,22 @@
               if (msg.accepted) {
                 const vx = typeof msg.roofX === 'number' ? msg.roofX : 0;
                 const vz = typeof msg.roofZ === 'number' ? msg.roofZ : 0;
-                player.group.position.set(vx + 1.5, ROOF_Y, vz + 4.5);
-                showToast(`تمت الموافقة! أنت الآن في زيارة سطح #${msg.slot || ''}`);
+                visitingTarget = {
+                  id: msg.fromId || null,
+                  slot: msg.slot || '?',
+                  name: msg.ownerName || `سطح #${msg.slot || ''}`,
+                  roofX: vx,
+                  roofZ: vz
+                };
+                player.velY = 0;
+                player.group.position.set(vx + 1.2, ROOF_Y, vz + 5.2);
+                updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
+                showToast(`تمت الموافقة! أنت الآن على سطح #${msg.slot || ''}`);
               } else {
                 showToast('تم رفض طلب زيارتك للسطح.');
               }
             } else if (msg.type === 'KICKED_FROM_ROOF') {
-              player.group.position.set(myRoofX + 1.2, ROOF_Y, myRoofZ + 5.2);
-              showToast('تم طردك من السطح وإرجاعك إلى سطحك!');
+              returnToOwnRoof('تم طردك من السطح وإرجاعك إلى سطحك!');
             }
           });
           wsClient.addEventListener('close', () => {
@@ -2348,6 +2435,7 @@
           yaw: player.group.rotation.y,
           skin: gameState.currentSkin,
           coins: Math.floor(gameState.coins),
+          doorOpen: COOP.isOpen,
           flyingCount,
           pigeons: pigeons.map((p) => p.toNetworkSnapshot())
         }));
@@ -2384,7 +2472,7 @@
           const raw = localStorage.getItem(SAVE_KEY);
           if (!raw) return false;
           const d = JSON.parse(raw);
-          if (typeof d.coins === 'number') gameState.coins = d.coins;
+          if (typeof d.coins === 'number' && d.coins >= 0 && d.coins <= 10000000) gameState.coins = d.coins;
           if (d.feeds) gameState.feeds = Object.assign(gameState.feeds, d.feeds);
           if (d.waters) gameState.waters = Object.assign(gameState.waters, d.waters);
           if (typeof d.coopLevel === 'number') gameState.coopLevel = d.coopLevel;
@@ -2411,28 +2499,36 @@
         spawnEggInCoop(BREEDS[0], COOP.x - 1.2, COOP.z - 1.4, 24);
       }
 
-      // Controls & Actions
+      // Controls & Actions (Anti-exploit on coins)
       const heldBarEl = document.getElementById('held-bird-bar');
       const heldTitleEl = document.getElementById('held-bird-title');
+      const heldInfoEl = document.getElementById('held-bird-info');
+
+      function openHeldBirdBar(p) {
+        heldTitleEl.textContent = `طير: ${p.getDisplayName()}`;
+        heldInfoEl.textContent = p.getDetailsText();
+        heldBarEl.style.display = 'flex';
+      }
 
       document.getElementById('btn-launch').addEventListener('click', () => {
         let launchedAny = false;
         pigeons.forEach((p) => {
-          if (!p.isChick && p.state !== 'FLYING' && p.state !== 'HELD' && p.state !== 'TAMED_PERCHED') {
-            p.commandLaunch();
-            launchedAny = true;
-          }
+          if (p.commandLaunch()) launchedAny = true;
         });
         playWhistle('launch');
-        if (launchedAny) {
+        const nowSec = performance.now() / 1000;
+        if (launchedAny && nowSec - gameState.lastLaunchRewardTime >= 1.2) {
+          gameState.lastLaunchRewardTime = nowSec;
           gameState.coins += 100;
           updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
           saveGameAuto();
-          showToast('صفارة إقلاع! يطير سربك فوق سطحك وحصلت +100 د.ع!');
+          showToast('صفارة إقلاع! يطير سربك وحصلت +100 د.ع!');
           if (wsClient && wsClient.readyState === WebSocket.OPEN) {
             wsClient.send(JSON.stringify({ type: 'WHISTLE_SIGNAL', action: 'launch' }));
           }
           sendOnlineState(pigeons.filter((p) => p.state === 'FLYING').length);
+        } else {
+          showToast('صفارة إقلاع!');
         }
       });
 
@@ -2443,6 +2539,7 @@
         gameState.falconActive = false;
         falconGroup.visible = false;
         playWhistle('land');
+        updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
         showToast('صفارة نزول! السرب ينزل إلى سطحك.');
       });
 
@@ -2488,14 +2585,16 @@
       });
 
       document.getElementById('btn-grab').addEventListener('click', () => {
-        if (gameState.heldPigeon) return;
-        const nearest = pigeons.find((p) => p.state !== 'FLYING' && p.group.position.distanceTo(player.group.position) < 3.4);
-        if (!nearest) { showToast('اقترب من طير على سطحك للزمه!'); return; }
+        if (gameState.heldPigeon) {
+          openHeldBirdBar(gameState.heldPigeon);
+          return;
+        }
+        const nearest = pigeons.find((p) => p.state !== 'FLYING' && p.group.position.distanceTo(player.group.position) < 3.6);
+        if (!nearest) { showToast('اقترب من طير على سطحك للزمه ومعرفة تفاصيله!'); return; }
         gameState.heldPigeon = nearest;
         nearest.state = 'HELD';
         nearest.isInsideCoop = false;
-        heldTitleEl.textContent = `ماسك طير: ${nearest.getDisplayName()}`;
-        heldBarEl.style.display = 'flex';
+        openHeldBirdBar(nearest);
       });
 
       document.getElementById('btn-put-ground').addEventListener('click', () => {
@@ -2516,10 +2615,8 @@
         gameState.heldPigeon = null;
         heldBarEl.style.display = 'none';
         p.startSkyFlight();
-        gameState.coins += 100;
         playWhistle('launch');
         updateHudStats();
-        saveGameAuto();
       });
 
       document.getElementById('btn-move-tower').addEventListener('click', () => {
@@ -2561,7 +2658,7 @@
         if (gameState.heldPigeon) {
           gameState.heldPigeon.customName = renameInput.value.trim();
           gameState.heldPigeon.refreshLabel();
-          heldTitleEl.textContent = `ماسك طير: ${gameState.heldPigeon.getDisplayName()}`;
+          openHeldBirdBar(gameState.heldPigeon);
         }
         renameModal.style.display = 'none';
         saveGameAuto();
@@ -2576,21 +2673,26 @@
 
       document.getElementById('btn-jump').addEventListener('click', () => player.jump());
 
-      // Bird Cam
+      // Bird Cam + Details
       const btnBirdCam = document.getElementById('btn-birdcam');
       const birdCamBar = document.getElementById('birdcam-bar');
       const birdCamLabel = document.getElementById('birdcam-label');
+      const birdCamDetails = document.getElementById('birdcam-details');
       let isFirstPerson = false;
+
+      function refreshBirdCamHud() {
+        if (!gameState.birdCamActive || !pigeons.length) return;
+        const b = pigeons[gameState.birdCamIndex % pigeons.length];
+        birdCamLabel.textContent = `كاميرا الطير: ${b.getDisplayName()}`;
+        birdCamDetails.textContent = b.getDetailsText();
+      }
 
       function setBirdCamMode(active) {
         gameState.birdCamActive = active && pigeons.length > 0;
         btnBirdCam.classList.toggle('active', gameState.birdCamActive);
         btnBirdCam.textContent = gameState.birdCamActive ? 'رجوع للاعب' : 'كاميرا الطير';
         birdCamBar.style.display = gameState.birdCamActive ? 'flex' : 'none';
-        if (gameState.birdCamActive) {
-          const b = pigeons[gameState.birdCamIndex % pigeons.length];
-          birdCamLabel.textContent = `كاميرا الطير: ${b.getDisplayName()}`;
-        }
+        refreshBirdCamHud();
       }
 
       btnBirdCam.addEventListener('click', () => setBirdCamMode(!gameState.birdCamActive));
@@ -2598,10 +2700,10 @@
       document.getElementById('btn-birdcam-next').addEventListener('click', () => {
         if (!pigeons.length) return;
         gameState.birdCamIndex = (gameState.birdCamIndex + 1) % pigeons.length;
-        birdCamLabel.textContent = `كاميرا الطير: ${pigeons[gameState.birdCamIndex].getDisplayName()}`;
+        refreshBirdCamHud();
       });
 
-      // Market Modal
+      // Market Modal (Unchanged)
       const marketModal = document.getElementById('market-modal');
       const marketListEl = document.getElementById('market-items-list');
       let currentMarketTab = 'birds';
@@ -2746,10 +2848,10 @@
         renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, highQuality ? 1.75 : 1.0));
       });
 
-      // Joystick & Keyboard & Camera
+      // Multi-Pointer Joystick & Camera (never drops or stops on multi-finger touch)
       const joyZone = document.getElementById('joystick-zone');
       const joyKnob = document.getElementById('joystick-knob');
-      let joyActive = false, joyTouchId = null, joyX = 0, joyY = 0;
+      let joyPointerId = null, joyX = 0, joyY = 0;
 
       function updateJoyKnob(dx, dy) {
         const maxR = 32;
@@ -2762,31 +2864,32 @@
         joyY = ky / maxR;
       }
 
-      joyZone.addEventListener('touchstart', (e) => {
+      joyZone.addEventListener('pointerdown', (e) => {
         e.preventDefault();
-        const t = e.changedTouches[0];
-        joyActive = true; joyTouchId = t.identifier;
+        e.stopPropagation();
+        if (joyPointerId !== null) return;
+        joyPointerId = e.pointerId;
+        try { joyZone.setPointerCapture(e.pointerId); } catch (err) {}
         const rect = joyZone.getBoundingClientRect();
-        updateJoyKnob(t.clientX - (rect.left + rect.width / 2), t.clientY - (rect.top + rect.height / 2));
-      }, { passive: false });
+        updateJoyKnob(e.clientX - (rect.left + rect.width / 2), e.clientY - (rect.top + rect.height / 2));
+      });
 
-      window.addEventListener('touchmove', (e) => {
-        if (!joyActive) return;
-        for (let i = 0; i < e.changedTouches.length; i++) {
-          if (e.changedTouches[i].identifier === joyTouchId) {
-            const rect = joyZone.getBoundingClientRect();
-            updateJoyKnob(e.changedTouches[i].clientX - (rect.left + rect.width / 2), e.changedTouches[i].clientY - (rect.top + rect.height / 2));
-          }
-        }
-      }, { passive: false });
+      joyZone.addEventListener('pointermove', (e) => {
+        if (e.pointerId !== joyPointerId) return;
+        e.preventDefault();
+        const rect = joyZone.getBoundingClientRect();
+        updateJoyKnob(e.clientX - (rect.left + rect.width / 2), e.clientY - (rect.top + rect.height / 2));
+      });
 
-      function endJoy(e) {
-        for (let i = 0; i < e.changedTouches.length; i++) {
-          if (e.changedTouches[i].identifier === joyTouchId) { joyActive = false; joyTouchId = null; updateJoyKnob(0, 0); }
-        }
+      function releaseJoystickPointer(e) {
+        if (e.pointerId !== joyPointerId) return;
+        joyPointerId = null;
+        updateJoyKnob(0, 0);
       }
-      window.addEventListener('touchend', endJoy);
-      window.addEventListener('touchcancel', endJoy);
+      joyZone.addEventListener('pointerup', releaseJoystickPointer);
+      joyZone.addEventListener('pointercancel', releaseJoystickPointer);
+      window.addEventListener('pointerup', releaseJoystickPointer);
+      window.addEventListener('pointercancel', releaseJoystickPointer);
 
       const keys = {};
       window.addEventListener('keydown', (e) => {
@@ -2796,18 +2899,27 @@
       });
       window.addEventListener('keyup', (e) => { keys[e.code] = false; });
 
-      let camYaw = 0.0, camPitch = 0.25, camDrag = false, camPointerId = null, lastCamX = 0, lastCamY = 0;
+      let camYaw = 0.0, camPitch = 0.25, camPointerId = null, lastCamX = 0, lastCamY = 0;
       canvas.addEventListener('pointerdown', (e) => {
-        camDrag = true; camPointerId = e.pointerId; lastCamX = e.clientX; lastCamY = e.clientY;
+        if (e.pointerId === joyPointerId) return;
+        if (camPointerId === null) {
+          camPointerId = e.pointerId;
+          lastCamX = e.clientX;
+          lastCamY = e.clientY;
+        }
       });
       window.addEventListener('pointermove', (e) => {
-        if (!camDrag || e.pointerId !== camPointerId) return;
+        if (e.pointerId !== camPointerId) return;
         camYaw -= (e.clientX - lastCamX) * 0.0065;
         camPitch = Math.max(-0.95, Math.min(1.15, camPitch + (e.clientY - lastCamY) * 0.0055));
-        lastCamX = e.clientX; lastCamY = e.clientY;
+        lastCamX = e.clientX;
+        lastCamY = e.clientY;
       });
-      window.addEventListener('pointerup', (e) => { if (e.pointerId === camPointerId) camDrag = false; });
-      window.addEventListener('pointercancel', (e) => { if (e.pointerId === camPointerId) camDrag = false; });
+      function releaseCamPointer(e) {
+        if (e.pointerId === camPointerId) camPointerId = null;
+      }
+      window.addEventListener('pointerup', releaseCamPointer);
+      window.addEventListener('pointercancel', releaseCamPointer);
 
       window.addEventListener('resize', () => {
         camera.aspect = (window.innerWidth || 1280) / (window.innerHeight || 720);
@@ -2823,7 +2935,7 @@
         prevTime = now;
         elapsed += dt;
 
-        const fPos = flagGeo.attributes.position;
+        const fPos = flagMesh.geometry.attributes.position;
         for (let i = 0; i < fPos.count; i++) {
           const bx = flagBasePositions[i * 3];
           const by = flagBasePositions[i * 3 + 1];
@@ -2878,18 +2990,21 @@
           if (pigeons[i].state === 'FLYING') flyingCount++;
         }
 
-        // Eagle every 60s above player's sector
+        const sectorX = getActiveWorldRoofX();
+        const sectorZ = getActiveWorldRoofZ();
+
+        // Eagle every 60s above active sky sector
         gameState.eagleCycleTimer += dt;
         if (gameState.eagleCycleTimer >= 60 && gameState.eagleActiveTimer <= 0) {
           gameState.eagleCycleTimer = 0;
           gameState.eagleActiveTimer = 14;
           eagleGroup.visible = true;
-          showToast('نسر ظهر فوق سطحك!');
+          showToast('نسر ظهر فوق السطح!');
         }
         if (gameState.eagleActiveTimer > 0) {
           gameState.eagleActiveTimer -= dt;
           const eAng = -elapsed * 1.15;
-          eagleGroup.position.set(myRoofX + Math.cos(eAng) * 23, 32 + Math.sin(elapsed * 2) * 2.2, myRoofZ + Math.sin(eAng) * 23);
+          eagleGroup.position.set(sectorX + Math.cos(eAng) * 23, 32 + Math.sin(elapsed * 2) * 2.2, sectorZ + Math.sin(eAng) * 23);
           eagleGroup.rotation.y = -eAng + Math.PI;
           if (gameState.eagleActiveTimer <= 0) eagleGroup.visible = false;
         }
@@ -2951,7 +3066,11 @@
         }
 
         hudSync += dt;
-        if (hudSync >= 0.25) { hudSync = 0; updateHudStats(flyingCount); }
+        if (hudSync >= 0.25) {
+          hudSync = 0;
+          updateHudStats(flyingCount);
+          refreshBirdCamHud();
+        }
 
         netSync += dt;
         if (netSync >= 0.08) { netSync = 0; sendOnlineState(flyingCount); }
@@ -2967,4 +3086,4 @@
     }
   </script>
 </body>
-  </html>
+          </html>

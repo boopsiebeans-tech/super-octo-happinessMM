@@ -1,12 +1,33 @@
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
 const WebSocket = require('ws');
 
 const PORT = process.env.PORT || 8080;
 const MAX_PLAYERS = 100;
 
-const wss = new WebSocket.Server({ port: PORT });
+const server = http.createServer((req, res) => {
+  const cleanUrl = (req.url || '/').split('?')[0];
+  if (cleanUrl === '/' || cleanUrl === '/index.html') {
+    const filePath = path.join(__dirname, 'index.html');
+    fs.readFile(filePath, (err, content) => {
+      if (err) {
+        res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
+        res.end('تعذر تحميل ملف index.html');
+        return;
+      }
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(content);
+    });
+    return;
+  }
+  res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+  res.end('Not Found');
+});
 
-// Slots 1..100 each with a dedicated rooftop center on a 10x10 grid (120m spacing)
-const players = new Map(); // id -> player state
+const wss = new WebSocket.Server({ server });
+
+const players = new Map();
 const usedSlots = new Set();
 
 function allocateSlot() {
@@ -74,13 +95,11 @@ wss.on('connection', (ws) => {
     yaw: 0,
     coins: 250,
     flyingCount: 0,
-    pigeons: [],
     ws
   };
 
   players.set(id, playerData);
 
-  // Send initial welcome + existing players snapshot
   const snapshot = [];
   for (const [, other] of players.entries()) {
     if (other.id !== id) {
@@ -96,8 +115,7 @@ wss.on('connection', (ws) => {
         z: other.z,
         yaw: other.yaw,
         coins: other.coins,
-        flyingCount: other.flyingCount,
-        pigeons: other.pigeons
+        flyingCount: other.flyingCount
       });
     }
   }
@@ -132,8 +150,7 @@ wss.on('connection', (ws) => {
       z: playerData.z,
       yaw: playerData.yaw,
       coins: playerData.coins,
-      flyingCount: playerData.flyingCount,
-      pigeons: playerData.pigeons
+      flyingCount: playerData.flyingCount
     },
     leaderboard: getLeaderboard()
   }, id);
@@ -158,7 +175,6 @@ wss.on('connection', (ws) => {
       if (typeof msg.name === 'string' && msg.name.trim()) cur.name = msg.name.trim().slice(0, 20);
       if (typeof msg.coins === 'number') cur.coins = Math.floor(msg.coins);
       if (typeof msg.flyingCount === 'number') cur.flyingCount = msg.flyingCount;
-      if (Array.isArray(msg.pigeons)) cur.pigeons = msg.pigeons.slice(0, 35);
 
       broadcast({
         type: 'PLAYER_STATE',
@@ -171,8 +187,7 @@ wss.on('connection', (ws) => {
         z: cur.z,
         yaw: cur.yaw,
         coins: cur.coins,
-        flyingCount: cur.flyingCount,
-        pigeons: cur.pigeons
+        flyingCount: cur.flyingCount
       }, id);
     } else if (msg.type === 'WHISTLE_SIGNAL') {
       broadcast({
@@ -214,4 +229,6 @@ setInterval(() => {
   });
 }, 5000);
 
-console.log(`Pigeon Kingdom Online Server (Max ${MAX_PLAYERS} players) running on ws://localhost:${PORT}`);
+server.listen(PORT, () => {
+  console.log(`Pigeon Kingdom Online Server running on port ${PORT}`);
+});

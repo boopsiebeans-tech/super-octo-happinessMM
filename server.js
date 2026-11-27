@@ -94,6 +94,7 @@ wss.on('connection', (ws) => {
     z: alloc.roofZ + 5.2,
     yaw: 0,
     coins: 250,
+    doorOpen: false,
     flyingCount: 0,
     pigeons: [],
     ws
@@ -116,6 +117,7 @@ wss.on('connection', (ws) => {
         z: other.z,
         yaw: other.yaw,
         coins: other.coins,
+        doorOpen: other.doorOpen,
         flyingCount: other.flyingCount,
         pigeons: other.pigeons
       });
@@ -152,6 +154,7 @@ wss.on('connection', (ws) => {
       z: playerData.z,
       yaw: playerData.yaw,
       coins: playerData.coins,
+      doorOpen: playerData.doorOpen,
       flyingCount: playerData.flyingCount,
       pigeons: playerData.pigeons
     },
@@ -170,20 +173,27 @@ wss.on('connection', (ws) => {
     if (!cur) return;
 
     if (msg.type === 'STATE_UPDATE') {
-      if (typeof msg.x === 'number') cur.x = msg.x;
-      if (typeof msg.y === 'number') cur.y = msg.y;
-      if (typeof msg.z === 'number') cur.z = msg.z;
-      if (typeof msg.yaw === 'number') cur.yaw = msg.yaw;
+      if (typeof msg.x === 'number' && Number.isFinite(msg.x)) cur.x = msg.x;
+      if (typeof msg.y === 'number' && Number.isFinite(msg.y)) cur.y = msg.y;
+      if (typeof msg.z === 'number' && Number.isFinite(msg.z)) cur.z = msg.z;
+      if (typeof msg.yaw === 'number' && Number.isFinite(msg.yaw)) cur.yaw = msg.yaw;
       if (typeof msg.skin === 'string') cur.skin = msg.skin;
       if (typeof msg.name === 'string' && msg.name.trim()) cur.name = msg.name.trim().slice(0, 20);
-      if (typeof msg.coins === 'number') cur.coins = Math.floor(msg.coins);
-      if (typeof msg.flyingCount === 'number') cur.flyingCount = msg.flyingCount;
+      if (typeof msg.doorOpen === 'boolean') cur.doorOpen = msg.doorOpen;
+      if (typeof msg.coins === 'number' && Number.isFinite(msg.coins) && msg.coins >= 0 && msg.coins <= 10000000) {
+        cur.coins = Math.floor(msg.coins);
+      }
+      if (typeof msg.flyingCount === 'number' && Number.isFinite(msg.flyingCount)) {
+        cur.flyingCount = Math.max(0, Math.floor(msg.flyingCount));
+      }
       if (Array.isArray(msg.pigeons)) cur.pigeons = msg.pigeons.slice(0, 35);
 
       broadcast({
         type: 'PLAYER_STATE',
         id: cur.id,
         slot: cur.slot,
+        roofX: cur.roofX,
+        roofZ: cur.roofZ,
         name: cur.name,
         skin: cur.skin,
         x: cur.x,
@@ -191,6 +201,7 @@ wss.on('connection', (ws) => {
         z: cur.z,
         yaw: cur.yaw,
         coins: cur.coins,
+        doorOpen: cur.doorOpen,
         flyingCount: cur.flyingCount,
         pigeons: cur.pigeons
       }, id);
@@ -222,10 +233,12 @@ wss.on('connection', (ws) => {
       if (target && target.ws.readyState === WebSocket.OPEN) {
         target.ws.send(JSON.stringify({
           type: 'VISIT_RESPONSE',
+          fromId: cur.id,
           accepted: !!msg.accepted,
           roofX: cur.roofX,
           roofZ: cur.roofZ,
-          slot: cur.slot
+          slot: cur.slot,
+          ownerName: cur.name
         }));
       }
     } else if (msg.type === 'KICK_VISITOR' && msg.targetId) {

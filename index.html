@@ -38,13 +38,13 @@
 
     .hud-top {
       position: fixed;
-      top: 6px;
-      left: 6px;
-      right: 6px;
+      top: 5px;
+      left: 5px;
+      right: 5px;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 6px;
+      gap: 5px;
       z-index: 120;
       pointer-events: none;
     }
@@ -52,23 +52,22 @@
     .brand-badge {
       background: linear-gradient(155deg, rgba(14, 14, 18, 0.92), rgba(55, 10, 14, 0.92));
       border: 1px solid #dc2626;
-      border-radius: 9px;
-      padding: 4px 8px;
+      border-radius: 8px;
+      padding: 3px 7px;
       color: #ffffff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
       pointer-events: auto;
       flex-shrink: 0;
     }
 
     .brand-title {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 900;
       color: #f87171;
       line-height: 1.1;
     }
 
     .brand-sub {
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 700;
       color: #f3f4f6;
       line-height: 1.15;
@@ -80,7 +79,7 @@
       justify-content: flex-end;
       align-items: center;
       gap: 3px;
-      max-width: 74%;
+      max-width: 75%;
       pointer-events: auto;
     }
 
@@ -88,10 +87,10 @@
       background: rgba(14, 14, 18, 0.88);
       border: 1px solid rgba(220, 38, 38, 0.65);
       color: #f9fafb;
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 7px;
+      padding: 2px 5px;
+      border-radius: 6px;
       white-space: nowrap;
       line-height: 1.2;
     }
@@ -110,13 +109,13 @@
       border: 1px solid #dc2626;
       color: #ffffff;
       font-family: 'Cairo', sans-serif;
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 800;
-      padding: 2px 7px;
-      border-radius: 7px;
+      padding: 2px 6px;
+      border-radius: 6px;
       white-space: nowrap;
       cursor: pointer;
-      line-height: 1.25;
+      line-height: 1.2;
     }
 
     .hud-btn.market-btn {
@@ -125,47 +124,41 @@
       color: #fef3c7;
     }
 
-    .hud-btn.visit-return {
-      background: linear-gradient(155deg, #065f46 0%, #059669 100%);
-      border-color: #6ee7b7;
-    }
-
-    /* Toggleable Chat */
     #chat-toggle-btn {
       position: fixed;
-      top: 56px;
-      left: 8px;
+      top: 50px;
+      left: 6px;
       z-index: 130;
       background: rgba(14, 14, 18, 0.9);
       border: 1px solid #38bdf8;
       color: #e0f2fe;
       font-family: 'Cairo', sans-serif;
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 800;
-      padding: 3px 9px;
-      border-radius: 8px;
+      padding: 2px 8px;
+      border-radius: 7px;
       cursor: pointer;
     }
 
     #online-chat-box {
       position: fixed;
-      top: 82px;
-      left: 8px;
-      width: 215px;
+      top: 74px;
+      left: 6px;
+      width: 205px;
       display: none;
       flex-direction: column;
       gap: 4px;
       z-index: 135;
-      background: rgba(14, 14, 18, 0.9);
+      background: rgba(14, 14, 18, 0.92);
       border: 1px solid rgba(56, 189, 248, 0.7);
-      border-radius: 9px;
+      border-radius: 8px;
       padding: 5px;
     }
 
     #chat-messages {
-      max-height: 78px;
+      max-height: 70px;
       overflow-y: auto;
-      font-size: 9px;
+      font-size: 8.5px;
       color: #f1f5f9;
       display: flex;
       flex-direction: column;
@@ -177,8 +170,8 @@
       flex-direction: column;
       gap: 2px;
       background: rgba(255, 255, 255, 0.05);
-      padding: 3px 5px;
-      border-radius: 5px;
+      padding: 2px 5px;
+      border-radius: 4px;
     }
 
     .visit-mini-btn {
@@ -187,16 +180,16 @@
       border: none;
       color: #fff;
       font-family: 'Cairo', sans-serif;
-      font-size: 8.5px;
+      font-size: 8px;
       font-weight: 800;
-      padding: 1px 6px;
+      padding: 1px 5px;
       border-radius: 4px;
       cursor: pointer;
     }
 
     .chat-input-wrap {
       display: flex;
-      gap: 4px;
+      gap: 3px;
     }
 
     #online-chat-input {
@@ -204,11 +197,11 @@
       min-width: 0;
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 6px;
+      border-radius: 5px;
       padding: 2px 5px;
       color: #fff;
       font-family: 'Cairo', sans-serif;
-      font-size: 9.5px;
+      font-size: 9px;
       outline: none;
     }
 
@@ -217,71 +210,71 @@
       border: none;
       color: #fff;
       font-family: 'Cairo', sans-serif;
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 800;
-      padding: 2px 7px;
-      border-radius: 6px;
+      padding: 2px 6px;
+      border-radius: 5px;
       cursor: pointer;
-    }
-
-    #toast-msg {
-      position: fixed;
-      top: 58px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(15, 15, 20, 0.94);
-      border: 1px solid #facc15;
-      color: #fef08a;
-      font-size: 10px;
-      font-weight: 800;
-      padding: 4px 12px;
-      border-radius: 14px;
-      z-index: 150;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-      max-width: 90vw;
-      text-align: center;
     }
 
     #visit-prompt {
       position: fixed;
-      top: 90px;
+      top: 82px;
       left: 50%;
       transform: translateX(-50%);
       background: rgba(15, 23, 42, 0.96);
       border: 1.5px solid #38bdf8;
-      border-radius: 10px;
-      padding: 6px 10px;
+      border-radius: 9px;
+      padding: 5px 9px;
       z-index: 180;
       display: none;
       align-items: center;
       gap: 6px;
       color: #fff;
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 800;
+    }
+
+    #toast-msg {
+      position: fixed;
+      top: 52px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 15, 20, 0.94);
+      border: 1px solid #facc15;
+      color: #fef08a;
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 12px;
+      z-index: 150;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      max-width: 88vw;
+      text-align: center;
     }
 
     #held-bird-bar {
       position: fixed;
-      bottom: 122px;
+      bottom: 108px;
       left: 50%;
       transform: translateX(-50%);
       background: rgba(14, 14, 18, 0.94);
       border: 1px solid #dc2626;
-      border-radius: 10px;
-      padding: 5px 8px;
+      border-radius: 9px;
+      padding: 4px 7px;
       display: none;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
       z-index: 140;
       max-width: 94vw;
     }
 
     #held-bird-title {
       color: #fca5a5;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 800;
     }
 
@@ -289,7 +282,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 4px;
+      gap: 3px;
     }
 
     .held-act-btn {
@@ -297,22 +290,21 @@
       border: 1px solid #f87171;
       color: #fff;
       font-family: 'Cairo', sans-serif;
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 800;
-      padding: 2px 7px;
-      border-radius: 6px;
+      padding: 2px 6px;
+      border-radius: 5px;
       cursor: pointer;
     }
 
-    /* Compact Joystick */
     #joystick-zone {
       position: fixed;
-      left: 12px;
-      bottom: 12px;
-      width: 84px;
-      height: 84px;
+      left: 10px;
+      bottom: 10px;
+      width: 78px;
+      height: 78px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(20, 20, 24, 0.45) 0%, rgba(127, 29, 29, 0.5) 100%);
+      background: radial-gradient(circle, rgba(20, 20, 24, 0.45) 0%, rgba(127, 29, 29, 0.48) 100%);
       border: 1.5px solid rgba(220, 38, 38, 0.8);
       z-index: 120;
       touch-action: none;
@@ -322,45 +314,43 @@
       position: absolute;
       left: 50%;
       top: 50%;
-      width: 34px;
-      height: 34px;
-      margin-left: -17px;
-      margin-top: -17px;
+      width: 32px;
+      height: 32px;
+      margin-left: -16px;
+      margin-top: -16px;
       border-radius: 50%;
       background: linear-gradient(145deg, #18181b 0%, #dc2626 100%);
       border: 1.5px solid #fca5a5;
       pointer-events: none;
     }
 
-    /* Compact Action Buttons */
     .action-cluster {
       position: fixed;
-      right: 8px;
-      bottom: 10px;
+      right: 6px;
+      bottom: 8px;
       display: grid;
-      grid-template-columns: repeat(2, minmax(74px, auto));
-      gap: 4px;
+      grid-template-columns: repeat(2, minmax(66px, auto));
+      gap: 3px;
       z-index: 120;
       pointer-events: auto;
       direction: rtl;
     }
 
     .act-btn {
-      min-width: 74px;
-      height: 27px;
-      padding: 1px 6px;
-      border-radius: 7px;
+      min-width: 66px;
+      height: 24px;
+      padding: 1px 5px;
+      border-radius: 6px;
       background: linear-gradient(160deg, #111111 0%, #2b090c 60%, #b91c1c 100%);
       border: 1px solid #dc2626;
       color: #ffffff;
       font-family: 'Cairo', sans-serif;
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 800;
       white-space: nowrap;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 3px;
       cursor: pointer;
     }
 
@@ -397,11 +387,11 @@
 
     .market-card {
       width: 100%;
-      max-width: 470px;
+      max-width: 460px;
       max-height: 84vh;
       background: linear-gradient(165deg, #121217 0%, #26090c 100%);
       border: 1.5px solid #dc2626;
-      border-radius: 14px;
+      border-radius: 13px;
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -409,7 +399,7 @@
     }
 
     .market-header {
-      padding: 8px 12px;
+      padding: 7px 11px;
       background: rgba(0, 0, 0, 0.45);
       border-bottom: 1px solid rgba(220, 38, 38, 0.5);
       display: flex;
@@ -419,13 +409,13 @@
     }
 
     .market-title {
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 900;
       color: #f87171;
     }
 
     .market-balance {
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 800;
       color: #facc15;
     }
@@ -435,17 +425,17 @@
       border: 1px solid #fca5a5;
       color: #fff;
       font-family: 'Cairo', sans-serif;
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 800;
-      padding: 2px 9px;
-      border-radius: 7px;
+      padding: 2px 8px;
+      border-radius: 6px;
       cursor: pointer;
     }
 
     .market-tabs {
       display: flex;
       gap: 4px;
-      padding: 6px 8px;
+      padding: 5px 8px;
       background: rgba(0, 0, 0, 0.35);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       overflow-x: auto;
@@ -456,10 +446,10 @@
       border: 1px solid rgba(255, 255, 255, 0.16);
       color: #e5e7eb;
       font-family: 'Cairo', sans-serif;
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 800;
-      padding: 3px 9px;
-      border-radius: 7px;
+      padding: 3px 8px;
+      border-radius: 6px;
       white-space: nowrap;
       cursor: pointer;
     }
@@ -471,32 +461,32 @@
     }
 
     .market-body {
-      padding: 8px 10px;
+      padding: 7px 9px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
     }
 
     .shop-item {
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 9px;
-      padding: 7px 9px;
+      border-radius: 8px;
+      padding: 6px 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
     }
 
     .shop-info h4 {
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 800;
       color: #f9fafb;
     }
 
     .shop-info p {
-      font-size: 9px;
+      font-size: 8.5px;
       color: #d1d5db;
       margin-top: 2px;
     }
@@ -506,10 +496,10 @@
       border: 1px solid #fbbf24;
       color: #fff;
       font-family: 'Cairo', sans-serif;
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 800;
-      padding: 4px 8px;
-      border-radius: 7px;
+      padding: 3px 7px;
+      border-radius: 6px;
       white-space: nowrap;
       cursor: pointer;
     }
@@ -526,13 +516,13 @@
 
     .rename-input {
       width: 100%;
-      padding: 7px 9px;
-      border-radius: 8px;
+      padding: 6px 8px;
+      border-radius: 7px;
       border: 1px solid #dc2626;
       background: #18181b;
       color: #fff;
       font-family: 'Cairo', sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       text-align: center;
       outline: none;
@@ -622,7 +612,7 @@
   </div>
 
   <div id="leaderboard-modal" class="modal-overlay">
-    <div class="market-card" style="max-width: 390px;">
+    <div class="market-card" style="max-width: 380px;">
       <div class="market-header">
         <div class="market-title">ترتيب اللاعبين أونلاين</div>
         <button id="btn-close-leaderboard" class="close-market" type="button">إغلاق</button>
@@ -632,7 +622,7 @@
   </div>
 
   <div id="visit-modal" class="modal-overlay">
-    <div class="market-card" style="max-width: 390px;">
+    <div class="market-card" style="max-width: 380px;">
       <div class="market-header">
         <div class="market-title">زيارة أسطح اللاعبين</div>
         <button id="btn-close-visit" class="close-market" type="button">إغلاق</button>
@@ -642,14 +632,14 @@
   </div>
 
   <div id="rename-modal" class="modal-overlay">
-    <div class="market-card" style="max-width: 330px;">
+    <div class="market-card" style="max-width: 320px;">
       <div class="market-header">
         <div class="market-title">تسمية الطير</div>
         <button id="btn-close-rename" class="close-market" type="button">إلغاء</button>
       </div>
       <div class="market-body">
         <input id="rename-input" class="rename-input" type="text" maxlength="18" placeholder="اسم الطير..." />
-        <button id="btn-save-rename" class="buy-btn" style="width:100%; padding:7px;" type="button">حفظ الاسم</button>
+        <button id="btn-save-rename" class="buy-btn" style="width:100%; padding:6px;" type="button">حفظ الاسم</button>
       </div>
     </div>
   </div>
@@ -677,8 +667,8 @@
     })();
 
     function initPigeonKingdomOnline() {
-      const SAVE_KEY = 'pigeon_kingdom_online_v2';
-      const SERVER_URL = 'wss://Super-octo-happinessmm-production.up.railway.app';
+      const SAVE_KEY = 'pigeon_kingdom_online_v3';
+      const SERVER_URL = 'wss://super-octo-happinessmm-production.up.railway.app';
       const canvas = document.getElementById('game-canvas');
       const SKY_COLOR = 0x87b5d6;
 
@@ -851,7 +841,6 @@
         document.getElementById('hud-skin-label').textContent = `${roofLabel} • ${skinObj.name}`;
       }
 
-      // Lighting
       const hemiLight = new THREE.HemisphereLight(0xf0f9ff, 0x786c5e, 0.9);
       hemiLight.position.set(0, 60, 0);
       scene.add(hemiLight);
@@ -1040,7 +1029,6 @@
       waterBowlGroup.add(bowlRim, waterSurface);
       myHouseGroup.add(waterBowlGroup);
 
-      // Realistic Bird Mesh Builder (Legs, Head, Eyes, Beak, Tail, Wings)
       function createBirdVisuals(breed, isChick) {
         const g = new THREE.Group();
         const bodyMat = new THREE.MeshStandardMaterial({ color: isChick ? 0xfde68a : breed.body, roughness: 0.55 });
@@ -1171,7 +1159,6 @@
 
         updateNameVisibility() {
           if (!this.nameSprite) return;
-          // Show name ONLY when on the ground/perched; hide while flying
           const onGround = this.state !== 'FLYING' && this.state !== 'LANDING';
           this.nameSprite.visible = onGround;
         }
@@ -1305,7 +1292,6 @@
         }
       }
 
-      // Realistic Player Character (Body, Head, Eyes, Hair, Limbs)
       class PlayerCharacter {
         constructor() {
           this.group = new THREE.Group();
@@ -1477,7 +1463,6 @@
 
       player = new PlayerCharacter();
 
-      // Remote Players + Full Rooftops + Coops + Birds in Online World
       const remotePlayers = new Map();
 
       function upsertRemotePlayer(pData) {
@@ -1574,7 +1559,6 @@
         updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
       }
 
-      // Chat & Visit UI
       const chatBox = document.getElementById('online-chat-box');
       const chatToggleBtn = document.getElementById('chat-toggle-btn');
       const chatMessagesEl = document.getElementById('chat-messages');
@@ -1737,7 +1721,6 @@
         }));
       }
 
-      // Save / Load
       function saveGameAuto() {
         try {
           localStorage.setItem(SAVE_KEY, JSON.stringify({
@@ -1788,7 +1771,6 @@
         }
       }
 
-      // Action Buttons (No Coin Glitch)
       const heldBarEl = document.getElementById('held-bird-bar');
       const heldTitleEl = document.getElementById('held-bird-title');
 
@@ -1936,7 +1918,6 @@
 
       document.getElementById('btn-jump').addEventListener('click', () => player.jump());
 
-      // Visit Rooftop Modal (Never auto-snaps back to home roof)
       const visitModal = document.getElementById('visit-modal');
       const visitListEl = document.getElementById('visit-players-list');
 
@@ -1986,7 +1967,6 @@
       });
       document.getElementById('btn-close-visit').addEventListener('click', () => { visitModal.style.display = 'none'; });
 
-      // Market Modal (Unchanged Structure + Every Bird Breed With Info)
       const marketModal = document.getElementById('market-modal');
       const marketListEl = document.getElementById('market-items-list');
       let currentMarketTab = 'birds';
@@ -2137,7 +2117,7 @@
 
       function updateJoyFromTouch(t) {
         const rect = joyZone.getBoundingClientRect();
-        const maxR = 26;
+        const maxR = 24;
         const dx = t.clientX - (rect.left + rect.width / 2);
         const dy = t.clientY - (rect.top + rect.height / 2);
         const clamped = Math.min(Math.hypot(dx, dy), maxR);
@@ -2184,7 +2164,7 @@
       window.addEventListener('touchend', clearJoyTouch);
       window.addEventListener('touchcancel', clearJoyTouch);
 
-      // Multi-finger safe Camera Orbit on Canvas (tracks its own pointerId independently)
+      // Multi-finger safe Camera Orbit on Canvas (independent pointerId)
       let camYaw = 0.0;
       let camPitch = 0.25;
       let camPointerId = null;

@@ -95,6 +95,7 @@ wss.on('connection', (ws) => {
     yaw: 0,
     coins: 250,
     flyingCount: 0,
+    pigeons: [],
     ws
   };
 
@@ -115,7 +116,8 @@ wss.on('connection', (ws) => {
         z: other.z,
         yaw: other.yaw,
         coins: other.coins,
-        flyingCount: other.flyingCount
+        flyingCount: other.flyingCount,
+        pigeons: other.pigeons
       });
     }
   }
@@ -150,7 +152,8 @@ wss.on('connection', (ws) => {
       z: playerData.z,
       yaw: playerData.yaw,
       coins: playerData.coins,
-      flyingCount: playerData.flyingCount
+      flyingCount: playerData.flyingCount,
+      pigeons: playerData.pigeons
     },
     leaderboard: getLeaderboard()
   }, id);
@@ -175,6 +178,7 @@ wss.on('connection', (ws) => {
       if (typeof msg.name === 'string' && msg.name.trim()) cur.name = msg.name.trim().slice(0, 20);
       if (typeof msg.coins === 'number') cur.coins = Math.floor(msg.coins);
       if (typeof msg.flyingCount === 'number') cur.flyingCount = msg.flyingCount;
+      if (Array.isArray(msg.pigeons)) cur.pigeons = msg.pigeons.slice(0, 35);
 
       broadcast({
         type: 'PLAYER_STATE',
@@ -187,7 +191,8 @@ wss.on('connection', (ws) => {
         z: cur.z,
         yaw: cur.yaw,
         coins: cur.coins,
-        flyingCount: cur.flyingCount
+        flyingCount: cur.flyingCount,
+        pigeons: cur.pigeons
       }, id);
     } else if (msg.type === 'WHISTLE_SIGNAL') {
       broadcast({
@@ -203,6 +208,33 @@ wss.on('connection', (ws) => {
         slot: cur.slot,
         text: msg.text.trim().slice(0, 90)
       });
+    } else if (msg.type === 'VISIT_REQUEST' && msg.targetId) {
+      const target = players.get(msg.targetId);
+      if (target && target.ws.readyState === WebSocket.OPEN) {
+        target.ws.send(JSON.stringify({
+          type: 'VISIT_REQUEST',
+          fromId: cur.id,
+          fromName: cur.name
+        }));
+      }
+    } else if (msg.type === 'VISIT_RESPONSE' && msg.targetId) {
+      const target = players.get(msg.targetId);
+      if (target && target.ws.readyState === WebSocket.OPEN) {
+        target.ws.send(JSON.stringify({
+          type: 'VISIT_RESPONSE',
+          accepted: !!msg.accepted,
+          roofX: cur.roofX,
+          roofZ: cur.roofZ,
+          slot: cur.slot
+        }));
+      }
+    } else if (msg.type === 'KICK_VISITOR' && msg.targetId) {
+      const target = players.get(msg.targetId);
+      if (target && target.ws.readyState === WebSocket.OPEN) {
+        target.ws.send(JSON.stringify({
+          type: 'KICKED_FROM_ROOF'
+        }));
+      }
     }
   });
 

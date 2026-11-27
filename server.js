@@ -7,7 +7,8 @@ const PORT = process.env.PORT || 8080;
 const MAX_PLAYERS = 100;
 
 const server = http.createServer((req, res) => {
-  if (req.url === '/' || req.url === '/index.html') {
+  const cleanUrl = (req.url || '/').split('?')[0];
+  if (cleanUrl === '/' || cleanUrl === '/index.html') {
     const filePath = path.join(__dirname, 'index.html');
     fs.readFile(filePath, (err, content) => {
       if (err) {
@@ -20,15 +21,15 @@ const server = http.createServer((req, res) => {
     });
     return;
   }
-
-  res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
-  res.end('Pigeon Kingdom Online Server is running.');
+  res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+  res.end('Not Found');
 });
 
 const wss = new WebSocket.Server({ server });
 
 const players = new Map();
 const usedSlots = new Set();
+const birdMarketListings = []; // { listingId, sellerId, sellerName, sellerSlot, price, bird }
 
 function allocateSlot() {
   for (let slot = 1; slot <= MAX_PLAYERS; slot++) {
@@ -36,31 +37,12 @@ function allocateSlot() {
       usedSlots.add(slot);
       const col = (slot - 1) % 10;
       const row = Math.floor((slot - 1) / 10);
-      const roofX = (col - 4.5) * 120;
-      const roofZ = (row - 4.5) * 120;
+      const roofX = (col - 4.5) * 140;
+      const roofZ = (row - 4.5) * 140;
       return { slot, roofX, roofZ };
     }
   }
   return null;
-}
-
-function serializePlayer(p) {
-  return {
-    id: p.id,
-    slot: p.slot,
-    roofX: p.roofX,
-    roofZ: p.roofZ,
-    name: p.name,
-    skin: p.skin,
-    x: p.x,
-    y: p.y,
-    z: p.z,
-    yaw: p.yaw,
-    coins: p.coins,
-    flyingCount: p.flyingCount,
-    doorOpen: p.doorOpen,
-    pigeons: p.pigeons
-  };
 }
 
 function broadcast(payload, excludeId = null) {
@@ -72,10 +54,10 @@ function broadcast(payload, excludeId = null) {
   }
 }
 
-function sendToPlayer(targetId, payload) {
-  const target = players.get(targetId);
-  if (target && target.ws.readyState === WebSocket.OPEN) {
-    target.ws.send(JSON.stringify(payload));
+function sendToPlayer(playerId, payload) {
+  const p = players.get(playerId);
+  if (p && p.ws.readyState === WebSocket.OPEN) {
+    p.ws.send(JSON.stringify(payload));
   }
 }
 
@@ -93,6 +75,7 @@ function getLeaderboard() {
 }
 
 let nextId = 1;
+let nextListingId = 1;
 
 wss.on('connection', (ws) => {
   if (players.size >= MAX_PLAYERS) {
@@ -120,9 +103,8 @@ wss.on('connection', (ws) => {
     z: alloc.roofZ + 5.2,
     yaw: 0,
     coins: 250,
-    flyingCount: 0,
     doorOpen: false,
-    lastLaunchRewardAt: 0,
+    flyingCount: 0,
     pigeons: [],
     ws
   };
@@ -132,23 +114,60 @@ wss.on('connection', (ws) => {
   const snapshot = [];
   for (const [, other] of players.entries()) {
     if (other.id !== id) {
-      snapshot.push(serializePlayer(other));
+      snapshot.push({
+        id: other.id,
+        slot: other.slot,
+        roofX: other.roofX,
+        roofZ: other.roofZ,
+        name: other.name,
+        skin: other.skin,
+        x: other.x,
+        y: other.y,
+        z: other.z,
+        yaw: other.yaw,
+        coins: other.coins,
+        doorOpen: other.doorOpen,
+        flyingCount: other.flyingCount,
+        pigeons: other.pigeons
+      });
     }
   }
 
   ws.send(JSON.stringify({
     type: 'WELCOME',
-    self: serializePlayer(playerData),
+    self: {
+      id: playerData.id,
+      slot: playerData.slot,
+      roofX: playerData.roofX,
+      roofZ: playerData.roofZ,
+      name: playerData.name
+    },
     onlineCount: players.size,
     maxPlayers: MAX_PLAYERS,
     players: snapshot,
-    leaderboard: getLeaderboard()
+    leaderboard: getLeaderboard(),
+    marketListings: birdMarketListings
   }));
 
   broadcast({
     type: 'PLAYER_JOINED',
     onlineCount: players.size,
-    player: serializePlayer(playerData),
+    player: {
+      id: playerData.id,
+      slot: playerData.slot,
+      roofX: playerData.roofX,
+      roofZ: playerData.roofZ,
+      name: playerData.name,
+      skin: playerData.skin,
+      x: playerData.x,
+      y: playerData.y,
+      z: playerData.z,
+      yaw: playerData.yaw,
+      coins: playerData.coins,
+      doorOpen: playerData.doorOpen,
+      flyingCount: playerData.flyingCount,
+      pigeons: playerData.pigeons
+    },
     leaderboard: getLeaderboard()
   }, id);
 
@@ -168,80 +187,137 @@ wss.on('connection', (ws) => {
       if (typeof msg.y === 'number' && Number.isFinite(msg.y)) cur.y = msg.y;
       if (typeof msg.z === 'number' && Number.isFinite(msg.z)) cur.z = msg.z;
       if (typeof msg.yaw === 'number' && Number.isFinite(msg.yaw)) cur.yaw = msg.yaw;
-      if (typeof msg.skin === 'string') cur.skin = msg.skin.slice(0, 24);
+      if (typeof msg.skin === 'string') cur.skin = msg.skin;
       if (typeof msg.name === 'string' && msg.name.trim()) cur.name = msg.name.trim().slice(0, 20);
-      if (typeof msg.coins === 'number' && Number.isFinite(msg.coins) && msg.coins >= 0) {
-        cur.coins = Math.min(9999999, Math.floor(msg.coins));
+      if (typeof msg.doorOpen === 'boolean') cur.doorOpen = msg.doorOpen;
+      if (typeof msg.coins === 'number' && Number.isFinite(msg.coins) && msg.coins >= 0 && msg.coins <= 10000000) {
+        cur.coins = Math.floor(msg.coins);
       }
       if (typeof msg.flyingCount === 'number' && Number.isFinite(msg.flyingCount)) {
-        cur.flyingCount = Math.max(0, Math.min(50, Math.floor(msg.flyingCount)));
+        cur.flyingCount = Math.max(0, Math.floor(msg.flyingCount));
       }
-      if (typeof msg.doorOpen === 'boolean') cur.doorOpen = msg.doorOpen;
-      if (Array.isArray(msg.pigeons)) {
-        cur.pigeons = msg.pigeons.slice(0, 30).map((b) => ({
-          breedId: String(b.breedId || 'zajil').slice(0, 16),
-          name: String(b.name || '').slice(0, 18),
-          flying: !!b.flying,
-          isChick: !!b.isChick,
-          x: Number.isFinite(b.x) ? b.x : cur.roofX,
-          y: Number.isFinite(b.y) ? b.y : 12.0,
-          z: Number.isFinite(b.z) ? b.z : cur.roofZ,
-          yaw: Number.isFinite(b.yaw) ? b.yaw : 0
-        }));
-      }
+      if (Array.isArray(msg.pigeons)) cur.pigeons = msg.pigeons.slice(0, 45);
 
       broadcast({
         type: 'PLAYER_STATE',
-        player: serializePlayer(cur)
+        id: cur.id,
+        slot: cur.slot,
+        roofX: cur.roofX,
+        roofZ: cur.roofZ,
+        name: cur.name,
+        skin: cur.skin,
+        x: cur.x,
+        y: cur.y,
+        z: cur.z,
+        yaw: cur.yaw,
+        coins: cur.coins,
+        doorOpen: cur.doorOpen,
+        flyingCount: cur.flyingCount,
+        pigeons: cur.pigeons
       }, id);
-    } else if (msg.type === 'CLAIM_LAUNCH_REWARD') {
-      const now = Date.now();
-      if (now - cur.lastLaunchRewardAt >= 20000 && cur.flyingCount > 0) {
-        cur.lastLaunchRewardAt = now;
-        cur.coins += 25;
-        sendToPlayer(id, {
-          type: 'LAUNCH_REWARD_APPROVED',
-          coins: cur.coins,
-          reward: 25
-        });
-      }
-    } else if (msg.type === 'VISIT_REQUEST' && msg.targetId) {
-      const target = players.get(msg.targetId);
-      if (target && target.id !== id) {
-        sendToPlayer(target.id, {
-          type: 'VISIT_REQUEST',
-          fromId: cur.id,
-          fromName: cur.name,
-          fromSlot: cur.slot
-        });
-      }
-    } else if (msg.type === 'VISIT_RESPONSE' && msg.visitorId) {
-      const visitor = players.get(msg.visitorId);
-      if (visitor) {
-        if (msg.accepted) {
-          sendToPlayer(visitor.id, {
-            type: 'VISIT_ACCEPTED',
-            hostId: cur.id,
-            hostName: cur.name,
-            hostSlot: cur.slot,
-            roofX: cur.roofX,
-            roofZ: cur.roofZ
-          });
-        } else {
-          sendToPlayer(visitor.id, {
-            type: 'VISIT_DECLINED',
-            hostName: cur.name
-          });
-        }
-      }
+    } else if (msg.type === 'WHISTLE_SIGNAL') {
+      broadcast({
+        type: 'WHISTLE_SIGNAL',
+        fromName: cur.name,
+        slot: cur.slot,
+        action: msg.action || 'launch'
+      }, id);
     } else if (msg.type === 'CHAT_MSG' && typeof msg.text === 'string' && msg.text.trim()) {
       broadcast({
         type: 'CHAT_MSG',
-        fromId: cur.id,
         fromName: cur.name,
         slot: cur.slot,
         text: msg.text.trim().slice(0, 90)
       });
+    } else if (msg.type === 'VISIT_REQUEST' && msg.targetId) {
+      const target = players.get(msg.targetId);
+      if (target && target.ws.readyState === WebSocket.OPEN) {
+        target.ws.send(JSON.stringify({
+          type: 'VISIT_REQUEST',
+          fromId: cur.id,
+          fromName: cur.name
+        }));
+      }
+    } else if (msg.type === 'VISIT_RESPONSE' && msg.targetId) {
+      const target = players.get(msg.targetId);
+      if (target && target.ws.readyState === WebSocket.OPEN) {
+        target.ws.send(JSON.stringify({
+          type: 'VISIT_RESPONSE',
+          fromId: cur.id,
+          accepted: !!msg.accepted,
+          roofX: cur.roofX,
+          roofZ: cur.roofZ,
+          slot: cur.slot,
+          ownerName: cur.name
+        }));
+      }
+    } else if (msg.type === 'KICK_VISITOR' && msg.targetId) {
+      const target = players.get(msg.targetId);
+      if (target && target.ws.readyState === WebSocket.OPEN) {
+        target.ws.send(JSON.stringify({ type: 'KICKED_FROM_ROOF' }));
+      }
+    } else if (msg.type === 'MARKET_LIST_BIRD' && msg.bird) {
+      const price = Math.max(10, Math.min(50000, Math.floor(Number(msg.price) || 100)));
+      const listing = {
+        listingId: 'lst_' + nextListingId++,
+        sellerId: cur.id,
+        sellerName: cur.name,
+        sellerSlot: cur.slot,
+        price,
+        bird: {
+          uid: String(msg.bird.uid || ('b_' + Date.now())),
+          breedId: String(msg.bird.breedId || 'zajil'),
+          breedName: String(msg.bird.breedName || 'زاجل'),
+          customName: String(msg.bird.customName || '').slice(0, 18),
+          isChick: !!msg.bird.isChick,
+          growth: Number(msg.bird.growth) || 100,
+          isTamed: !!msg.bird.isTamed,
+          speed: Number(msg.bird.speed) || 12.0
+        }
+      };
+      birdMarketListings.push(listing);
+      broadcast({ type: 'MARKET_SYNC', marketListings: birdMarketListings });
+      sendToPlayer(cur.id, { type: 'MARKET_SYNC', marketListings: birdMarketListings });
+    } else if (msg.type === 'MARKET_BUY_BIRD' && msg.listingId) {
+      const idx = birdMarketListings.findIndex((item) => item.listingId === msg.listingId);
+      if (idx === -1) {
+        sendToPlayer(cur.id, { type: 'MARKET_ERROR', message: 'هذا الطير تم بيعه أو سحبه.' });
+        return;
+      }
+      const item = birdMarketListings[idx];
+      if (item.sellerId === cur.id) {
+        sendToPlayer(cur.id, { type: 'MARKET_ERROR', message: 'هذا الطير معروض من قبلك.' });
+        return;
+      }
+      if (cur.coins < item.price) {
+        sendToPlayer(cur.id, { type: 'MARKET_ERROR', message: 'رصيدك غير كافٍ لشراء هذا الطير.' });
+        return;
+      }
+
+      cur.coins -= item.price;
+      birdMarketListings.splice(idx, 1);
+
+      const seller = players.get(item.sellerId);
+      if (seller) {
+        seller.coins += item.price;
+        sendToPlayer(seller.id, {
+          type: 'MARKET_BIRD_SOLD',
+          soldBirdUid: item.bird.uid,
+          price: item.price,
+          buyerName: cur.name,
+          newCoins: seller.coins
+        });
+      }
+
+      sendToPlayer(cur.id, {
+        type: 'MARKET_BIRD_PURCHASED',
+        bird: item.bird,
+        price: item.price,
+        newCoins: cur.coins
+      });
+
+      broadcast({ type: 'MARKET_SYNC', marketListings: birdMarketListings });
+      sendToPlayer(cur.id, { type: 'MARKET_SYNC', marketListings: birdMarketListings });
     }
   });
 
@@ -250,11 +326,17 @@ wss.on('connection', (ws) => {
     if (leaving) {
       usedSlots.delete(leaving.slot);
       players.delete(id);
+      for (let i = birdMarketListings.length - 1; i >= 0; i--) {
+        if (birdMarketListings[i].sellerId === id) {
+          birdMarketListings.splice(i, 1);
+        }
+      }
       broadcast({
         type: 'PLAYER_LEFT',
         id,
         onlineCount: players.size,
-        leaderboard: getLeaderboard()
+        leaderboard: getLeaderboard(),
+        marketListings: birdMarketListings
       });
     }
   });
@@ -269,5 +351,5 @@ setInterval(() => {
 }, 5000);
 
 server.listen(PORT, () => {
-  console.log(`Pigeon Kingdom Online running on port ${PORT}`);
+  console.log(`Pigeon Kingdom Online Server running on port ${PORT}`);
 });

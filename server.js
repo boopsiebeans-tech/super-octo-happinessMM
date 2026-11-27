@@ -182,12 +182,6 @@ wss.on('connection', (ws) => {
           coins: cur.coins,
           reward: 25
         });
-        broadcast({
-          type: 'WHISTLE_SIGNAL',
-          fromName: cur.name,
-          slot: cur.slot,
-          action: 'launch'
-        }, id);
       }
     } else if (msg.type === 'VISIT_REQUEST' && msg.targetId) {
       const target = players.get(msg.targetId);
@@ -221,6 +215,7 @@ wss.on('connection', (ws) => {
     } else if (msg.type === 'CHAT_MSG' && typeof msg.text === 'string' && msg.text.trim()) {
       broadcast({
         type: 'CHAT_MSG',
+        fromId: cur.id,
         fromName: cur.name,
         slot: cur.slot,
         text: msg.text.trim().slice(0, 90)
@@ -251,4 +246,4 @@ setInterval(() => {
   });
 }, 5000);
 
-console.log(`Pigeon Kingdom Online Server running on ws://localhost:${PORT}`);
+console.log(`Pigeon Kingdom Online Server running on port ${PORT}`);

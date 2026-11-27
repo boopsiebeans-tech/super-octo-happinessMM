@@ -81,7 +81,7 @@
       justify-content: flex-end;
       align-items: center;
       gap: 4px;
-      max-width: 76%;
+      max-width: 78%;
       pointer-events: auto;
     }
 
@@ -167,27 +167,81 @@
       color: #f0f9ff;
     }
 
+    .hud-btn.visit-btn {
+      background: linear-gradient(155deg, #312e81 0%, #4f46e5 80%);
+      border-color: #a5b4fc;
+      color: #eef2ff;
+    }
+
+    .hud-btn.kick-btn {
+      background: linear-gradient(155deg, #7f1d1d 0%, #dc2626 85%);
+      border-color: #fca5a5;
+      color: #fff;
+    }
+
     .hud-btn:active {
       transform: scale(0.94);
     }
 
-    /* Online Quick Chat Bar */
-    #online-chat-bar {
+    /* Persistent Chat Box & Input */
+    #chat-panel {
       position: fixed;
-      top: 76px;
+      top: 74px;
       left: 10px;
+      width: 245px;
+      max-width: 62vw;
+      z-index: 135;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      pointer-events: auto;
+    }
+
+    #chat-messages {
+      max-height: 112px;
+      overflow-y: auto;
+      background: rgba(12, 12, 18, 0.84);
+      border: 1px solid rgba(56, 189, 248, 0.55);
+      border-radius: 10px;
+      padding: 5px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+    }
+
+    .chat-line {
+      font-size: 10px;
+      line-height: 1.35;
+      color: #f3f4f6;
+      word-break: break-word;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: 2px;
+    }
+
+    .chat-line:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .chat-author {
+      color: #38bdf8;
+      font-weight: 800;
+    }
+
+    #online-chat-bar {
       display: flex;
       align-items: center;
       gap: 4px;
-      z-index: 135;
-      background: rgba(14, 14, 18, 0.86);
+      background: rgba(14, 14, 18, 0.9);
       border: 1px solid rgba(56, 189, 248, 0.65);
       border-radius: 10px;
       padding: 3px 6px;
     }
 
     #online-chat-input {
-      width: 145px;
+      flex: 1;
+      min-width: 0;
       background: transparent;
       border: none;
       color: #fff;
@@ -203,9 +257,38 @@
       font-family: 'Cairo', sans-serif;
       font-size: 10px;
       font-weight: 800;
-      padding: 2px 7px;
+      padding: 2px 8px;
       border-radius: 6px;
       cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* Visit Request Popup (Accept / Reject) */
+    #visit-request-banner {
+      position: fixed;
+      top: 120px;
+      right: 12px;
+      background: rgba(17, 17, 25, 0.96);
+      border: 1.5px solid #818cf8;
+      border-radius: 12px;
+      padding: 8px 12px;
+      z-index: 165;
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+      max-width: 280px;
+    }
+
+    #visit-request-text {
+      color: #e0e7ff;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .visit-req-actions {
+      display: flex;
+      gap: 6px;
     }
 
     #birdcam-bar {
@@ -247,7 +330,7 @@
 
     #toast-msg {
       position: fixed;
-      top: 142px;
+      top: 196px;
       left: 50%;
       transform: translateX(-50%);
       background: rgba(15, 15, 20, 0.95);
@@ -584,6 +667,9 @@
         height: 32px;
         font-size: 9px;
       }
+      #chat-panel {
+        width: 190px;
+      }
     }
   </style>
 </head>
@@ -607,6 +693,8 @@
       <div class="hud-pill">علف: <span id="stat-feed">5</span> | ماي: <span id="stat-water">3</span></div>
       <div class="hud-pill">الباب: <span id="stat-door">مغلق</span></div>
       <div class="hud-pill save-ok" id="stat-save">حفظ تلقائي ✓</div>
+      <button id="btn-visit" class="hud-btn visit-btn" type="button">زيارة سطح</button>
+      <button id="btn-kick-visitor" class="hud-btn kick-btn" type="button" style="display:none;">طرد زائر</button>
       <button id="btn-leaderboard" class="hud-btn online-btn" type="button">ترتيب اللاعبين</button>
       <button id="btn-market" class="hud-btn market-btn" type="button">السوق</button>
       <button id="btn-birdcam" class="hud-btn birdcam-btn" type="button">كاميرا الطير</button>
@@ -615,10 +703,24 @@
     </div>
   </div>
 
-  <!-- Online Chat Bar -->
-  <div id="online-chat-bar">
-    <input id="online-chat-input" type="text" maxlength="80" placeholder="راسل لاعبي السيرفر..." />
-    <button id="online-chat-send" type="button">إرسال</button>
+  <!-- Persistent Chat Box & Input -->
+  <div id="chat-panel">
+    <div id="chat-messages">
+      <div class="chat-line"><span class="chat-author">النظام:</span> أهلاً بك في مملكة الحمام! رسائلك تبقى ظاهرة هنا.</div>
+    </div>
+    <div id="online-chat-bar">
+      <input id="online-chat-input" type="text" maxlength="90" placeholder="اكتب كلمة تبقى بالشات..." />
+      <button id="online-chat-send" type="button">إرسال</button>
+    </div>
+  </div>
+
+  <!-- Visit Request Banner (Accept / Reject) -->
+  <div id="visit-request-banner">
+    <div id="visit-request-text">لاعب يطلب زيارة سطحك</div>
+    <div class="visit-req-actions">
+      <button id="btn-accept-visit" class="buy-btn sell-btn" type="button">موافقة</button>
+      <button id="btn-reject-visit" class="buy-btn" type="button">رفض</button>
+    </div>
   </div>
 
   <!-- Bird Cam Floating Controls -->
@@ -714,6 +816,17 @@
     </div>
   </div>
 
+  <!-- Visit Rooftop Modal -->
+  <div id="visit-modal" class="modal-overlay">
+    <div class="market-card" style="max-width: 400px;">
+      <div class="market-header">
+        <div class="market-title">زيارة سطح لاعب آخر</div>
+        <button id="btn-close-visit" class="close-market" type="button">إغلاق</button>
+      </div>
+      <div class="market-body" id="visit-players-list"></div>
+    </div>
+  </div>
+
   <!-- Leaderboard Modal -->
   <div id="leaderboard-modal" class="modal-overlay">
     <div class="market-card" style="max-width: 400px;">
@@ -763,7 +876,7 @@
     })();
 
     function initPigeonKingdomOnline() {
-      const SAVE_KEY = 'pigeon_kingdom_online_v1';
+      const SAVE_KEY = 'pigeon_kingdom_online_v2';
       const SERVER_URL = 'wss://Super-octo-happinessmm-production.up.railway.app';
       const canvas = document.getElementById('game-canvas');
       const SKY_COLOR = 0x87b5d6;
@@ -803,6 +916,22 @@
         }, 3400);
       }
 
+      const chatMessagesEl = document.getElementById('chat-messages');
+      function appendChatMessage(author, text) {
+        const line = document.createElement('div');
+        line.className = 'chat-line';
+        const authSpan = document.createElement('span');
+        authSpan.className = 'chat-author';
+        authSpan.textContent = author + ': ';
+        line.appendChild(authSpan);
+        line.appendChild(document.createTextNode(text));
+        chatMessagesEl.appendChild(line);
+        while (chatMessagesEl.children.length > 45) {
+          chatMessagesEl.removeChild(chatMessagesEl.firstChild);
+        }
+        chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+      }
+
       const BREEDS = [
         { id: 'zajil', name: 'زاجل', price: 75, sellPrice: 50, body: 0x64748b, wing: 0x334155, neck: 0x0f766e, eye: 0xf97316, speed: 12.8 },
         { id: 'ahmar', name: 'أحمر', price: 85, sellPrice: 55, body: 0x991b1b, wing: 0x7f1d1d, neck: 0xb45309, eye: 0xfacc15, speed: 11.9 },
@@ -834,14 +963,16 @@
       const pigeons = [];
       let player = null;
 
-      // Each player gets their own rooftop sector (default 0,0 locally or server-assigned slot 1..100)
       const ROOF_Y = 12.0;
       const ROOF_HALF = 12.0;
       let mySlot = 1;
       let myRoofX = 0;
       let myRoofZ = 0;
+      let myPlayerId = null;
       let onlineCount = 1;
       let leaderboardData = [];
+      let pendingVisitRequester = null;
+      let currentVisitorId = null;
 
       const gameState = {
         coins: 250,
@@ -906,6 +1037,7 @@
         document.getElementById('stat-eggs').textContent = gameState.eggs.length;
         const skinObj = SKINS.find((s) => s.id === gameState.currentSkin) || SKINS[0];
         document.getElementById('hud-skin-label').textContent = `سطح #${mySlot} • ${skinObj.name}`;
+        document.getElementById('btn-kick-visitor').style.display = currentVisitorId ? 'inline-block' : 'none';
       }
 
       // Lighting & Clouds
@@ -1074,7 +1206,127 @@
       groundMesh.receiveShadow = true;
       scene.add(groundMesh);
 
-      // Player's Own Rooftop & House (Positioned at myRoofX, myRoofZ)
+      // Realistic Character Builder (Head, Neck, Torso, Shoulders, Arms, Hands, Legs, Shoes/Sandals)
+      function createRealisticCharacterGroup(skinId, scale = 1.0) {
+        const g = new THREE.Group();
+        g.scale.set(scale, scale, scale);
+
+        const skinMat = new THREE.MeshStandardMaterial({ color: 0xd2a176, roughness: 0.62 });
+        const hairMat = new THREE.MeshStandardMaterial({ color: 0x111115, roughness: 0.78 });
+        const whiteMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.7 });
+        const redMat = new THREE.MeshStandardMaterial({ color: 0x991b1b, roughness: 0.58 });
+        const navyMat = new THREE.MeshStandardMaterial({ color: 0x1e3a8a, roughness: 0.65 });
+        const blackMat = new THREE.MeshStandardMaterial({ color: 0x18181b, roughness: 0.6 });
+        const pajamaMat = new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.78 });
+        const shoeMat = new THREE.MeshStandardMaterial({ color: 0x27272a, roughness: 0.5 });
+
+        const headGroup = new THREE.Group();
+        headGroup.position.set(0, 1.58, 0);
+        g.add(headGroup);
+
+        const head = new THREE.Mesh(new THREE.SphereGeometry(0.185, 16, 16), skinMat);
+        head.scale.set(0.92, 1.08, 0.96);
+        headGroup.add(head);
+
+        [-1, 1].forEach((side) => {
+          const ear = new THREE.Mesh(new THREE.SphereGeometry(0.04, 10, 10), skinMat);
+          ear.scale.set(0.45, 0.9, 0.75);
+          ear.position.set(side * 0.168, 0.0, 0.0);
+          const eyeW = new THREE.Mesh(new THREE.SphereGeometry(0.022, 8, 8), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+          eyeW.position.set(side * 0.062, 0.022, 0.165);
+          const pupil = new THREE.Mesh(new THREE.SphereGeometry(0.012, 8, 8), new THREE.MeshBasicMaterial({ color: 0x09090b }));
+          pupil.position.set(side * 0.062, 0.022, 0.182);
+          headGroup.add(ear, eyeW, pupil);
+        });
+
+        const nose = new THREE.Mesh(new THREE.ConeGeometry(0.025, 0.06, 8), skinMat);
+        nose.rotation.x = Math.PI / 2;
+        nose.position.set(0, -0.01, 0.19);
+        headGroup.add(nose);
+
+        const hair = new THREE.Mesh(new THREE.SphereGeometry(0.192, 16, 14, 0, Math.PI * 2, 0, Math.PI * 0.56), hairMat);
+        hair.scale.set(0.94, 1.05, 0.98);
+        hair.position.set(0, 0.015, -0.01);
+        headGroup.add(hair);
+
+        if (skinId === 'baghdadi') {
+          const agal = new THREE.Mesh(new THREE.TorusGeometry(0.185, 0.022, 8, 22), blackMat);
+          agal.rotation.x = Math.PI / 2;
+          agal.position.set(0, 0.155, 0);
+          headGroup.add(agal);
+        } else if (skinId === 'basrawi') {
+          const shemagh = new THREE.Mesh(new THREE.SphereGeometry(0.205, 16, 14), redMat);
+          shemagh.scale.set(1.02, 0.78, 1.04);
+          shemagh.position.set(0, 0.06, -0.02);
+          const agal = new THREE.Mesh(new THREE.TorusGeometry(0.195, 0.022, 8, 22), blackMat);
+          agal.rotation.x = Math.PI / 2;
+          agal.position.set(0, 0.165, 0);
+          headGroup.add(shemagh, agal);
+        }
+
+        const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.088, 0.14, 12), skinMat);
+        neck.position.y = 1.38;
+        g.add(neck);
+
+        const torsoMat = skinId === 'basrawi' ? navyMat : skinId === 'champion' ? blackMat : whiteMat;
+        const legMat = skinId === 'fanila' ? pajamaMat : skinId === 'basrawi' ? navyMat : skinId === 'champion' ? blackMat : whiteMat;
+        const sleeveMat = skinId === 'fanila' ? skinMat : torsoMat;
+
+        const chest = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.20, 0.42, 14), torsoMat);
+        chest.scale.set(1.08, 1.0, 0.65);
+        chest.position.y = 1.14;
+        const lowerTorso = new THREE.Mesh(new THREE.CylinderGeometry(0.20, 0.23, 0.34, 14), torsoMat);
+        lowerTorso.scale.set(1.06, 1.0, 0.68);
+        lowerTorso.position.y = 0.80;
+        g.add(chest, lowerTorso);
+
+        if (skinId === 'baghdadi' || skinId === 'champion') {
+          const vest = new THREE.Mesh(new THREE.CylinderGeometry(0.252, 0.22, 0.50, 14), redMat);
+          vest.scale.set(1.1, 1.0, 0.70);
+          vest.position.y = 1.10;
+          g.add(vest);
+        }
+
+        const leftArmPivot = new THREE.Group();
+        leftArmPivot.position.set(0.30, 1.28, 0);
+        const lShoulder = new THREE.Mesh(new THREE.SphereGeometry(0.085, 10, 10), sleeveMat);
+        const lArm = new THREE.Mesh(new THREE.CylinderGeometry(0.065, 0.055, 0.50, 10), sleeveMat);
+        lArm.position.y = -0.26;
+        const lHand = new THREE.Mesh(new THREE.SphereGeometry(0.06, 10, 10), skinMat);
+        lHand.position.y = -0.53;
+        leftArmPivot.add(lShoulder, lArm, lHand);
+
+        const rightArmPivot = new THREE.Group();
+        rightArmPivot.position.set(-0.30, 1.28, 0);
+        const rShoulder = new THREE.Mesh(new THREE.SphereGeometry(0.085, 10, 10), sleeveMat);
+        const rArm = new THREE.Mesh(new THREE.CylinderGeometry(0.065, 0.055, 0.50, 10), sleeveMat);
+        rArm.position.y = -0.26;
+        const rHand = new THREE.Mesh(new THREE.SphereGeometry(0.06, 10, 10), skinMat);
+        rHand.position.y = -0.53;
+        rightArmPivot.add(rShoulder, rArm, rHand);
+        g.add(leftArmPivot, rightArmPivot);
+
+        const leftLegPivot = new THREE.Group();
+        leftLegPivot.position.set(0.115, 0.66, 0);
+        const lLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.085, 0.068, 0.58, 10), legMat);
+        lLeg.position.y = -0.29;
+        const lFoot = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.08, 0.24), shoeMat);
+        lFoot.position.set(0, -0.60, 0.05);
+        leftLegPivot.add(lLeg, lFoot);
+
+        const rightLegPivot = new THREE.Group();
+        rightLegPivot.position.set(-0.115, 0.66, 0);
+        const rLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.085, 0.068, 0.58, 10), legMat);
+        rLeg.position.y = -0.29;
+        const rFoot = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.08, 0.24), shoeMat);
+        rFoot.position.set(0, -0.60, 0.05);
+        rightLegPivot.add(rLeg, rFoot);
+        g.add(leftLegPivot, rightLegPivot);
+
+        return { group: g, headGroup, leftArmPivot, rightArmPivot, leftLegPivot, rightLegPivot };
+      }
+
+      // Player's Own Rooftop & House
       const myHouseGroup = new THREE.Group();
       scene.add(myHouseGroup);
 
@@ -1173,7 +1425,7 @@
       eagleGroup.visible = false;
       scene.add(eagleGroup);
 
-      // Coop (local coordinates inside roofGroup)
+      // Coop
       const COOP = {
         x: 2.0,
         z: -4.2,
@@ -1274,7 +1526,7 @@
         } catch (e) {}
       }
 
-      // Eggs & Pigeon
+      // Eggs & Realistic Pigeon
       const eggMat = new THREE.MeshStandardMaterial({ color: 0xfefce8, roughness: 0.35 });
       function spawnEggInCoop(breed, lx, lz, savedTimer = 34) {
         const eggMesh = new THREE.Mesh(new THREE.SphereGeometry(0.085, 12, 12), eggMat);
@@ -1299,64 +1551,91 @@
 
           this.group = new THREE.Group();
 
-          const bodyMat = new THREE.MeshStandardMaterial({ color: this.isChick ? 0xfde68a : breed.body, roughness: 0.58 });
-          const wingMat = new THREE.MeshStandardMaterial({ color: this.isChick ? 0xfcd34d : breed.wing, roughness: 0.54 });
-          const neckMat = new THREE.MeshStandardMaterial({ color: this.isChick ? 0xfef3c7 : breed.neck, roughness: 0.44, metalness: 0.16 });
-          const beakMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.4 });
-          const legMat = new THREE.MeshStandardMaterial({ color: 0xe11d48, roughness: 0.5 });
+          const bodyMat = new THREE.MeshStandardMaterial({ color: this.isChick ? 0xfde68a : breed.body, roughness: 0.52 });
+          const wingMat = new THREE.MeshStandardMaterial({ color: this.isChick ? 0xfcd34d : breed.wing, roughness: 0.48 });
+          const neckMat = new THREE.MeshStandardMaterial({ color: this.isChick ? 0xfef3c7 : breed.neck, roughness: 0.36, metalness: 0.22 });
+          const beakMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.35 });
+          const legMat = new THREE.MeshStandardMaterial({ color: 0xe11d48, roughness: 0.45 });
           const eyeIrisMat = new THREE.MeshBasicMaterial({ color: breed.eye });
           const pupilMat = new THREE.MeshBasicMaterial({ color: 0x09090b });
 
-          const torso = new THREE.Mesh(new THREE.SphereGeometry(0.165, 16, 14), bodyMat);
-          torso.scale.set(0.84, 0.90, 1.50);
-          torso.position.set(0, 0.25, 0);
-          this.group.add(torso);
+          // Realistic contoured pigeon body + breast
+          const torso = new THREE.Mesh(new THREE.SphereGeometry(0.16, 18, 16), bodyMat);
+          torso.scale.set(0.86, 0.92, 1.48);
+          torso.position.set(0, 0.24, -0.02);
+          const breast = new THREE.Mesh(new THREE.SphereGeometry(0.135, 16, 14), neckMat);
+          breast.scale.set(0.88, 1.05, 1.0);
+          breast.position.set(0, 0.27, 0.12);
+          this.group.add(torso, breast);
 
+          // Head, cere, eyes, beak
           this.headGroup = new THREE.Group();
-          this.headGroup.position.set(0, 0.36, 0.13);
+          this.headGroup.position.set(0, 0.36, 0.14);
           this.group.add(this.headGroup);
 
-          const head = new THREE.Mesh(new THREE.SphereGeometry(0.080, 14, 14), neckMat);
-          head.position.set(0, 0.08, 0.04);
+          const head = new THREE.Mesh(new THREE.SphereGeometry(0.078, 16, 16), neckMat);
+          head.scale.set(0.95, 1.04, 1.05);
+          head.position.set(0, 0.085, 0.03);
           this.headGroup.add(head);
+
+          const cere = new THREE.Mesh(new THREE.SphereGeometry(0.022, 10, 10), new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.5 }));
+          cere.scale.set(0.9, 0.7, 1.2);
+          cere.position.set(0, 0.082, 0.105);
+          this.headGroup.add(cere);
 
           [-1, 1].forEach((side) => {
             const eye = new THREE.Mesh(new THREE.SphereGeometry(0.021, 10, 10), eyeIrisMat);
-            eye.position.set(side * 0.066, 0.09, 0.062);
+            eye.position.set(side * 0.064, 0.095, 0.056);
             const pupil = new THREE.Mesh(new THREE.SphereGeometry(0.012, 8, 8), pupilMat);
-            pupil.position.set(side * 0.077, 0.09, 0.066);
+            pupil.position.set(side * 0.075, 0.095, 0.060);
             this.headGroup.add(eye, pupil);
           });
 
-          const beak = new THREE.Mesh(new THREE.ConeGeometry(0.020, 0.084, 8), beakMat);
-          beak.rotation.x = Math.PI / 2 + 0.14;
-          beak.position.set(0, 0.066, 0.15);
+          const beak = new THREE.Mesh(new THREE.ConeGeometry(0.019, 0.082, 10), beakMat);
+          beak.rotation.x = Math.PI / 2 + 0.16;
+          beak.position.set(0, 0.068, 0.145);
           this.headGroup.add(beak);
 
-          const tail = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.018, 0.28), wingMat);
-          tail.position.set(0, 0.21, -0.28);
+          // Feathered tail fan
+          const tail = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.016, 0.28), wingMat);
+          tail.position.set(0, 0.21, -0.29);
+          tail.rotation.x = -0.12;
           this.group.add(tail);
 
+          // Articulated legs + toes
           this.leftLeg = new THREE.Group();
-          this.leftLeg.position.set(0.056, 0.15, 0.01);
-          const lShin = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.01, 0.15, 6), legMat);
-          lShin.position.y = -0.075;
-          this.leftLeg.add(lShin);
+          this.leftLeg.position.set(0.056, 0.16, 0.01);
+          const lShin = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.01, 0.14, 8), legMat);
+          lShin.position.y = -0.07;
+          const lToe = new THREE.Mesh(new THREE.BoxGeometry(0.045, 0.012, 0.075), legMat);
+          lToe.position.set(0, -0.142, 0.02);
+          this.leftLeg.add(lShin, lToe);
 
           this.rightLeg = new THREE.Group();
-          this.rightLeg.position.set(-0.056, 0.15, 0.01);
-          const rShin = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.01, 0.15, 6), legMat);
-          rShin.position.y = -0.075;
-          this.rightLeg.add(rShin);
+          this.rightLeg.position.set(-0.056, 0.16, 0.01);
+          const rShin = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.01, 0.14, 8), legMat);
+          rShin.position.y = -0.07;
+          const rToe = new THREE.Mesh(new THREE.BoxGeometry(0.045, 0.012, 0.075), legMat);
+          rToe.position.set(0, -0.142, 0.02);
+          this.rightLeg.add(rShin, rToe);
           this.group.add(this.leftLeg, this.rightLeg);
 
+          // Multi-jointed Wings (inner arm wing + outer primary feather tip)
           this.leftWing = new THREE.Group();
-          this.leftWing.position.set(0.11, 0.27, 0.03);
-          this.leftWing.add(new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.022, 0.23), wingMat).translateX(0.12));
+          this.leftWing.position.set(0.105, 0.27, 0.03);
+          const lInner = new THREE.Mesh(new THREE.BoxGeometry(0.20, 0.022, 0.22), wingMat);
+          lInner.position.set(0.10, 0, 0);
+          const lTip = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.016, 0.16), wingMat);
+          lTip.position.set(0.26, -0.01, -0.03);
+          this.leftWing.add(lInner, lTip);
 
           this.rightWing = new THREE.Group();
-          this.rightWing.position.set(-0.11, 0.27, 0.03);
-          this.rightWing.add(new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.022, 0.23), wingMat).translateX(-0.12));
+          this.rightWing.position.set(-0.105, 0.27, 0.03);
+          const rInner = new THREE.Mesh(new THREE.BoxGeometry(0.20, 0.022, 0.22), wingMat);
+          rInner.position.set(-0.10, 0, 0);
+          const rTip = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.016, 0.16), wingMat);
+          rTip.position.set(-0.26, -0.01, -0.03);
+          this.rightWing.add(rInner, rTip);
           this.group.add(this.leftWing, this.rightWing);
 
           this.labelSprite = null;
@@ -1409,8 +1688,8 @@
         }
 
         spreadWingsForFlight(flapAngle) {
-          this.leftWing.rotation.set(0, 0, flapAngle);
-          this.rightWing.rotation.set(0, 0, -flapAngle);
+          this.leftWing.rotation.set(0.08, 0.12, flapAngle);
+          this.rightWing.rotation.set(0.08, -0.12, -flapAngle);
         }
 
         commandExitCoop(launchAfter = false) {
@@ -1457,6 +1736,23 @@
             ROOF_Y,
             myRoofZ + 3.2 + (Math.random() - 0.5) * 7.5
           );
+        }
+
+        toNetworkSnapshot() {
+          return {
+            uid: this.uid,
+            breedId: this.breed.id,
+            customName: this.customName,
+            isChick: this.isChick,
+            growth: this.growth,
+            isTamed: this.isTamed,
+            state: this.state,
+            x: this.group.position.x,
+            y: this.group.position.y,
+            z: this.group.position.z,
+            yaw: this.group.rotation.y,
+            flapPhase: this.flapPhase
+          };
         }
 
         update(dt, elapsed, allPigeons) {
@@ -1547,6 +1843,11 @@
               toTarget.normalize();
               this.group.position.addScaledVector(toTarget, dt * (this.isChick ? 0.75 : 1.18));
               this.group.rotation.y = Math.atan2(toTarget.x, toTarget.z);
+              this.leftLeg.rotation.x = Math.sin(this.flapPhase * 0.7) * 0.45;
+              this.rightLeg.rotation.x = -Math.sin(this.flapPhase * 0.7) * 0.45;
+            } else {
+              this.leftLeg.rotation.x *= 0.8;
+              this.rightLeg.rotation.x *= 0.8;
             }
           } else if (this.state === 'FLYING') {
             this.spreadWingsForFlight(Math.sin(this.flapPhase) * 0.78);
@@ -1599,67 +1900,19 @@
           this.velY = 0;
           this.isGrounded = true;
           this.walkCycle = 0;
+          this.rig = null;
           this.buildSkin(gameState.currentSkin);
         }
 
         buildSkin(skinId) {
           while (this.group.children.length > 0) this.group.remove(this.group.children[0]);
-          const skinMat = new THREE.MeshStandardMaterial({ color: 0xd2a176, roughness: 0.65 });
-          const hairMat = new THREE.MeshStandardMaterial({ color: 0x111115, roughness: 0.8 });
-          const whiteMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.72 });
-          const redMat = new THREE.MeshStandardMaterial({ color: 0x991b1b, roughness: 0.6 });
-          const navyMat = new THREE.MeshStandardMaterial({ color: 0x1e3a8a, roughness: 0.65 });
-          const blackMat = new THREE.MeshStandardMaterial({ color: 0x18181b, roughness: 0.65 });
-          const pajamaMat = new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.8 });
-
-          this.headGroup = new THREE.Group();
-          this.headGroup.position.set(0, 1.58, 0);
-          this.group.add(this.headGroup);
-
-          const head = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.38, 0.36), skinMat);
-          this.headGroup.add(head);
-          const hair = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.12, 0.38), hairMat);
-          hair.position.set(0, 0.18, -0.01);
-          this.headGroup.add(hair);
-
-          if (skinId === 'baghdadi') {
-            const agal = new THREE.Mesh(new THREE.TorusGeometry(0.19, 0.024, 8, 20), blackMat);
-            agal.rotation.x = Math.PI / 2;
-            agal.position.set(0, 0.21, 0);
-            this.headGroup.add(agal);
-          }
-
-          const torsoMat = skinId === 'basrawi' ? navyMat : skinId === 'champion' ? blackMat : whiteMat;
-          const legMat = skinId === 'fanila' ? pajamaMat : skinId === 'basrawi' ? navyMat : skinId === 'champion' ? blackMat : whiteMat;
-          const sleeveMat = skinId === 'fanila' ? skinMat : torsoMat;
-
-          const torso = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.72, 0.28), torsoMat);
-          torso.position.y = 1.04;
-          this.group.add(torso);
-
-          if (skinId === 'baghdadi' || skinId === 'champion') {
-            const vest = new THREE.Mesh(new THREE.BoxGeometry(0.51, 0.56, 0.31), redMat);
-            vest.position.y = 1.11;
-            this.group.add(vest);
-          }
-
-          this.leftArmPivot = new THREE.Group();
-          this.leftArmPivot.position.set(0.33, 1.32, 0);
-          this.leftArmPivot.add(new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.56, 0.15), sleeveMat).translateY(-0.28));
-
-          this.rightArmPivot = new THREE.Group();
-          this.rightArmPivot.position.set(-0.33, 1.32, 0);
-          this.rightArmPivot.add(new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.56, 0.15), sleeveMat).translateY(-0.28));
-          this.group.add(this.leftArmPivot, this.rightArmPivot);
-
-          this.leftLegPivot = new THREE.Group();
-          this.leftLegPivot.position.set(0.13, 0.70, 0);
-          this.leftLegPivot.add(new THREE.Mesh(new THREE.BoxGeometry(0.19, 0.66, 0.20), legMat).translateY(-0.33));
-
-          this.rightLegPivot = new THREE.Group();
-          this.rightLegPivot.position.set(-0.13, 0.70, 0);
-          this.rightLegPivot.add(new THREE.Mesh(new THREE.BoxGeometry(0.19, 0.66, 0.20), legMat).translateY(-0.33));
-          this.group.add(this.leftLegPivot, this.rightLegPivot);
+          this.rig = createRealisticCharacterGroup(skinId, 1.0);
+          this.group.add(this.rig.group);
+          this.headGroup = this.rig.headGroup;
+          this.leftArmPivot = this.rig.leftArmPivot;
+          this.rightArmPivot = this.rig.rightArmPivot;
+          this.leftLegPivot = this.rig.leftLegPivot;
+          this.rightLegPivot = this.rig.rightLegPivot;
         }
 
         getPerchWorldPos(mode) {
@@ -1771,9 +2024,13 @@
             const swing = Math.sin(this.walkCycle) * 0.58;
             this.leftLegPivot.rotation.x = swing;
             this.rightLegPivot.rotation.x = -swing;
+            this.leftArmPivot.rotation.x = -swing * 0.65;
+            this.rightArmPivot.rotation.x = swing * 0.65;
           } else {
             this.leftLegPivot.rotation.x *= 0.82;
             this.rightLegPivot.rotation.x *= 0.82;
+            this.leftArmPivot.rotation.x *= 0.82;
+            this.rightArmPivot.rotation.x *= 0.82;
           }
 
           if (gameState.heldPigeon) {
@@ -1818,8 +2075,67 @@
 
       player = new PlayerCharacter();
 
-      // Remote Players & Their Rooftops in Online World
-      const remotePlayers = new Map(); // id -> { group, house, label }
+      // Remote Players, Their Rooftops & Their Flying/Ground Pigeons
+      const remotePlayers = new Map(); // id -> { data, group, house, birdMeshes }
+
+      function createRemoteBirdMesh(breedId) {
+        const breed = BREEDS.find((b) => b.id === breedId) || BREEDS[0];
+        const bg = new THREE.Group();
+        const bodyMat = new THREE.MeshStandardMaterial({ color: breed.body, roughness: 0.52 });
+        const wingMat = new THREE.MeshStandardMaterial({ color: breed.wing, roughness: 0.48 });
+        const neckMat = new THREE.MeshStandardMaterial({ color: breed.neck, roughness: 0.36 });
+
+        const torso = new THREE.Mesh(new THREE.SphereGeometry(0.16, 14, 12), bodyMat);
+        torso.scale.set(0.86, 0.92, 1.48);
+        torso.position.set(0, 0.24, -0.02);
+
+        const head = new THREE.Mesh(new THREE.SphereGeometry(0.078, 12, 12), neckMat);
+        head.position.set(0, 0.44, 0.17);
+
+        const beak = new THREE.Mesh(new THREE.ConeGeometry(0.019, 0.082, 8), new THREE.MeshStandardMaterial({ color: 0x334155 }));
+        beak.rotation.x = Math.PI / 2 + 0.16;
+        beak.position.set(0, 0.425, 0.285);
+
+        const tail = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.016, 0.28), wingMat);
+        tail.position.set(0, 0.21, -0.29);
+
+        const lWing = new THREE.Group();
+        lWing.position.set(0.105, 0.27, 0.03);
+        lWing.add(new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.02, 0.2), wingMat).translateX(0.18));
+
+        const rWing = new THREE.Group();
+        rWing.position.set(-0.105, 0.27, 0.03);
+        rWing.add(new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.02, 0.2), wingMat).translateX(-0.18));
+
+        bg.add(torso, head, beak, tail, lWing, rWing);
+        scene.add(bg);
+        return { group: bg, lWing, rWing };
+      }
+
+      function syncRemoteBirds(entry, pigeonsList) {
+        const list = Array.isArray(pigeonsList) ? pigeonsList : [];
+        while (entry.birdMeshes.length > list.length) {
+          const old = entry.birdMeshes.pop();
+          scene.remove(old.group);
+        }
+        while (entry.birdMeshes.length < list.length) {
+          entry.birdMeshes.push(createRemoteBirdMesh('zajil'));
+        }
+        for (let i = 0; i < list.length; i++) {
+          const pd = list[i];
+          const bm = entry.birdMeshes[i];
+          bm.group.position.set(pd.x || 0, pd.y || ROOF_Y, pd.z || 0);
+          bm.group.rotation.y = pd.yaw || 0;
+          if (pd.state === 'FLYING' || pd.state === 'LANDING') {
+            const flap = Math.sin((pd.flapPhase || 0)) * 0.78;
+            bm.lWing.rotation.set(0.08, 0.12, flap);
+            bm.rWing.rotation.set(0.08, -0.12, -flap);
+          } else {
+            bm.lWing.rotation.set(0.05, -0.14, -1.48);
+            bm.rWing.rotation.set(0.05, 0.14, 1.48);
+          }
+        }
+      }
 
       function upsertRemotePlayer(pData) {
         if (!pData || !pData.id) return;
@@ -1834,31 +2150,122 @@
           rHouse.add(rBody, rRoof);
           scene.add(rHouse);
 
-          const pMesh = new THREE.Group();
-          const body = new THREE.Mesh(new THREE.BoxGeometry(0.5, 1.45, 0.32), new THREE.MeshStandardMaterial({ color: 0x0284c7 }));
-          body.position.y = 0.85;
-          const head = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.35, 0.35), new THREE.MeshStandardMaterial({ color: 0xd2a176 }));
-          head.position.y = 1.78;
+          const rig = createRealisticCharacterGroup(pData.skin || 'baghdadi', 1.0);
           const tag = createBirdLabelSprite(`${pData.name || 'لاعب'} (سطح #${pData.slot || '?'})`, false, true);
-          tag.position.set(0, 2.25, 0);
-          pMesh.add(body, head, tag);
-          scene.add(pMesh);
+          tag.position.set(0, 2.15, 0);
+          rig.group.add(tag);
+          scene.add(rig.group);
 
-          entry = { house: rHouse, mesh: pMesh };
+          entry = { data: Object.assign({}, pData), house: rHouse, group: rig.group, birdMeshes: [] };
           remotePlayers.set(pData.id, entry);
+        } else {
+          entry.data = Object.assign({}, entry.data, pData);
         }
-        entry.mesh.position.set(pData.x || 0, pData.y || ROOF_Y, pData.z || 0);
-        entry.mesh.rotation.y = pData.yaw || 0;
+        entry.group.position.set(pData.x || 0, pData.y || ROOF_Y, pData.z || 0);
+        entry.group.rotation.y = pData.yaw || 0;
+        syncRemoteBirds(entry, pData.pigeons);
       }
 
       function removeRemotePlayer(id) {
         const entry = remotePlayers.get(id);
         if (entry) {
           scene.remove(entry.house);
-          scene.remove(entry.mesh);
+          scene.remove(entry.group);
+          entry.birdMeshes.forEach((bm) => scene.remove(bm.group));
           remotePlayers.delete(id);
         }
+        if (currentVisitorId === id) {
+          currentVisitorId = null;
+          updateHudStats();
+        }
       }
+
+      // Visit & Kick Logic
+      const visitModal = document.getElementById('visit-modal');
+      const visitListEl = document.getElementById('visit-players-list');
+      const visitReqBanner = document.getElementById('visit-request-banner');
+      const visitReqText = document.getElementById('visit-request-text');
+
+      document.getElementById('btn-visit').addEventListener('click', () => {
+        visitListEl.innerHTML = '';
+        const others = Array.from(remotePlayers.values());
+        if (others.length === 0) {
+          const empty = document.createElement('div');
+          empty.className = 'shop-item';
+          empty.innerHTML = '<div class="shop-info"><h4>لا يوجد لاعبون آخرون متصلون حالياً</h4><p>افتح اللعبة من جهاز ثانٍ لتظهر أسطح اللاعبين هنا.</p></div>';
+          visitListEl.appendChild(empty);
+        } else {
+          others.forEach((entry) => {
+            const d = entry.data;
+            const row = document.createElement('div');
+            row.className = 'shop-item';
+            row.innerHTML = `<div class="shop-info"><h4>${d.name || 'لاعب'} (سطح #${d.slot || '?'})</h4><p>الرصيد: ${d.coins || 250} د.ع • طائر بالسماء: ${d.flyingCount || 0}</p></div><button class="buy-btn equip-btn" type="button">طلب زيارة</button>`;
+            row.querySelector('button').onclick = () => {
+              visitModal.style.display = 'none';
+              if (wsClient && wsClient.readyState === WebSocket.OPEN) {
+                wsClient.send(JSON.stringify({ type: 'VISIT_REQUEST', targetId: d.id }));
+                showToast(`تم إرسال طلب زيارة إلى ${d.name}...`);
+              } else {
+                // Local/offline preview fallback
+                player.group.position.set((d.roofX || 0) + 1.5, ROOF_Y, (d.roofZ || 0) + 4.5);
+                showToast(`انتقلت إلى سطح #${d.slot}`);
+              }
+            };
+            visitListEl.appendChild(row);
+          });
+        }
+        visitModal.style.display = 'flex';
+      });
+
+      document.getElementById('btn-close-visit').addEventListener('click', () => {
+        visitModal.style.display = 'none';
+      });
+
+      document.getElementById('btn-accept-visit').addEventListener('click', () => {
+        if (!pendingVisitRequester) return;
+        const req = pendingVisitRequester;
+        pendingVisitRequester = null;
+        visitReqBanner.style.display = 'none';
+        currentVisitorId = req.fromId;
+        updateHudStats();
+        if (wsClient && wsClient.readyState === WebSocket.OPEN) {
+          wsClient.send(JSON.stringify({
+            type: 'VISIT_RESPONSE',
+            targetId: req.fromId,
+            accepted: true,
+            roofX: myRoofX,
+            roofZ: myRoofZ,
+            slot: mySlot
+          }));
+        }
+        showToast(`وافقت على زيارة (${req.fromName}) لسطحك.`);
+      });
+
+      document.getElementById('btn-reject-visit').addEventListener('click', () => {
+        if (!pendingVisitRequester) return;
+        const req = pendingVisitRequester;
+        pendingVisitRequester = null;
+        visitReqBanner.style.display = 'none';
+        if (wsClient && wsClient.readyState === WebSocket.OPEN) {
+          wsClient.send(JSON.stringify({
+            type: 'VISIT_RESPONSE',
+            targetId: req.fromId,
+            accepted: false
+          }));
+        }
+        showToast(`رفضت طلب زيارة (${req.fromName}).`);
+      });
+
+      document.getElementById('btn-kick-visitor').addEventListener('click', () => {
+        if (!currentVisitorId) return;
+        const target = currentVisitorId;
+        currentVisitorId = null;
+        updateHudStats();
+        if (wsClient && wsClient.readyState === WebSocket.OPEN) {
+          wsClient.send(JSON.stringify({ type: 'KICK_VISITOR', targetId: target }));
+        }
+        showToast('تم طرد الزائر من سطحك وإرجاعه لسطحه!');
+      });
 
       // WebSocket Online Client
       let wsClient = null;
@@ -1872,6 +2279,7 @@
             let msg;
             try { msg = JSON.parse(ev.data); } catch (e) { return; }
             if (msg.type === 'WELCOME') {
+              myPlayerId = msg.self && msg.self.id ? msg.self.id : null;
               onlineCount = msg.onlineCount || 1;
               if (msg.self) {
                 applyRoofSectorPosition(msg.self.roofX || 0, msg.self.roofZ || 0, msg.self.slot || 1);
@@ -1901,16 +2309,31 @@
             } else if (msg.type === 'WHISTLE_SIGNAL') {
               showToast(`صفارة من ${msg.fromName} (سطح #${msg.slot})!`);
             } else if (msg.type === 'CHAT_MSG') {
+              appendChatMessage(`${msg.fromName} #${msg.slot || ''}`, msg.text);
               showToast(`${msg.fromName}: ${msg.text}`);
+            } else if (msg.type === 'VISIT_REQUEST') {
+              pendingVisitRequester = { fromId: msg.fromId, fromName: msg.fromName || 'لاعب' };
+              visitReqText.textContent = `طلب زيارة من (${pendingVisitRequester.fromName}) لسطحك`;
+              visitReqBanner.style.display = 'flex';
+            } else if (msg.type === 'VISIT_RESPONSE') {
+              if (msg.accepted) {
+                const vx = typeof msg.roofX === 'number' ? msg.roofX : 0;
+                const vz = typeof msg.roofZ === 'number' ? msg.roofZ : 0;
+                player.group.position.set(vx + 1.5, ROOF_Y, vz + 4.5);
+                showToast(`تمت الموافقة! أنت الآن في زيارة سطح #${msg.slot || ''}`);
+              } else {
+                showToast('تم رفض طلب زيارتك للسطح.');
+              }
+            } else if (msg.type === 'KICKED_FROM_ROOF') {
+              player.group.position.set(myRoofX + 1.2, ROOF_Y, myRoofZ + 5.2);
+              showToast('تم طردك من السطح وإرجاعك إلى سطحك!');
             }
           });
           wsClient.addEventListener('close', () => {
             onlineCount = 1;
             updateHudStats();
           });
-          wsClient.addEventListener('error', () => {
-            // Silent fallback to local mode when server isn't started yet
-          });
+          wsClient.addEventListener('error', () => {});
         } catch (e) {}
       }
       connectOnlineServer();
@@ -1925,7 +2348,8 @@
           yaw: player.group.rotation.y,
           skin: gameState.currentSkin,
           coins: Math.floor(gameState.coins),
-          flyingCount
+          flyingCount,
+          pigeons: pigeons.map((p) => p.toNetworkSnapshot())
         }));
       }
 
@@ -2002,12 +2426,13 @@
         playWhistle('launch');
         if (launchedAny) {
           gameState.coins += 100;
-          updateHudStats();
+          updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
           saveGameAuto();
           showToast('صفارة إقلاع! يطير سربك فوق سطحك وحصلت +100 د.ع!');
           if (wsClient && wsClient.readyState === WebSocket.OPEN) {
             wsClient.send(JSON.stringify({ type: 'WHISTLE_SIGNAL', action: 'launch' }));
           }
+          sendOnlineState(pigeons.filter((p) => p.state === 'FLYING').length);
         }
       });
 
@@ -2291,15 +2716,21 @@
 
       // Chat Send
       const chatInput = document.getElementById('online-chat-input');
-      document.getElementById('online-chat-send').addEventListener('click', () => {
+      function submitChatMessage() {
         const txt = chatInput.value.trim();
         if (!txt) return;
+        appendChatMessage(`أنت #${mySlot}`, txt);
         if (wsClient && wsClient.readyState === WebSocket.OPEN) {
           wsClient.send(JSON.stringify({ type: 'CHAT_MSG', text: txt }));
-        } else {
-          showToast(`أنت: ${txt}`);
         }
         chatInput.value = '';
+      }
+      document.getElementById('online-chat-send').addEventListener('click', submitChatMessage);
+      chatInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          submitChatMessage();
+        }
       });
 
       document.getElementById('btn-view').addEventListener('click', (e) => {
@@ -2523,7 +2954,7 @@
         if (hudSync >= 0.25) { hudSync = 0; updateHudStats(flyingCount); }
 
         netSync += dt;
-        if (netSync >= 0.1) { netSync = 0; sendOnlineState(flyingCount); }
+        if (netSync >= 0.08) { netSync = 0; sendOnlineState(flyingCount); }
 
         saveSync += dt;
         if (saveSync >= 12) { saveSync = 0; saveGameAuto(); }
@@ -2536,4 +2967,4 @@
     }
   </script>
 </body>
-</html>
+  </html>

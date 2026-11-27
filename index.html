@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>PIGEON KINGDOM ONLINE - مملكة الحمام أونلاين (100 لاعب)</title>
+  <title>PIGEON KINGDOM ONLINE - مملكة الحمام أونلاين</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet" />
@@ -34,7 +34,6 @@
       display: block;
       z-index: 1;
       background: #87b5d6;
-      touch-action: none;
     }
 
     .hud-top {
@@ -45,18 +44,18 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 5px;
+      gap: 6px;
       z-index: 120;
       pointer-events: none;
     }
 
     .brand-badge {
       background: linear-gradient(155deg, rgba(14, 14, 18, 0.92), rgba(55, 10, 14, 0.92));
-      border: 1.2px solid #dc2626;
-      border-radius: 10px;
+      border: 1px solid #dc2626;
+      border-radius: 9px;
       padding: 4px 8px;
       color: #ffffff;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
       pointer-events: auto;
       flex-shrink: 0;
     }
@@ -72,7 +71,7 @@
       font-size: 9px;
       font-weight: 700;
       color: #f3f4f6;
-      line-height: 1.2;
+      line-height: 1.15;
     }
 
     .hud-pills {
@@ -102,10 +101,9 @@
       font-weight: 800;
     }
 
-    .hud-pill.gold span { color: #facc15; }
-    .hud-pill.online-pill { border-color: #38bdf8; color: #bae6fd; }
-    .hud-pill.falcon-pill { border-color: #f59e0b; color: #fde68a; }
-    .hud-pill.eagle-pill { border-color: #fb923c; color: #fed7aa; }
+    .hud-pill.gold span {
+      color: #facc15;
+    }
 
     .hud-btn {
       background: linear-gradient(155deg, #16161c 0%, #3b0d11 70%, #991b1b 100%);
@@ -114,89 +112,89 @@
       font-family: 'Cairo', sans-serif;
       font-size: 9px;
       font-weight: 800;
-      padding: 3px 7px;
+      padding: 2px 7px;
       border-radius: 7px;
       white-space: nowrap;
       cursor: pointer;
-      line-height: 1.2;
+      line-height: 1.25;
     }
 
     .hud-btn.market-btn {
-      background: linear-gradient(155deg, #78350f 0%, #b45309 65%, #dc2626 100%);
+      background: linear-gradient(155deg, #78350f 0%, #b45309 70%, #dc2626 100%);
       border-color: #fbbf24;
       color: #fef3c7;
     }
 
-    .hud-btn.birdcam-btn {
-      background: linear-gradient(155deg, #064e3b 0%, #059669 75%, #10b981 100%);
+    .hud-btn.visit-return {
+      background: linear-gradient(155deg, #065f46 0%, #059669 100%);
       border-color: #6ee7b7;
-      color: #ecfdf5;
     }
 
-    .hud-btn.birdcam-btn.active {
-      background: linear-gradient(155deg, #991b1b 0%, #dc2626 100%);
-      border-color: #fef08a;
-      color: #fef08a;
-    }
-
-    .hud-btn.online-btn {
-      background: linear-gradient(155deg, #0c4a6e 0%, #0284c7 80%);
-      border-color: #7dd3fc;
-      color: #f0f9ff;
-    }
-
-    .hud-btn.visit-back-btn {
-      background: linear-gradient(155deg, #7c2d12 0%, #ea580c 85%);
-      border-color: #fed7aa;
-      color: #fff;
-      display: none;
-    }
-
-    .hud-btn:active { transform: scale(0.95); }
-
-    /* Toggleable Online Chat */
-    #btn-toggle-chat {
+    /* Toggleable Chat */
+    #chat-toggle-btn {
       position: fixed;
-      top: 64px;
+      top: 56px;
       left: 8px;
-      z-index: 135;
+      z-index: 130;
       background: rgba(14, 14, 18, 0.9);
       border: 1px solid #38bdf8;
-      color: #bae6fd;
+      color: #e0f2fe;
       font-family: 'Cairo', sans-serif;
       font-size: 9.5px;
       font-weight: 800;
-      padding: 3px 8px;
+      padding: 3px 9px;
       border-radius: 8px;
       cursor: pointer;
     }
 
-    #online-chat-panel {
+    #online-chat-box {
       position: fixed;
-      top: 90px;
+      top: 82px;
       left: 8px;
       width: 215px;
-      background: rgba(14, 14, 18, 0.9);
-      border: 1px solid rgba(56, 189, 248, 0.7);
-      border-radius: 10px;
-      padding: 6px;
-      z-index: 136;
       display: none;
       flex-direction: column;
-      gap: 5px;
+      gap: 4px;
+      z-index: 135;
+      background: rgba(14, 14, 18, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.7);
+      border-radius: 9px;
+      padding: 5px;
     }
 
     #chat-messages {
-      max-height: 76px;
+      max-height: 78px;
       overflow-y: auto;
-      font-size: 9.5px;
-      color: #e5e7eb;
+      font-size: 9px;
+      color: #f1f5f9;
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
 
-    #chat-input-row {
+    .chat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 3px 5px;
+      border-radius: 5px;
+    }
+
+    .visit-mini-btn {
+      align-self: flex-start;
+      background: #0284c7;
+      border: none;
+      color: #fff;
+      font-family: 'Cairo', sans-serif;
+      font-size: 8.5px;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .chat-input-wrap {
       display: flex;
       gap: 4px;
     }
@@ -205,9 +203,9 @@
       flex: 1;
       min-width: 0;
       background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 6px;
-      padding: 2px 6px;
+      padding: 2px 5px;
       color: #fff;
       font-family: 'Cairo', sans-serif;
       font-size: 9.5px;
@@ -226,47 +224,13 @@
       cursor: pointer;
     }
 
-    #birdcam-bar {
-      position: fixed;
-      top: 94px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(6, 78, 59, 0.94);
-      border: 1.2px solid #34d399;
-      border-radius: 10px;
-      padding: 4px 8px;
-      display: none;
-      align-items: center;
-      gap: 6px;
-      z-index: 145;
-    }
-
-    #birdcam-label {
-      color: #ecfdf5;
-      font-size: 10px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .birdcam-nav-btn {
-      background: #065f46;
-      border: 1px solid #a7f3d0;
-      color: #fff;
-      font-family: 'Cairo', sans-serif;
-      font-size: 9px;
-      font-weight: 800;
-      padding: 2px 7px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
     #toast-msg {
       position: fixed;
-      top: 124px;
+      top: 58px;
       left: 50%;
       transform: translateX(-50%);
       background: rgba(15, 15, 20, 0.94);
-      border: 1.2px solid #facc15;
+      border: 1px solid #facc15;
       color: #fef08a;
       font-size: 10px;
       font-weight: 800;
@@ -280,14 +244,32 @@
       text-align: center;
     }
 
+    #visit-prompt {
+      position: fixed;
+      top: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.96);
+      border: 1.5px solid #38bdf8;
+      border-radius: 10px;
+      padding: 6px 10px;
+      z-index: 180;
+      display: none;
+      align-items: center;
+      gap: 6px;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
     #held-bird-bar {
       position: fixed;
-      bottom: 124px;
+      bottom: 122px;
       left: 50%;
       transform: translateX(-50%);
       background: rgba(14, 14, 18, 0.94);
-      border: 1.2px solid #dc2626;
-      border-radius: 11px;
+      border: 1px solid #dc2626;
+      border-radius: 10px;
       padding: 5px 8px;
       display: none;
       flex-direction: column;
@@ -317,17 +299,12 @@
       font-family: 'Cairo', sans-serif;
       font-size: 9px;
       font-weight: 800;
-      padding: 3px 7px;
-      border-radius: 7px;
+      padding: 2px 7px;
+      border-radius: 6px;
       cursor: pointer;
     }
 
-    .held-act-btn.tame-style {
-      background: linear-gradient(155deg, #065f46, #059669);
-      border-color: #6ee7b7;
-    }
-
-    /* Joystick: left side, isolated multi-touch */
+    /* Compact Joystick */
     #joystick-zone {
       position: fixed;
       left: 12px;
@@ -335,9 +312,9 @@
       width: 84px;
       height: 84px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(20, 20, 24, 0.45) 0%, rgba(127, 29, 29, 0.45) 100%);
-      border: 1.5px solid rgba(220, 38, 38, 0.78);
-      z-index: 125;
+      background: radial-gradient(circle, rgba(20, 20, 24, 0.45) 0%, rgba(127, 29, 29, 0.5) 100%);
+      border: 1.5px solid rgba(220, 38, 38, 0.8);
+      z-index: 120;
       touch-action: none;
     }
 
@@ -355,29 +332,29 @@
       pointer-events: none;
     }
 
-    /* Compact Action Buttons Cluster on bottom-right */
+    /* Compact Action Buttons */
     .action-cluster {
       position: fixed;
       right: 8px;
       bottom: 10px;
       display: grid;
-      grid-template-columns: repeat(2, minmax(76px, auto));
+      grid-template-columns: repeat(2, minmax(74px, auto));
       gap: 4px;
-      z-index: 125;
+      z-index: 120;
       pointer-events: auto;
       direction: rtl;
     }
 
     .act-btn {
-      min-width: 76px;
-      height: 28px;
+      min-width: 74px;
+      height: 27px;
       padding: 1px 6px;
-      border-radius: 8px;
+      border-radius: 7px;
       background: linear-gradient(160deg, #111111 0%, #2b090c 60%, #b91c1c 100%);
       border: 1px solid #dc2626;
       color: #ffffff;
       font-family: 'Cairo', sans-serif;
-      font-size: 8.8px;
+      font-size: 9px;
       font-weight: 800;
       white-space: nowrap;
       display: flex;
@@ -385,7 +362,6 @@
       justify-content: center;
       gap: 3px;
       cursor: pointer;
-      touch-action: manipulation;
     }
 
     .act-btn.feed-btn {
@@ -403,12 +379,9 @@
       border-color: #34d399;
     }
 
-    .act-btn.tame-btn {
-      background: linear-gradient(160deg, #1e1b4b 0%, #4c1d95 60%, #7c3aed 100%);
-      border-color: #c4b5fd;
+    .act-btn:active {
+      transform: scale(0.95);
     }
-
-    .act-btn:active { transform: scale(0.95); }
 
     .modal-overlay {
       position: fixed;
@@ -418,17 +391,17 @@
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 12px;
+      padding: 10px;
       z-index: 220;
     }
 
     .market-card {
       width: 100%;
-      max-width: 480px;
-      max-height: 85vh;
+      max-width: 470px;
+      max-height: 84vh;
       background: linear-gradient(165deg, #121217 0%, #26090c 100%);
-      border: 2px solid #dc2626;
-      border-radius: 16px;
+      border: 1.5px solid #dc2626;
+      border-radius: 14px;
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -436,7 +409,7 @@
     }
 
     .market-header {
-      padding: 10px 14px;
+      padding: 8px 12px;
       background: rgba(0, 0, 0, 0.45);
       border-bottom: 1px solid rgba(220, 38, 38, 0.5);
       display: flex;
@@ -445,15 +418,24 @@
       gap: 6px;
     }
 
-    .market-title { font-size: 13px; font-weight: 900; color: #f87171; }
-    .market-balance { font-size: 11px; font-weight: 800; color: #facc15; }
+    .market-title {
+      font-size: 12px;
+      font-weight: 900;
+      color: #f87171;
+    }
+
+    .market-balance {
+      font-size: 10px;
+      font-weight: 800;
+      color: #facc15;
+    }
 
     .close-market {
       background: #991b1b;
       border: 1px solid #fca5a5;
       color: #fff;
       font-family: 'Cairo', sans-serif;
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 800;
       padding: 2px 9px;
       border-radius: 7px;
@@ -463,7 +445,7 @@
     .market-tabs {
       display: flex;
       gap: 4px;
-      padding: 7px 10px;
+      padding: 6px 8px;
       background: rgba(0, 0, 0, 0.35);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       overflow-x: auto;
@@ -474,10 +456,10 @@
       border: 1px solid rgba(255, 255, 255, 0.16);
       color: #e5e7eb;
       font-family: 'Cairo', sans-serif;
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 800;
-      padding: 4px 9px;
-      border-radius: 8px;
+      padding: 3px 9px;
+      border-radius: 7px;
       white-space: nowrap;
       cursor: pointer;
     }
@@ -489,17 +471,17 @@
     }
 
     .market-body {
-      padding: 10px 12px;
+      padding: 8px 10px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 7px;
+      gap: 6px;
     }
 
     .shop-item {
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 10px;
+      border-radius: 9px;
       padding: 7px 9px;
       display: flex;
       justify-content: space-between;
@@ -507,30 +489,46 @@
       gap: 8px;
     }
 
-    .shop-info h4 { font-size: 11px; font-weight: 800; color: #f9fafb; }
-    .shop-info p { font-size: 9.5px; color: #d1d5db; margin-top: 2px; }
+    .shop-info h4 {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #f9fafb;
+    }
+
+    .shop-info p {
+      font-size: 9px;
+      color: #d1d5db;
+      margin-top: 2px;
+    }
 
     .buy-btn {
       background: linear-gradient(155deg, #b45309, #dc2626);
       border: 1px solid #fbbf24;
       color: #fff;
       font-family: 'Cairo', sans-serif;
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 800;
-      padding: 4px 9px;
+      padding: 4px 8px;
       border-radius: 7px;
       white-space: nowrap;
       cursor: pointer;
     }
 
-    .buy-btn.sell-btn { background: linear-gradient(155deg, #065f46, #059669); border-color: #6ee7b7; }
-    .buy-btn.equip-btn { background: linear-gradient(155deg, #1d4ed8, #2563eb); border-color: #93c5fd; }
+    .buy-btn.sell-btn {
+      background: linear-gradient(155deg, #065f46, #059669);
+      border-color: #6ee7b7;
+    }
+
+    .buy-btn.equip-btn {
+      background: linear-gradient(155deg, #1d4ed8, #2563eb);
+      border-color: #93c5fd;
+    }
 
     .rename-input {
       width: 100%;
-      padding: 7px 10px;
+      padding: 7px 9px;
       border-radius: 8px;
-      border: 1.5px solid #dc2626;
+      border: 1px solid #dc2626;
       background: #18181b;
       color: #fff;
       font-family: 'Cairo', sans-serif;
@@ -544,7 +542,6 @@
 <body>
   <canvas id="game-canvas"></canvas>
 
-  <!-- Top HUD -->
   <div class="hud-top">
     <div class="brand-badge">
       <div class="brand-title">PIGEON KINGDOM ONLINE</div>
@@ -552,71 +549,61 @@
     </div>
 
     <div class="hud-pills">
-      <div class="hud-pill online-pill">أونلاين: <span id="stat-online">1</span>/100</div>
+      <div class="hud-pill">أونلاين: <span id="stat-online">1</span>/100</div>
       <div class="hud-pill gold">الرصيد: <span id="stat-coins">250</span> د.ع</div>
-      <div class="hud-pill falcon-pill">الشاهين: <span id="stat-falcon-timer">10:00</span></div>
-      <div class="hud-pill eagle-pill">النسر: <span id="stat-eagle-timer">01:00</span></div>
       <div class="hud-pill">السرب: <span id="stat-flying">0</span>/<span id="stat-total">12</span></div>
       <div class="hud-pill">علف: <span id="stat-feed">5</span> | ماي: <span id="stat-water">3</span></div>
       <div class="hud-pill">الباب: <span id="stat-door">مغلق</span></div>
-      <button id="btn-visit-back" class="hud-btn visit-back-btn" type="button">رجوع لسطحي</button>
-      <button id="btn-leaderboard" class="hud-btn online-btn" type="button">اللاعبون والزيارة</button>
+      <button id="btn-visit-roof" class="hud-btn" type="button">زيارة سطح</button>
+      <button id="btn-leaderboard" class="hud-btn" type="button">الترتيب</button>
       <button id="btn-market" class="hud-btn market-btn" type="button">السوق</button>
-      <button id="btn-birdcam" class="hud-btn birdcam-btn" type="button">كاميرا الطير</button>
-      <button id="btn-view" class="hud-btn" type="button">المنظور: ثالث</button>
+      <button id="btn-view" class="hud-btn" type="button">منظور: ثالث</button>
     </div>
   </div>
 
-  <!-- Toggleable Chat -->
-  <button id="btn-toggle-chat" type="button">الدردشة (فتح/إغلاق)</button>
-  <div id="online-chat-panel">
+  <button id="chat-toggle-btn" type="button">الدردشة ▾</button>
+
+  <div id="online-chat-box">
     <div id="chat-messages"></div>
-    <div id="chat-input-row">
+    <div class="chat-input-wrap">
       <input id="online-chat-input" type="text" maxlength="80" placeholder="اكتب رسالة..." />
       <button id="online-chat-send" type="button">إرسال</button>
     </div>
   </div>
 
-  <!-- Bird Cam Bar -->
-  <div id="birdcam-bar">
-    <span id="birdcam-label">كاميرا الطير</span>
-    <button id="btn-birdcam-next" class="birdcam-nav-btn" type="button">التالي</button>
-    <button id="btn-birdcam-exit" class="birdcam-nav-btn" style="background:#991b1b; border-color:#fca5a5;" type="button">رجوع</button>
+  <div id="visit-prompt">
+    <span id="visit-prompt-text">طلب زيارة سطح</span>
+    <button id="btn-visit-accept" class="buy-btn sell-btn" type="button">قبول</button>
+    <button id="btn-visit-decline" class="buy-btn" type="button">رفض</button>
   </div>
 
   <div id="toast-msg"></div>
 
-  <!-- Held Bird Bar -->
   <div id="held-bird-bar">
     <div id="held-bird-title">ماسك طير</div>
     <div class="held-actions">
       <button id="btn-put-ground" class="held-act-btn" type="button">حطّه بالكاع</button>
       <button id="btn-release-fly" class="held-act-btn" type="button">طيّره بالسماء</button>
-      <button id="btn-tame-hand" class="held-act-btn tame-style" type="button">أليف (عاليد)</button>
-      <button id="btn-tame-shoulder" class="held-act-btn tame-style" type="button">عل جتف</button>
-      <button id="btn-rename-bird" class="held-act-btn" type="button">سمّي الطير</button>
+      <button id="btn-tame-shoulder" class="held-act-btn" type="button">أليف عل جتف</button>
+      <button id="btn-rename-bird" class="held-act-btn" type="button">تسمية</button>
     </div>
   </div>
 
-  <!-- Joystick -->
   <div id="joystick-zone">
     <div id="joystick-knob"></div>
   </div>
 
-  <!-- Compact Action Buttons -->
   <div class="action-cluster">
-    <button id="btn-launch" class="act-btn" type="button">إقلاع (+100)</button>
+    <button id="btn-launch" class="act-btn" type="button">إقلاع</button>
     <button id="btn-land" class="act-btn" type="button">نزول</button>
-    <button id="btn-exit-all" class="act-btn" type="button">إخراج الحمام</button>
+    <button id="btn-exit-all" class="act-btn" type="button">إخراج الكل</button>
     <button id="btn-door" class="act-btn" type="button">باب القفص</button>
     <button id="btn-feed" class="act-btn feed-btn" type="button">ذب علف</button>
     <button id="btn-water" class="act-btn water-btn" type="button">سقي ماي</button>
     <button id="btn-grab" class="act-btn grab-btn" type="button">لزم طير</button>
-    <button id="btn-call-tame" class="act-btn tame-btn" type="button">صياح للأليف</button>
-    <button id="btn-jump" class="act-btn" style="grid-column: span 2;" type="button">قفز</button>
+    <button id="btn-jump" class="act-btn" type="button">قفز</button>
   </div>
 
-  <!-- Market Modal (Unchanged Market Items & Prices) -->
   <div id="market-modal" class="modal-overlay">
     <div class="market-card">
       <div class="market-header">
@@ -628,50 +615,40 @@
         <button class="tab-btn active" data-tab="birds" type="button">بيع وشراء الحمام</button>
         <button class="tab-btn" data-tab="feed" type="button">الأعلاف والماي</button>
         <button class="tab-btn" data-tab="skins" type="button">سكنات المطيرجية</button>
-        <button class="tab-btn" data-tab="coop" type="button">أقفاص وأدوية وأبراج</button>
+        <button class="tab-btn" data-tab="coop" type="button">أقفاص وأدوية</button>
       </div>
       <div class="market-body" id="market-items-list"></div>
     </div>
   </div>
 
-  <!-- Online Players & Visit Modal -->
   <div id="leaderboard-modal" class="modal-overlay">
-    <div class="market-card" style="max-width: 420px;">
+    <div class="market-card" style="max-width: 390px;">
       <div class="market-header">
-        <div class="market-title">اللاعبون أونلاين وزيارة الأسطح</div>
+        <div class="market-title">ترتيب اللاعبين أونلاين</div>
         <button id="btn-close-leaderboard" class="close-market" type="button">إغلاق</button>
       </div>
       <div class="market-body" id="leaderboard-list"></div>
     </div>
   </div>
 
-  <!-- Visit Request Modal -->
-  <div id="visit-request-modal" class="modal-overlay">
-    <div class="market-card" style="max-width: 340px;">
+  <div id="visit-modal" class="modal-overlay">
+    <div class="market-card" style="max-width: 390px;">
       <div class="market-header">
-        <div class="market-title">طلب زيارة سطح</div>
-        <button id="btn-close-visit-req" class="close-market" type="button">إغلاق</button>
+        <div class="market-title">زيارة أسطح اللاعبين</div>
+        <button id="btn-close-visit" class="close-market" type="button">إغلاق</button>
       </div>
-      <div class="market-body" style="text-align:center;">
-        <p id="visit-req-text" style="font-size:11.5px; color:#f3f4f6; margin-bottom:8px;">يريد لاعب زيارة سطحك</p>
-        <div style="display:flex; gap:8px; justify-content:center;">
-          <button id="btn-accept-visit" class="buy-btn sell-btn" type="button">قبول الزيارة</button>
-          <button id="btn-reject-visit" class="buy-btn" type="button">رفض</button>
-        </div>
-      </div>
+      <div class="market-body" id="visit-players-list"></div>
     </div>
   </div>
 
-  <!-- Rename Modal -->
   <div id="rename-modal" class="modal-overlay">
-    <div class="market-card" style="max-width: 340px;">
+    <div class="market-card" style="max-width: 330px;">
       <div class="market-header">
         <div class="market-title">تسمية الطير</div>
         <button id="btn-close-rename" class="close-market" type="button">إلغاء</button>
       </div>
       <div class="market-body">
-        <p style="font-size:11px; color:#e5e7eb; text-align:center;">اكتب اسماً للطير ليظهر فوق رأسه على الأرض:</p>
-        <input id="rename-input" class="rename-input" type="text" maxlength="18" placeholder="مثلاً: عنتر، كحيلان، لوات..." />
+        <input id="rename-input" class="rename-input" type="text" maxlength="18" placeholder="اسم الطير..." />
         <button id="btn-save-rename" class="buy-btn" style="width:100%; padding:7px;" type="button">حفظ الاسم</button>
       </div>
     </div>
@@ -683,7 +660,10 @@
         if (!window.THREE) return;
         initPigeonKingdomOnline();
       }
-      if (window.THREE) { bootGame(); return; }
+      if (window.THREE) {
+        bootGame();
+        return;
+      }
       const s1 = document.createElement('script');
       s1.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
       s1.onload = bootGame;
@@ -710,7 +690,7 @@
         56,
         (window.innerWidth || 1280) / (window.innerHeight || 720),
         0.1,
-        1600
+        1800
       );
 
       let renderer;
@@ -720,10 +700,11 @@
         renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: false });
       }
       renderer.setClearColor(SKY_COLOR, 1);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
       renderer.setSize(window.innerWidth || 1280, window.innerHeight || 720);
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.render(scene, camera);
 
       const toastEl = document.getElementById('toast-msg');
       let toastTimer = null;
@@ -731,18 +712,11 @@
         toastEl.textContent = text;
         toastEl.style.opacity = '1';
         clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => { toastEl.style.opacity = '0'; }, 3200);
+        toastTimer = setTimeout(() => {
+          toastEl.style.opacity = '0';
+        }, 3000);
       }
 
-      function appendChatMessage(sender, text) {
-        const box = document.getElementById('chat-messages');
-        const row = document.createElement('div');
-        row.textContent = `${sender}: ${text}`;
-        box.appendChild(row);
-        box.scrollTop = box.scrollHeight;
-      }
-
-      // Pigeon Breeds with Detailed Info
       const BREEDS = [
         {
           id: 'zajil',
@@ -754,7 +728,7 @@
           neck: 0x0f766e,
           eye: 0xf97316,
           speed: 12.8,
-          info: 'سريع جداً في الارتفاع والتحليق لمسافات بعيدة، يمتاز بقوة التحمل والعودة للسطح.'
+          info: 'سريع جداً بالتحليق لمسافات بعيدة ودقيق بالعودة للسطح.'
         },
         {
           id: 'ahmar',
@@ -766,7 +740,7 @@
           neck: 0xb45309,
           eye: 0xfacc15,
           speed: 11.9,
-          info: 'طير صبّار متوازن في السرعة والثبات داخل السرب، محبوب في سطوح بغداد والبصرة.'
+          info: 'ريش قرمزي متين وقوة تحمل عالية في الجو.'
         },
         {
           id: 'lawat',
@@ -778,7 +752,7 @@
           neck: 0x0f172a,
           eye: 0x38bdf8,
           speed: 12.3,
-          info: 'يمتاز باللف والدوران السريع في السماء والاستجابة السريعة للصفارة.'
+          info: 'مناوراته الجوية رشيقة ويستجيب بسرعة للصفارة.'
         },
         {
           id: 'arafel',
@@ -790,7 +764,7 @@
           neck: 0x78350f,
           eye: 0xfacc15,
           speed: 11.7,
-          info: 'طير زينة وأداء بلون ذهبي وأبيض مميز، هادئ على السطح ونشيط عند الطيران.'
+          info: 'ألوان حنطية مميزة وهادئ على أرض السطح والقفص.'
         },
         {
           id: 'abyad',
@@ -802,68 +776,59 @@
           neck: 0xffffff,
           eye: 0x111827,
           speed: 11.3,
-          info: 'واضح جداً في السماء وسط السرب، يسهل تتبعه بالعين وكاميرا الطير.'
+          info: 'واضح في السماء ومحبوب في أسراب الاستعراض.'
         }
       ];
 
       const FEED_TYPES = {
-        qamh: { id: 'qamh', name: 'قمح', price: 30, qty: 5, color: 0xfacc15, desc: 'علف قمح لتجميع الحمام وتسريع نمو الأفراخ' },
-        adas: { id: 'adas', name: 'عدس', price: 45, qty: 5, color: 0xd97706, desc: 'بروتين عالي يسرّع نمو الأفراخ الصغار' },
-        taman: { id: 'taman', name: 'تمن عنبر', price: 65, qty: 5, color: 0xf8fafc, desc: 'غذاء فاخر يرفع صحة السرب ونشاطه' },
-        mashboosh: { id: 'mashboosh', name: 'حنطة مشبوش 😂', price: 85, qty: 5, color: 0xb45309, desc: 'خلطة مشبوش تخلي الحمام يطير بقوة' }
+        qamh: { id: 'qamh', name: 'قمح', price: 30, qty: 5, desc: 'علف قمح لتجميع الحمام وتسريع نمو الأفراخ' },
+        adas: { id: 'adas', name: 'عدس', price: 45, qty: 5, desc: 'بروتين عالي يسرّع نمو الأفراخ الصغار' },
+        taman: { id: 'taman', name: 'تمن عنبر', price: 65, qty: 5, desc: 'غذاء فاخر يرفع صحة السرب ونشاطه' },
+        mashboosh: { id: 'mashboosh', name: 'حنطة مشبوش 😂', price: 85, qty: 5, desc: 'خلطة مشبوش تخلي الحمام يطير بقوة' }
       };
 
       const WATER_TYPES = {
         bori: { id: 'bori', name: 'ماي بوري', price: 20, qty: 5, color: 0x38bdf8, desc: 'ماي بوري يروي عطش الطيور' },
         helo: { id: 'helo', name: 'ماي حلو', price: 40, qty: 5, color: 0x0ea5e9, desc: 'ماي حلو نقي يزيد نشاط السرب' },
-        zamzam: { id: 'zamzam', name: 'ماي زمزم', price: 75, qty: 5, color: 0x67e8f9, desc: 'ماي زمزم يرفع صحة السرب ويسرّع التفقيس' }
+        zamzam: { id: 'zamzam', name: 'ماي زمزم', price: 75, qty: 5, color: 0x67e8f9, desc: 'ماي زمزم يرفع صحة السرب' }
       };
 
       const SKINS = [
         { id: 'baghdadi', name: 'مطيرجي بغدادي', price: 0, desc: 'دشداشة بيضاء + سترة قرمزية + عرقجين وعقال' },
-        { id: 'fanila', name: 'أبو الفانيلة واللباس', price: 90, desc: 'فانيلة علاگة بيضاء + لباس بيتي + نعال عراقي' },
-        { id: 'basrawi', name: 'مطيرجي بصراوي', price: 140, desc: 'دشداشة كحلية + يشماغ أحمر وأبيض + عقال' },
-        { id: 'champion', name: 'بطل السطوح الذهبي', price: 210, desc: 'سترة جلدية حمراء وسوداء فاخرة للمحترفين' }
+        { id: 'fanila', name: 'أبو الفانيلة واللباس', price: 90, desc: 'فانيلة علاگة بيضاء + لباس بيتي' },
+        { id: 'basrawi', name: 'مطيرجي بصراوي', price: 140, desc: 'دشداشة كحلية + يشماغ أحمر وأبيض' },
+        { id: 'champion', name: 'بطل السطوح الذهبي', price: 210, desc: 'سترة سوداء وحمراء فاخرة' }
       ];
 
       const ROOF_Y = 12.0;
       const ROOF_HALF = 12.0;
+
       let mySlot = 1;
-      let myRoofX = 0;
-      let myRoofZ = 0;
-      let activeSectorX = 0;
-      let activeSectorZ = 0;
-      let visitingPlayer = null; // { id, name, slot, roofX, roofZ }
+      let homeRoofX = 0;
+      let homeRoofZ = 0;
+      let currentRoofX = 0;
+      let currentRoofZ = 0;
+      let visitingHostName = null;
       let onlineCount = 1;
       let leaderboardData = [];
-      let lastLaunchClickTime = 0;
-
-      const pigeons = [];
-      let player = null;
+      let pendingVisitRequest = null;
 
       const gameState = {
         coins: 250,
         feeds: { qamh: 5, adas: 0, taman: 0, mashboosh: 0 },
         waters: { bori: 3, helo: 0, zamzam: 0 },
-        coopLevel: 1,
         flockHealth: 100,
         ownedSkins: ['baghdadi'],
         currentSkin: 'baghdadi',
-        flightElapsed: 0,
-        falconWarned: false,
-        falconActive: false,
-        falconStrikeTimer: 0,
-        eagleCycleTimer: 0,
-        eagleActiveTimer: 0,
         heldPigeon: null,
         tamedPigeonId: null,
-        tamedPerchMode: 'hand',
         activeFeedPile: null,
         activeWaterPile: null,
-        eggs: [],
-        birdCamActive: false,
-        birdCamIndex: 0
+        lastFlightRewardTime: 0
       };
+
+      const pigeons = [];
+      let player = null;
 
       function getTotalFeed() {
         return (gameState.feeds.qamh || 0) + (gameState.feeds.adas || 0) + (gameState.feeds.taman || 0) + (gameState.feeds.mashboosh || 0);
@@ -873,67 +838,29 @@
         return (gameState.waters.bori || 0) + (gameState.waters.helo || 0) + (gameState.waters.zamzam || 0);
       }
 
-      function formatFalconCountdown() {
-        const remaining = Math.max(0, 600 - gameState.flightElapsed);
-        const mins = Math.floor(remaining / 60);
-        const secs = Math.floor(remaining % 60);
-        return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-      }
-
-      function formatEagleCountdown() {
-        if (gameState.eagleActiveTimer > 0) return 'موجود!';
-        const remaining = Math.max(0, 60 - gameState.eagleCycleTimer);
-        const mins = Math.floor(remaining / 60);
-        const secs = Math.floor(remaining % 60);
-        return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-      }
-
       function updateHudStats(flyingCount = 0) {
         document.getElementById('stat-online').textContent = onlineCount;
-        document.getElementById('stat-coins').textContent = Math.max(0, Math.floor(gameState.coins));
-        document.getElementById('market-coins').textContent = Math.max(0, Math.floor(gameState.coins));
-        document.getElementById('stat-falcon-timer').textContent = gameState.falconActive ? 'قريب!' : formatFalconCountdown();
-        document.getElementById('stat-eagle-timer').textContent = formatEagleCountdown();
+        document.getElementById('stat-coins').textContent = Math.floor(gameState.coins);
+        document.getElementById('market-coins').textContent = Math.floor(gameState.coins);
         document.getElementById('stat-feed').textContent = getTotalFeed();
         document.getElementById('stat-water').textContent = getTotalWater();
         document.getElementById('stat-flying').textContent = flyingCount;
         document.getElementById('stat-total').textContent = pigeons.length;
-
         const skinObj = SKINS.find((s) => s.id === gameState.currentSkin) || SKINS[0];
-        if (visitingPlayer) {
-          document.getElementById('hud-skin-label').textContent = `زيارة سطح #${visitingPlayer.slot} (${visitingPlayer.name})`;
-          document.getElementById('btn-visit-back').style.display = 'inline-block';
-        } else {
-          document.getElementById('hud-skin-label').textContent = `سطح #${mySlot} • ${skinObj.name}`;
-          document.getElementById('btn-visit-back').style.display = 'none';
-        }
+        const roofLabel = visitingHostName ? `زيارة سطح ${visitingHostName}` : `سطح #${mySlot}`;
+        document.getElementById('hud-skin-label').textContent = `${roofLabel} • ${skinObj.name}`;
       }
 
-      // Lights & Clouds
+      // Lighting
       const hemiLight = new THREE.HemisphereLight(0xf0f9ff, 0x786c5e, 0.9);
       hemiLight.position.set(0, 60, 0);
       scene.add(hemiLight);
 
       const dirLight = new THREE.DirectionalLight(0xfffbeb, 1.05);
       dirLight.position.set(35, 58, 28);
+      dirLight.castShadow = true;
       scene.add(dirLight);
 
-      const cloudMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.85 });
-      const clouds = [];
-      for (let i = 0; i < 16; i++) {
-        const cg = new THREE.Group();
-        for (let b = 0; b < 3; b++) {
-          const puff = new THREE.Mesh(new THREE.SphereGeometry(3.4 + Math.random() * 2, 8, 8), cloudMat);
-          puff.scale.set(1.5, 0.55, 1.0);
-          puff.position.set((b - 1) * 3.4, Math.random() * 0.7, (Math.random() - 0.5) * 1.4);
-          cg.add(puff);
-        }
-        cg.position.set((Math.random() - 0.5) * 700, 56 + Math.random() * 18, (Math.random() - 0.5) * 700);
-        scene.add(cg);
-        clouds.push(cg);
-      }
-
-      // Textures
       function createRoofTileTexture() {
         const c = document.createElement('canvas');
         c.width = 256; c.height = 256;
@@ -968,36 +895,13 @@
         return tex;
       }
 
-      function createDiamondSteelTexture() {
-        const c = document.createElement('canvas');
-        c.width = 256; c.height = 256;
-        const ctx = c.getContext('2d');
-        ctx.fillStyle = '#d6ccb8'; ctx.fillRect(0, 0, 256, 256);
-        ctx.strokeStyle = '#6b5e4c'; ctx.lineWidth = 5;
-        const step = 64;
-        for (let y = 0; y < 256; y += step) {
-          for (let x = 0; x < 256; x += step) {
-            ctx.beginPath();
-            ctx.moveTo(x + step / 2, y + 6);
-            ctx.lineTo(x + step - 6, y + step / 2);
-            ctx.lineTo(x + step / 2, y + step - 6);
-            ctx.lineTo(x + 6, y + step / 2);
-            ctx.closePath();
-            ctx.stroke();
-          }
-        }
-        const tex = new THREE.CanvasTexture(c);
-        tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-        tex.repeat.set(3, 2);
-        return tex;
-      }
-
       function createWireMeshTexture() {
         const c = document.createElement('canvas');
         c.width = 128; c.height = 128;
         const ctx = c.getContext('2d');
         ctx.clearRect(0, 0, 128, 128);
-        ctx.strokeStyle = 'rgba(45, 45, 50, 0.72)'; ctx.lineWidth = 2;
+        ctx.strokeStyle = 'rgba(40, 40, 46, 0.72)';
+        ctx.lineWidth = 2;
         for (let i = -128; i < 256; i += 16) {
           ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i + 128, 128); ctx.stroke();
           ctx.beginPath(); ctx.moveTo(i + 128, 0); ctx.lineTo(i, 128); ctx.stroke();
@@ -1008,42 +912,41 @@
         return tex;
       }
 
-      function createLabelSprite(text, bgColor, borderColor) {
+      function createNameSprite(text, bgColor = 'rgba(15, 15, 22, 0.84)', borderColor = '#ef4444') {
         const c = document.createElement('canvas');
-        c.width = 340; c.height = 76;
+        c.width = 320; c.height = 76;
         const ctx = c.getContext('2d');
         ctx.fillStyle = bgColor;
         ctx.beginPath();
-        ctx.roundRect(12, 10, 316, 56, 18);
+        ctx.roundRect(14, 10, 292, 54, 18);
         ctx.fill();
         ctx.strokeStyle = borderColor;
         ctx.lineWidth = 3;
         ctx.stroke();
         ctx.fillStyle = '#ffffff';
-        ctx.font = 'bold 24px Cairo, sans-serif';
+        ctx.font = 'bold 25px Cairo, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText(text, 170, 38);
+        ctx.fillText(text, 160, 38);
         const tex = new THREE.CanvasTexture(c);
         const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false });
         const sprite = new THREE.Sprite(mat);
-        sprite.scale.set(1.5, 0.34, 1);
+        sprite.scale.set(1.3, 0.3, 1);
         return sprite;
       }
 
-      // Ground
       const groundMesh = new THREE.Mesh(
         new THREE.PlaneGeometry(2400, 2400),
         new THREE.MeshStandardMaterial({ color: 0x57534e, roughness: 0.92 })
       );
       groundMesh.rotation.x = -Math.PI / 2;
+      groundMesh.receiveShadow = true;
       scene.add(groundMesh);
 
-      const houseMat = new THREE.MeshStandardMaterial({ map: createBrickTexture(), roughness: 0.85 });
-      const roofTileMat = new THREE.MeshStandardMaterial({ map: createRoofTileTexture(), roughness: 0.8 });
-      const beigeSteelMat = new THREE.MeshStandardMaterial({ color: 0xd6ccb8, metalness: 0.35, roughness: 0.45 });
-      const diamondSteelMat = new THREE.MeshStandardMaterial({ map: createDiamondSteelTexture(), metalness: 0.32, roughness: 0.45 });
-      const wireMeshMat = new THREE.MeshStandardMaterial({ map: createWireMeshTexture(), transparent: true, side: THREE.DoubleSide });
+      const brickMat = new THREE.MeshStandardMaterial({ map: createBrickTexture(), roughness: 0.85 });
+      const tileMat = new THREE.MeshStandardMaterial({ map: createRoofTileTexture(), roughness: 0.8 });
+      const steelMat = new THREE.MeshStandardMaterial({ color: 0xd6ccb8, metalness: 0.3, roughness: 0.45 });
+      const wireMat = new THREE.MeshStandardMaterial({ map: createWireMeshTexture(), transparent: true, side: THREE.DoubleSide });
 
       const COOP = {
         x: 2.0,
@@ -1056,426 +959,297 @@
         doorXEnd: 0.25
       };
 
-      // Helper to build a complete rooftop + walls + coop
-      function createFullRooftopStructure(isMainPlayer) {
-        const g = new THREE.Group();
-        const body = new THREE.Mesh(new THREE.BoxGeometry(24, ROOF_Y, 24), houseMat);
+      function buildFullRooftopStructure(targetGroup, isOpenRef) {
+        const body = new THREE.Mesh(new THREE.BoxGeometry(24, ROOF_Y, 24), brickMat);
         body.position.set(0, ROOF_Y / 2, 0);
-        g.add(body);
+        body.receiveShadow = true;
+        targetGroup.add(body);
 
-        const floor = new THREE.Mesh(new THREE.BoxGeometry(24.2, 0.3, 24.2), roofTileMat);
+        const floor = new THREE.Mesh(new THREE.BoxGeometry(24.2, 0.3, 24.2), tileMat);
         floor.position.set(0, ROOF_Y - 0.12, 0);
-        g.add(floor);
+        floor.receiveShadow = true;
+        targetGroup.add(floor);
 
         const wallH = 1.15;
         const wallT = 0.45;
-        const wN = new THREE.Mesh(new THREE.BoxGeometry(24.4, wallH, wallT), houseMat);
-        wN.position.set(0, ROOF_Y + wallH / 2, -11.8);
-        const wS = new THREE.Mesh(new THREE.BoxGeometry(24.4, wallH, wallT), houseMat);
-        wS.position.set(0, ROOF_Y + wallH / 2, 11.8);
-        const wE = new THREE.Mesh(new THREE.BoxGeometry(wallT, wallH, 24.0), houseMat);
-        wE.position.set(11.8, ROOF_Y + wallH / 2, 0);
-        const wWN = new THREE.Mesh(new THREE.BoxGeometry(wallT, wallH, 16.0), houseMat);
-        wWN.position.set(-11.8, ROOF_Y + wallH / 2, -4.0);
-        const wWS = new THREE.Mesh(new THREE.BoxGeometry(wallT, wallH, 5.0), houseMat);
-        wWS.position.set(-11.8, ROOF_Y + wallH / 2, 9.5);
-        g.add(wN, wS, wE, wWN, wWS);
+        const nWall = new THREE.Mesh(new THREE.BoxGeometry(24.4, wallH, wallT), brickMat);
+        nWall.position.set(0, ROOF_Y + wallH / 2, -11.8);
+        const sWall = new THREE.Mesh(new THREE.BoxGeometry(24.4, wallH, wallT), brickMat);
+        sWall.position.set(0, ROOF_Y + wallH / 2, 11.8);
+        const eWall = new THREE.Mesh(new THREE.BoxGeometry(wallT, wallH, 24.0), brickMat);
+        eWall.position.set(11.8, ROOF_Y + wallH / 2, 0);
+        const wWall1 = new THREE.Mesh(new THREE.BoxGeometry(wallT, wallH, 16.0), brickMat);
+        wWall1.position.set(-11.8, ROOF_Y + wallH / 2, -4.0);
+        const wWall2 = new THREE.Mesh(new THREE.BoxGeometry(wallT, wallH, 5.0), brickMat);
+        wWall2.position.set(-11.8, ROOF_Y + wallH / 2, 9.5);
+        targetGroup.add(nWall, sWall, eWall, wWall1, wWall2);
 
-        const cGroup = new THREE.Group();
-        cGroup.position.set(COOP.x, ROOF_Y, COOP.z);
-        g.add(cGroup);
-
-        const cRoof = new THREE.Mesh(new THREE.BoxGeometry(COOP.w + 0.5, 0.16, COOP.d + 0.5), beigeSteelMat);
+        const cg = new THREE.Group();
+        cg.position.set(COOP.x, ROOF_Y, COOP.z);
+        const cRoof = new THREE.Mesh(new THREE.BoxGeometry(COOP.w + 0.5, 0.16, COOP.d + 0.5), steelMat);
         cRoof.position.set(0, COOP.h + 0.08, 0);
-        cGroup.add(cRoof);
-
-        const backW = new THREE.Mesh(new THREE.BoxGeometry(COOP.w, COOP.h, 0.14), diamondSteelMat);
+        const backW = new THREE.Mesh(new THREE.BoxGeometry(COOP.w, COOP.h, 0.14), steelMat);
         backW.position.set(0, COOP.h / 2, -COOP.d / 2);
-        cGroup.add(backW);
-
-        [-1, 1].forEach((side) => {
-          const lowP = new THREE.Mesh(new THREE.BoxGeometry(0.14, 1.35, COOP.d), diamondSteelMat);
-          lowP.position.set(side * (COOP.w / 2), 0.675, 0);
-          const upW = new THREE.Mesh(new THREE.PlaneGeometry(COOP.d - 0.2, COOP.h - 1.35), wireMeshMat);
-          upW.position.set(side * (COOP.w / 2), 1.35 + (COOP.h - 1.35) / 2, 0);
-          upW.rotation.y = Math.PI / 2;
-          cGroup.add(lowP, upW);
-        });
+        const lW = new THREE.Mesh(new THREE.PlaneGeometry(COOP.d, COOP.h), wireMat);
+        lW.position.set(-COOP.w / 2, COOP.h / 2, 0);
+        lW.rotation.y = Math.PI / 2;
+        const rW = new THREE.Mesh(new THREE.PlaneGeometry(COOP.d, COOP.h), wireMat);
+        rW.position.set(COOP.w / 2, COOP.h / 2, 0);
+        rW.rotation.y = Math.PI / 2;
 
         const frontZ = COOP.d / 2;
         const leftFrontW = COOP.w / 2 + COOP.doorXStart;
-        const leftFront = new THREE.Mesh(new THREE.BoxGeometry(leftFrontW, COOP.h, 0.14), diamondSteelMat);
+        const leftFront = new THREE.Mesh(new THREE.BoxGeometry(leftFrontW, COOP.h, 0.14), steelMat);
         leftFront.position.set(-COOP.w / 2 + leftFrontW / 2, COOP.h / 2, frontZ);
+
         const rightFrontW = COOP.w / 2 - COOP.doorXEnd;
-        const rightFront = new THREE.Mesh(new THREE.BoxGeometry(rightFrontW, COOP.h, 0.14), diamondSteelMat);
+        const rightFront = new THREE.Mesh(new THREE.BoxGeometry(rightFrontW, COOP.h, 0.14), steelMat);
         rightFront.position.set(COOP.doorXEnd + rightFrontW / 2, COOP.h / 2, frontZ);
+
         const doorW = COOP.doorXEnd - COOP.doorXStart;
-        const doorH = 2.25;
-        const doorHeader = new THREE.Mesh(new THREE.BoxGeometry(doorW, COOP.h - doorH, 0.14), beigeSteelMat);
-        doorHeader.position.set(COOP.doorXStart + doorW / 2, doorH + (COOP.h - doorH) / 2, frontZ);
-        cGroup.add(leftFront, rightFront, doorHeader);
+        const doorPivot = new THREE.Group();
+        doorPivot.position.set(COOP.doorXStart, 0, frontZ);
+        const doorMesh = new THREE.Mesh(new THREE.BoxGeometry(doorW, 2.2, 0.1), steelMat);
+        doorMesh.position.set(doorW / 2, 1.1, 0);
+        doorPivot.add(doorMesh);
+        doorPivot.rotation.y = isOpenRef ? -Math.PI * 0.62 : 0;
 
-        const dPivot = new THREE.Group();
-        dPivot.position.set(COOP.doorXStart, 0, frontZ);
-        cGroup.add(dPivot);
+        cg.add(cRoof, backW, lW, rW, leftFront, rightFront, doorPivot);
+        targetGroup.add(cg);
 
-        const dLower = new THREE.Mesh(new THREE.BoxGeometry(doorW, 1.1, 0.1), diamondSteelMat);
-        dLower.position.set(doorW / 2, 0.55, 0);
-        const dUpper = new THREE.Mesh(new THREE.PlaneGeometry(doorW - 0.12, doorH - 1.15), wireMeshMat);
-        dUpper.position.set(doorW / 2, 1.1 + (doorH - 1.15) / 2, 0);
-        dPivot.add(dLower, dUpper);
-
-        let wSurface = null;
-        if (isMainPlayer) {
-          const bowl = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.55, 0.45, 0.18, 20),
-            new THREE.MeshStandardMaterial({ color: 0x991b1b, roughness: 0.4 })
-          );
-          bowl.position.set(-2.2, ROOF_Y + 0.09, 2.4);
-          wSurface = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.49, 0.49, 0.04, 20),
-            new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.15 })
-          );
-          wSurface.position.set(-2.2, ROOF_Y + 0.17, 2.4);
-          wSurface.visible = false;
-          g.add(bowl, wSurface);
-        }
-
-        return { group: g, doorPivot: dPivot, waterSurface: wSurface };
+        return { doorPivot };
       }
 
-      const mainRoofObj = createFullRooftopStructure(true);
-      scene.add(mainRoofObj.group);
-      const doorPivot = mainRoofObj.doorPivot;
-      const waterSurface = mainRoofObj.waterSurface;
+      const myHouseGroup = new THREE.Group();
+      scene.add(myHouseGroup);
+      const myRoofParts = buildFullRooftopStructure(myHouseGroup, COOP.isOpen);
 
-      // Falcon & Eagle
-      const falconGroup = new THREE.Group();
-      falconGroup.add(new THREE.Mesh(new THREE.ConeGeometry(0.26, 0.96, 10), new THREE.MeshStandardMaterial({ color: 0x5c3a21 })).rotateX(Math.PI / 2));
-      const fwL = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.04, 0.38), new THREE.MeshStandardMaterial({ color: 0x3b2314 }));
-      fwL.position.set(0.56, 0.02, 0.05);
-      const fwR = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.04, 0.38), new THREE.MeshStandardMaterial({ color: 0x3b2314 }));
-      fwR.position.set(-0.56, 0.02, 0.05);
-      falconGroup.add(fwL, fwR);
-      falconGroup.visible = false;
-      scene.add(falconGroup);
+      const waterBowlGroup = new THREE.Group();
+      waterBowlGroup.position.set(-2.2, ROOF_Y, 2.4);
+      const bowlRim = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.55, 0.45, 0.18, 20),
+        new THREE.MeshStandardMaterial({ color: 0x991b1b, roughness: 0.4 })
+      );
+      bowlRim.position.y = 0.09;
+      const waterSurface = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.49, 0.49, 0.04, 20),
+        new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.15 })
+      );
+      waterSurface.position.y = 0.17;
+      waterSurface.visible = false;
+      waterBowlGroup.add(bowlRim, waterSurface);
+      myHouseGroup.add(waterBowlGroup);
 
-      const eagleGroup = new THREE.Group();
-      eagleGroup.add(new THREE.Mesh(new THREE.ConeGeometry(0.34, 1.25, 10), new THREE.MeshStandardMaterial({ color: 0x451a03 })).rotateX(Math.PI / 2));
-      const ewL = new THREE.Mesh(new THREE.BoxGeometry(1.55, 0.05, 0.48), new THREE.MeshStandardMaterial({ color: 0x290f02 }));
-      ewL.position.set(0.76, 0.02, 0.06);
-      const ewR = new THREE.Mesh(new THREE.BoxGeometry(1.55, 0.05, 0.48), new THREE.MeshStandardMaterial({ color: 0x290f02 }));
-      ewR.position.set(-0.76, 0.02, 0.06);
-      eagleGroup.add(ewL, ewR);
-      eagleGroup.visible = false;
-      scene.add(eagleGroup);
+      // Realistic Bird Mesh Builder (Legs, Head, Eyes, Beak, Tail, Wings)
+      function createBirdVisuals(breed, isChick) {
+        const g = new THREE.Group();
+        const bodyMat = new THREE.MeshStandardMaterial({ color: isChick ? 0xfde68a : breed.body, roughness: 0.55 });
+        const wingMat = new THREE.MeshStandardMaterial({ color: isChick ? 0xfcd34d : breed.wing, roughness: 0.5 });
+        const neckMat = new THREE.MeshStandardMaterial({ color: isChick ? 0xfef3c7 : breed.neck, roughness: 0.42, metalness: 0.15 });
+        const legMat = new THREE.MeshStandardMaterial({ color: 0xe11d48, roughness: 0.5 });
+        const clawMat = new THREE.MeshStandardMaterial({ color: 0x18181b, roughness: 0.6 });
+        const eyeMat = new THREE.MeshBasicMaterial({ color: breed.eye });
+        const pupilMat = new THREE.MeshBasicMaterial({ color: 0x09090b });
+        const beakMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.4 });
 
-      // Whistle Audio
-      let audioCtx = null;
-      function playWhistle(type) {
-        try {
-          if (!audioCtx) {
-            const AC = window.AudioContext || window.webkitAudioContext;
-            if (AC) audioCtx = new AC();
-          }
-          if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-          if (!audioCtx) return;
-          const now = audioCtx.currentTime;
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = 'sine';
-          if (type === 'launch') {
-            osc.frequency.setValueAtTime(1650, now);
-            osc.frequency.exponentialRampToValueAtTime(3150, now + 0.5);
-          } else {
-            osc.frequency.setValueAtTime(2400, now);
-            osc.frequency.exponentialRampToValueAtTime(1180, now + 0.6);
-          }
-          gain.gain.setValueAtTime(0.12, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.65);
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.start(now);
-          osc.stop(now + 0.68);
-        } catch (e) {}
-      }
+        const torso = new THREE.Mesh(new THREE.SphereGeometry(0.165, 16, 14), bodyMat);
+        torso.scale.set(0.84, 0.9, 1.5);
+        torso.position.set(0, 0.25, 0);
+        g.add(torso);
 
-      // Eggs & Pigeon
-      const eggMat = new THREE.MeshStandardMaterial({ color: 0xfefce8, roughness: 0.35 });
-      function spawnEggInCoop(breed, lx, lz, savedTimer = 34) {
-        const eggMesh = new THREE.Mesh(new THREE.SphereGeometry(0.085, 12, 12), eggMat);
-        eggMesh.scale.set(0.85, 1.18, 0.85);
-        const ex = Math.max(COOP.x - COOP.w / 2 + 0.6, Math.min(COOP.x + COOP.w / 2 - 0.6, lx));
-        const ez = Math.max(COOP.z - COOP.d / 2 + 0.6, Math.min(COOP.z + COOP.d / 2 - 0.6, lz));
-        eggMesh.position.set(myRoofX + ex, ROOF_Y + 0.08, myRoofZ + ez);
-        scene.add(eggMesh);
-        gameState.eggs.push({ breedId: breed.id, lx: ex, lz: ez, timer: savedTimer, mesh: eggMesh });
+        const headGroup = new THREE.Group();
+        headGroup.position.set(0, 0.36, 0.13);
+        g.add(headGroup);
+
+        const head = new THREE.Mesh(new THREE.SphereGeometry(0.082, 14, 14), neckMat);
+        head.position.set(0, 0.08, 0.04);
+        headGroup.add(head);
+
+        [-1, 1].forEach((side) => {
+          const eye = new THREE.Mesh(new THREE.SphereGeometry(0.022, 10, 10), eyeMat);
+          eye.position.set(side * 0.066, 0.09, 0.062);
+          const pupil = new THREE.Mesh(new THREE.SphereGeometry(0.012, 8, 8), pupilMat);
+          pupil.position.set(side * 0.077, 0.09, 0.066);
+          headGroup.add(eye, pupil);
+        });
+
+        const beak = new THREE.Mesh(new THREE.ConeGeometry(0.02, 0.084, 8), beakMat);
+        beak.rotation.x = Math.PI / 2 + 0.14;
+        beak.position.set(0, 0.066, 0.15);
+        headGroup.add(beak);
+
+        const tail = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.018, 0.28), wingMat);
+        tail.position.set(0, 0.21, -0.28);
+        g.add(tail);
+
+        const leftLeg = new THREE.Group();
+        leftLeg.position.set(0.056, 0.15, 0.01);
+        const lShin = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.01, 0.15, 6), legMat);
+        lShin.position.y = -0.075;
+        const lFoot = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.014, 0.07), clawMat);
+        lFoot.position.set(0, -0.145, 0.015);
+        leftLeg.add(lShin, lFoot);
+
+        const rightLeg = new THREE.Group();
+        rightLeg.position.set(-0.056, 0.15, 0.01);
+        const rShin = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.01, 0.15, 6), legMat);
+        rShin.position.y = -0.075;
+        const rFoot = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.014, 0.07), clawMat);
+        rFoot.position.set(0, -0.145, 0.015);
+        rightLeg.add(rShin, rFoot);
+        g.add(leftLeg, rightLeg);
+
+        const leftWing = new THREE.Group();
+        leftWing.position.set(0.11, 0.27, 0.03);
+        const lwMesh = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.022, 0.23), wingMat);
+        lwMesh.position.x = 0.12;
+        leftWing.add(lwMesh);
+
+        const rightWing = new THREE.Group();
+        rightWing.position.set(-0.11, 0.27, 0.03);
+        const rwMesh = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.022, 0.23), wingMat);
+        rwMesh.position.x = -0.12;
+        rightWing.add(rwMesh);
+        g.add(leftWing, rightWing);
+
+        return { group: g, leftWing, rightWing };
       }
 
       class Pigeon {
         constructor(index, forcedBreed = null, options = {}) {
           this.uid = options.uid || ('p_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7));
-          const breed = forcedBreed || BREEDS[index % BREEDS.length];
-          this.breed = breed;
+          this.breed = forcedBreed || BREEDS[index % BREEDS.length];
           this.customName = options.customName || '';
           this.isChick = !!options.isChick;
-          this.growth = this.isChick ? (typeof options.growth === 'number' ? options.growth : 5) : 100;
           this.isTamed = !!options.isTamed;
 
-          this.group = new THREE.Group();
+          const vis = createBirdVisuals(this.breed, this.isChick);
+          this.group = vis.group;
+          this.leftWing = vis.leftWing;
+          this.rightWing = vis.rightWing;
 
-          const bodyMat = new THREE.MeshStandardMaterial({ color: this.isChick ? 0xfde68a : breed.body, roughness: 0.58 });
-          const wingMat = new THREE.MeshStandardMaterial({ color: this.isChick ? 0xfcd34d : breed.wing, roughness: 0.54 });
-          const neckMat = new THREE.MeshStandardMaterial({ color: this.isChick ? 0xfef3c7 : breed.neck, roughness: 0.44, metalness: 0.16 });
-          const beakMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.4 });
-          const legMat = new THREE.MeshStandardMaterial({ color: 0xe11d48, roughness: 0.5 });
-          const eyeIrisMat = new THREE.MeshBasicMaterial({ color: breed.eye });
-          const pupilMat = new THREE.MeshBasicMaterial({ color: 0x09090b });
-
-          const torso = new THREE.Mesh(new THREE.SphereGeometry(0.165, 16, 14), bodyMat);
-          torso.scale.set(0.84, 0.90, 1.50);
-          torso.position.set(0, 0.25, 0);
-          this.group.add(torso);
-
-          this.headGroup = new THREE.Group();
-          this.headGroup.position.set(0, 0.36, 0.13);
-          this.group.add(this.headGroup);
-
-          const head = new THREE.Mesh(new THREE.SphereGeometry(0.080, 14, 14), neckMat);
-          head.position.set(0, 0.08, 0.04);
-          this.headGroup.add(head);
-
-          [-1, 1].forEach((side) => {
-            const eye = new THREE.Mesh(new THREE.SphereGeometry(0.021, 10, 10), eyeIrisMat);
-            eye.position.set(side * 0.066, 0.09, 0.062);
-            const pupil = new THREE.Mesh(new THREE.SphereGeometry(0.012, 8, 8), pupilMat);
-            pupil.position.set(side * 0.077, 0.09, 0.066);
-            this.headGroup.add(eye, pupil);
-          });
-
-          const beak = new THREE.Mesh(new THREE.ConeGeometry(0.020, 0.084, 8), beakMat);
-          beak.rotation.x = Math.PI / 2 + 0.14;
-          beak.position.set(0, 0.066, 0.15);
-          this.headGroup.add(beak);
-
-          const tail = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.018, 0.28), wingMat);
-          tail.position.set(0, 0.21, -0.28);
-          this.group.add(tail);
-
-          this.leftLeg = new THREE.Group();
-          this.leftLeg.position.set(0.056, 0.15, 0.01);
-          this.leftLeg.add(new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.01, 0.15, 6), legMat).translateY(-0.075));
-
-          this.rightLeg = new THREE.Group();
-          this.rightLeg.position.set(-0.056, 0.15, 0.01);
-          this.rightLeg.add(new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.01, 0.15, 6), legMat).translateY(-0.075));
-          this.group.add(this.leftLeg, this.rightLeg);
-
-          this.leftWing = new THREE.Group();
-          this.leftWing.position.set(0.11, 0.27, 0.03);
-          this.leftWing.add(new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.022, 0.23), wingMat).translateX(0.12));
-
-          this.rightWing = new THREE.Group();
-          this.rightWing.position.set(-0.11, 0.27, 0.03);
-          this.rightWing.add(new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.022, 0.23), wingMat).translateX(-0.12));
-          this.group.add(this.leftWing, this.rightWing);
-
-          this.labelSprite = null;
-          this.refreshLabel();
-          this.applyGrowthScale();
+          this.nameSprite = null;
+          this.refreshNameLabel();
 
           this.isInsideCoop = options.isInsideCoop !== undefined ? options.isInsideCoop : true;
           const lx = this.isInsideCoop ? COOP.x + (Math.random() - 0.5) * (COOP.w - 1.4) : -2.0 + (Math.random() - 0.5) * 9.0;
           const lz = this.isInsideCoop ? COOP.z + (Math.random() - 0.5) * (COOP.d - 1.4) : 3.0 + (Math.random() - 0.5) * 7.0;
-          this.group.position.set(myRoofX + lx, ROOF_Y, myRoofZ + lz);
+          this.group.position.set(homeRoofX + lx, ROOF_Y, homeRoofZ + lz);
           scene.add(this.group);
 
           this.state = 'WALK';
-          this.launchAfterExit = false;
           this.targetPos = this.group.position.clone();
           this.velocity = new THREE.Vector3();
           this.orbitAngle = (index / 12) * Math.PI * 2;
-          this.orbitRadius = 17 + (index % 5) * 4.0;
-          this.cruiseAlt = 24 + (index % 6) * 2.3;
+          this.orbitRadius = 18 + (index % 5) * 4.0;
+          this.cruiseAlt = 24 + (index % 6) * 2.2;
           this.flapPhase = Math.random() * Math.PI * 2;
-          this.idleTimer = Math.random() * 2.5;
-          this.eggTimer = 32 + Math.random() * 28;
-          this.foldWingsTightly();
+          this.idleTimer = Math.random() * 2.0;
+          this.foldWings();
         }
 
         getDisplayName() {
-          const base = this.customName ? `${this.customName} • ${this.breed.name}` : this.breed.name;
-          if (this.isChick) return `فرخ ${base} ${Math.floor(this.growth)}%`;
+          const base = this.customName ? `${this.customName} (${this.breed.name})` : this.breed.name;
+          if (this.isChick) return `فرخ ${base}`;
           if (this.isTamed) return `★ ${base}`;
           return base;
         }
 
-        refreshLabel() {
-          if (this.labelSprite) this.group.remove(this.labelSprite);
-          const bg = this.isTamed ? 'rgba(6, 78, 59, 0.88)' : this.isChick ? 'rgba(120, 53, 15, 0.88)' : 'rgba(15, 15, 22, 0.84)';
-          const br = this.isTamed ? '#34d399' : this.isChick ? '#fbbf24' : '#ef4444';
-          this.labelSprite = createLabelSprite(this.getDisplayName(), bg, br);
-          this.labelSprite.position.set(0, 0.72, 0);
-          this.group.add(this.labelSprite);
-          this.syncNameVisibility();
+        refreshNameLabel() {
+          if (this.nameSprite) {
+            this.group.remove(this.nameSprite);
+            this.nameSprite = null;
+          }
+          this.nameSprite = createNameSprite(
+            this.getDisplayName(),
+            this.isTamed ? 'rgba(6, 78, 59, 0.88)' : 'rgba(15, 15, 22, 0.82)',
+            this.isTamed ? '#34d399' : '#ef4444'
+          );
+          this.nameSprite.position.set(0, 0.72, 0);
+          this.group.add(this.nameSprite);
         }
 
-        // Show name ONLY on ground/coop/perched; hide completely when flying in air
-        syncNameVisibility() {
-          if (!this.labelSprite) return;
-          const isFlyingInAir = this.state === 'FLYING' || this.state === 'LANDING';
-          this.labelSprite.visible = !isFlyingInAir;
+        updateNameVisibility() {
+          if (!this.nameSprite) return;
+          // Show name ONLY when on the ground/perched; hide while flying
+          const onGround = this.state !== 'FLYING' && this.state !== 'LANDING';
+          this.nameSprite.visible = onGround;
         }
 
-        applyGrowthScale() {
-          const s = this.isChick ? 0.52 + (this.growth / 100) * 0.48 : 1.0;
-          this.group.scale.set(s, s, s);
-        }
-
-        foldWingsTightly() {
+        foldWings() {
           this.leftWing.rotation.set(0.05, -0.14, -1.48);
           this.rightWing.rotation.set(0.05, 0.14, 1.48);
         }
 
-        spreadWingsForFlight(flapAngle) {
-          this.leftWing.rotation.set(0, 0, flapAngle);
-          this.rightWing.rotation.set(0, 0, -flapAngle);
-        }
-
-        commandExitCoop(launchAfter = false) {
-          if (this.isChick && launchAfter) return;
-          if (!this.isInsideCoop) {
-            if (launchAfter && !this.isChick) this.startSkyFlight();
-            return;
-          }
-          this.state = 'EXITING_DOOR';
-          this.launchAfterExit = launchAfter;
-          this.syncNameVisibility();
-          const doorX = myRoofX + COOP.x + (COOP.doorXStart + COOP.doorXEnd) / 2 + (Math.random() - 0.5) * 0.6;
-          const doorZ = myRoofZ + COOP.z + COOP.d / 2 + 1.05;
-          this.targetPos.set(doorX, ROOF_Y, doorZ);
+        flapWings(ang) {
+          this.leftWing.rotation.set(0, 0, ang);
+          this.rightWing.rotation.set(0, 0, -ang);
         }
 
         startSkyFlight() {
           if (this.isChick) return;
           this.state = 'FLYING';
           this.isInsideCoop = false;
-          this.syncNameVisibility();
-          this.orbitAngle = Math.atan2(this.group.position.z - myRoofZ, this.group.position.x - myRoofX);
-          this.velocity.set((Math.random() - 0.5) * 4.5, 5.8, (Math.random() - 0.5) * 4.5);
+          this.orbitAngle = Math.atan2(this.group.position.z - homeRoofZ, this.group.position.x - homeRoofX);
+          this.velocity.set((Math.random() - 0.5) * 4.5, 6.2, (Math.random() - 0.5) * 4.5);
+          this.updateNameVisibility();
         }
 
         commandLaunch() {
-          if (this.isChick) return false;
-          if (this.state === 'FLYING' || this.state === 'LANDING' || this.state === 'HELD' || this.state === 'TAMED_PERCHED') {
-            return false;
+          if (this.isChick || this.state === 'FLYING' || this.state === 'HELD') return;
+          if (this.isInsideCoop && !COOP.isOpen) {
+            COOP.isOpen = true;
+            document.getElementById('stat-door').textContent = 'مفتوح';
           }
-          if (this.isInsideCoop) {
-            if (!COOP.isOpen) {
-              COOP.isOpen = true;
-              document.getElementById('stat-door').textContent = 'مفتوح';
-            }
-            this.commandExitCoop(true);
-          } else {
-            this.startSkyFlight();
-          }
-          return true;
+          this.startSkyFlight();
         }
 
         commandLand() {
-          if (this.state === 'WALK' || this.state === 'HELD' || this.state === 'TAMED_PERCHED') return;
+          if (this.state === 'WALK' || this.state === 'HELD') return;
           this.state = 'LANDING';
-          this.launchAfterExit = false;
-          this.syncNameVisibility();
           this.targetPos.set(
-            myRoofX - 3.0 + (Math.random() - 0.5) * 10,
+            homeRoofX - 3.0 + (Math.random() - 0.5) * 10,
             ROOF_Y,
-            myRoofZ + 3.2 + (Math.random() - 0.5) * 7.5
+            homeRoofZ + 3.2 + (Math.random() - 0.5) * 7.5
           );
+          this.updateNameVisibility();
         }
 
         update(dt, elapsed, allPigeons) {
-          this.syncNameVisibility();
-
-          if (this.isChick) {
-            const prevPct = Math.floor(this.growth / 25);
-            this.growth += dt * 0.85 * (gameState.activeFeedPile ? 1.85 : 1.0);
-            this.applyGrowthScale();
-            if (this.growth >= 100) {
-              this.isChick = false;
-              this.growth = 100;
-              this.applyGrowthScale();
-              this.refreshLabel();
-              saveGameAuto();
-            } else if (Math.floor(this.growth / 25) !== prevPct) {
-              this.refreshLabel();
-            }
-          } else if (this.isInsideCoop && this.state === 'WALK' && gameState.eggs.length < 5 && allPigeons.length < 28) {
-            this.eggTimer -= dt;
-            if (this.eggTimer <= 0) {
-              this.eggTimer = 48 + Math.random() * 35;
-              spawnEggInCoop(this.breed, this.group.position.x - myRoofX, this.group.position.z - myRoofZ);
-            }
-          }
+          this.updateNameVisibility();
 
           if (this.state === 'HELD' || this.state === 'TAMED_PERCHED') {
-            this.foldWingsTightly();
-            return;
-          }
-
-          if (this.state === 'TAMED_FLY_TO_PLAYER' && player) {
-            this.flapPhase += dt * 18;
-            this.spreadWingsForFlight(Math.sin(this.flapPhase) * 0.72);
-            const dest = player.getPerchWorldPos(gameState.tamedPerchMode);
-            const dir = dest.clone().sub(this.group.position);
-            if (dir.length() < 0.28) {
-              this.state = 'TAMED_PERCHED';
-              this.foldWingsTightly();
-              this.syncNameVisibility();
-            } else {
-              dir.normalize();
-              this.group.position.addScaledVector(dir, dt * 7.5);
-              this.group.rotation.y = Math.atan2(dir.x, dir.z);
-            }
+            this.foldWings();
             return;
           }
 
           this.flapPhase += dt * 16.5;
 
-          if (this.state === 'EXITING_DOOR') {
-            this.foldWingsTightly();
-            const toDoor = this.targetPos.clone().sub(this.group.position);
-            toDoor.y = 0;
-            if (toDoor.length() < 0.22) {
-              this.isInsideCoop = false;
-              if (this.launchAfterExit && !this.isChick) {
-                this.startSkyFlight();
-              } else {
-                this.state = 'WALK';
-                this.syncNameVisibility();
-                this.targetPos.set(myRoofX - 2.5 + (Math.random() - 0.5) * 9, ROOF_Y, myRoofZ + 3.5 + (Math.random() - 0.5) * 6);
-              }
-            } else {
-              toDoor.normalize();
-              this.group.position.addScaledVector(toDoor, dt * 2.1);
-              this.group.rotation.y = Math.atan2(toDoor.x, toDoor.z);
-            }
-            return;
-          }
-
           if (this.state === 'WALK') {
-            this.foldWingsTightly();
+            this.foldWings();
             if (gameState.activeFeedPile && !this.isInsideCoop) {
               const ang = (this.flapPhase * 0.37) % (Math.PI * 2);
-              this.targetPos.set(myRoofX + gameState.activeFeedPile.lx + Math.cos(ang) * 0.95, ROOF_Y, myRoofZ + gameState.activeFeedPile.lz + Math.sin(ang) * 0.95);
+              this.targetPos.set(
+                homeRoofX + gameState.activeFeedPile.lx + Math.cos(ang) * 0.9,
+                ROOF_Y,
+                homeRoofZ + gameState.activeFeedPile.lz + Math.sin(ang) * 0.9
+              );
             } else {
               this.idleTimer -= dt;
               if (this.idleTimer <= 0) {
-                this.idleTimer = 1.6 + Math.random() * 2.4;
+                this.idleTimer = 1.6 + Math.random() * 2.2;
                 if (this.isInsideCoop) {
-                  this.targetPos.set(myRoofX + COOP.x + (Math.random() - 0.5) * (COOP.w - 1.3), ROOF_Y, myRoofZ + COOP.z + (Math.random() - 0.5) * (COOP.d - 1.3));
+                  this.targetPos.set(
+                    homeRoofX + COOP.x + (Math.random() - 0.5) * (COOP.w - 1.3),
+                    ROOF_Y,
+                    homeRoofZ + COOP.z + (Math.random() - 0.5) * (COOP.d - 1.3)
+                  );
                 } else {
-                  this.targetPos.set(myRoofX - 3.0 + (Math.random() - 0.5) * 11, ROOF_Y, myRoofZ + 3.0 + (Math.random() - 0.5) * 8.5);
+                  this.targetPos.set(
+                    homeRoofX - 3.0 + (Math.random() - 0.5) * 11,
+                    ROOF_Y,
+                    homeRoofZ + 3.0 + (Math.random() - 0.5) * 8.5
+                  );
                 }
               }
             }
@@ -1484,17 +1258,17 @@
             toTarget.y = 0;
             if (toTarget.length() > 0.12) {
               toTarget.normalize();
-              this.group.position.addScaledVector(toTarget, dt * (this.isChick ? 0.75 : 1.18));
+              this.group.position.addScaledVector(toTarget, dt * (this.isChick ? 0.75 : 1.2));
               this.group.rotation.y = Math.atan2(toTarget.x, toTarget.z);
             }
           } else if (this.state === 'FLYING') {
-            this.spreadWingsForFlight(Math.sin(this.flapPhase) * 0.78);
+            this.flapWings(Math.sin(this.flapPhase) * 0.78);
             this.orbitAngle += dt * 0.42;
-            const tx = myRoofX + Math.cos(this.orbitAngle) * this.orbitRadius;
-            const tz = myRoofZ + Math.sin(this.orbitAngle) * this.orbitRadius;
-            const ty = this.cruiseAlt + Math.sin(elapsed * 1.6 + this.orbitAngle * 2) * 1.9;
+            const tx = homeRoofX + Math.cos(this.orbitAngle) * this.orbitRadius;
+            const tz = homeRoofZ + Math.sin(this.orbitAngle) * this.orbitRadius;
+            const ty = this.cruiseAlt + Math.sin(elapsed * 1.6 + this.orbitAngle * 2) * 1.8;
 
-            const seek = new THREE.Vector3(tx, ty, tz).sub(this.group.position).multiplyScalar(1.45);
+            const seek = new THREE.Vector3(tx, ty, tz).sub(this.group.position).multiplyScalar(1.5);
             const sep = new THREE.Vector3();
             for (let i = 0; i < allPigeons.length; i++) {
               const other = allPigeons[i];
@@ -1502,7 +1276,7 @@
               const diff = this.group.position.clone().sub(other.group.position);
               const d = diff.length();
               if (d > 0.01 && d < 3.4) {
-                sep.addScaledVector(diff.normalize(), ((3.4 - d) / 3.4) * 19.5);
+                sep.addScaledVector(diff.normalize(), ((3.4 - d) / 3.4) * 18.0);
               }
             }
 
@@ -1515,26 +1289,27 @@
               this.group.rotation.y = Math.atan2(this.velocity.x, this.velocity.z);
             }
           } else if (this.state === 'LANDING') {
-            this.spreadWingsForFlight(Math.sin(this.flapPhase * 1.2) * 0.7);
+            this.flapWings(Math.sin(this.flapPhase * 1.2) * 0.7);
             const dir = this.targetPos.clone().sub(this.group.position);
             if (dir.length() < 0.25) {
               this.group.position.copy(this.targetPos);
               this.state = 'WALK';
-              this.syncNameVisibility();
-              this.foldWingsTightly();
+              this.foldWings();
+              this.updateNameVisibility();
             } else {
               dir.normalize();
-              this.group.position.addScaledVector(dir, dt * 8.2);
+              this.group.position.addScaledVector(dir, dt * 8.4);
               this.group.rotation.y = Math.atan2(dir.x, dir.z);
             }
           }
         }
       }
 
+      // Realistic Player Character (Body, Head, Eyes, Hair, Limbs)
       class PlayerCharacter {
         constructor() {
           this.group = new THREE.Group();
-          this.group.position.set(myRoofX + 1.2, ROOF_Y, myRoofZ + 5.2);
+          this.group.position.set(homeRoofX + 1.2, ROOF_Y, homeRoofZ + 5.2);
           scene.add(this.group);
           this.velY = 0;
           this.isGrounded = true;
@@ -1546,25 +1321,44 @@
           while (this.group.children.length > 0) this.group.remove(this.group.children[0]);
           const skinMat = new THREE.MeshStandardMaterial({ color: 0xd2a176, roughness: 0.65 });
           const hairMat = new THREE.MeshStandardMaterial({ color: 0x111115, roughness: 0.8 });
+          const eyeWhiteMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+          const pupilMat = new THREE.MeshBasicMaterial({ color: 0x18181b });
           const whiteMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.72 });
           const redMat = new THREE.MeshStandardMaterial({ color: 0x991b1b, roughness: 0.6 });
           const navyMat = new THREE.MeshStandardMaterial({ color: 0x1e3a8a, roughness: 0.65 });
           const blackMat = new THREE.MeshStandardMaterial({ color: 0x18181b, roughness: 0.65 });
           const pajamaMat = new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.8 });
 
-          const head = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.38, 0.36), skinMat);
-          head.position.set(0, 1.58, 0);
-          this.group.add(head);
+          const headGroup = new THREE.Group();
+          headGroup.position.set(0, 1.58, 0);
+          this.group.add(headGroup);
 
-          const hair = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.12, 0.38), hairMat);
-          hair.position.set(0, 1.76, -0.01);
-          this.group.add(hair);
+          const head = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.38, 0.36), skinMat);
+          headGroup.add(head);
+
+          const hair = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.13, 0.38), hairMat);
+          hair.position.set(0, 0.18, -0.01);
+          const backHair = new THREE.Mesh(new THREE.BoxGeometry(0.37, 0.24, 0.08), hairMat);
+          backHair.position.set(0, 0.06, -0.16);
+          headGroup.add(hair, backHair);
+
+          [-1, 1].forEach((side) => {
+            const ew = new THREE.Mesh(new THREE.BoxGeometry(0.065, 0.045, 0.02), eyeWhiteMat);
+            ew.position.set(side * 0.085, 0.02, 0.185);
+            const pu = new THREE.Mesh(new THREE.BoxGeometry(0.032, 0.035, 0.024), pupilMat);
+            pu.position.set(side * 0.085, 0.02, 0.19);
+            headGroup.add(ew, pu);
+          });
+
+          const nose = new THREE.Mesh(new THREE.BoxGeometry(0.045, 0.065, 0.05), skinMat);
+          nose.position.set(0, -0.02, 0.195);
+          headGroup.add(nose);
 
           if (skinId === 'baghdadi') {
             const agal = new THREE.Mesh(new THREE.TorusGeometry(0.19, 0.024, 8, 20), blackMat);
             agal.rotation.x = Math.PI / 2;
-            agal.position.set(0, 1.79, 0);
-            this.group.add(agal);
+            agal.position.set(0, 0.21, 0);
+            headGroup.add(agal);
           }
 
           const torsoMat = skinId === 'basrawi' ? navyMat : skinId === 'champion' ? blackMat : whiteMat;
@@ -1600,70 +1394,30 @@
           this.group.add(this.leftLegPivot, this.rightLegPivot);
         }
 
-        getPerchWorldPos(mode) {
-          const offset = mode === 'shoulder'
-            ? new THREE.Vector3(-0.24, 1.44, 0.02)
-            : new THREE.Vector3(-0.34, 1.02, 0.56);
-          offset.applyAxisAngle(new THREE.Vector3(0, 1, 0), this.group.rotation.y);
-          return this.group.position.clone().add(offset);
+        getPerchPos() {
+          const off = new THREE.Vector3(-0.24, 1.44, 0.02);
+          off.applyAxisAngle(new THREE.Vector3(0, 1, 0), this.group.rotation.y);
+          return this.group.position.clone().add(off);
         }
 
         jump() {
           if (this.isGrounded) {
-            this.velY = 8.4;
+            this.velY = 8.6;
             this.isGrounded = false;
           }
         }
 
-        pushOutBox(x, z, minX, maxX, minZ, maxZ) {
-          if (x > minX && x < maxX && z > minZ && z < maxZ) {
-            const m = Math.min(Math.abs(x - minX), Math.abs(maxX - x), Math.abs(z - minZ), Math.abs(maxZ - z));
-            if (m === Math.abs(x - minX)) x = minX;
-            else if (m === Math.abs(maxX - x)) x = maxX;
-            else if (m === Math.abs(z - minZ)) z = minZ;
-            else z = maxZ;
-          }
-          return { x, z };
-        }
-
-        resolveCollisions(nx, nz) {
+        resolveRooftopBounds(nx, nz) {
           let x = nx;
           let z = nz;
-          const r = 0.45;
-          const limitXMin = activeSectorX - ROOF_HALF + 0.52;
-          const limitXMax = activeSectorX + ROOF_HALF - 0.52;
-          const limitZMin = activeSectorZ - ROOF_HALF + 0.52;
-          const limitZMax = activeSectorZ + ROOF_HALF - 0.52;
-
-          if (x > limitXMax) x = limitXMax;
-          if (x < limitXMin) x = limitXMin;
-          if (z > limitZMax) z = limitZMax;
-          if (z < limitZMin) z = limitZMin;
-
-          const cMinX = activeSectorX + COOP.x - COOP.w / 2;
-          const cMaxX = activeSectorX + COOP.x + COOP.w / 2;
-          const cMinZ = activeSectorZ + COOP.z - COOP.d / 2;
-          const cMaxZ = activeSectorZ + COOP.z + COOP.d / 2;
-          const wallThick = 0.14;
-
-          let res = this.pushOutBox(x, z, cMinX - r, cMaxX + r, cMinZ - wallThick - r, cMinZ + wallThick + r);
-          x = res.x; z = res.z;
-          res = this.pushOutBox(x, z, cMinX - wallThick - r, cMinX + wallThick + r, cMinZ - r, cMaxZ + r);
-          x = res.x; z = res.z;
-          res = this.pushOutBox(x, z, cMaxX - wallThick - r, cMaxX + wallThick + r, cMinZ - r, cMaxZ + r);
-          x = res.x; z = res.z;
-
-          const doorWorldStart = activeSectorX + COOP.x + COOP.doorXStart;
-          const doorWorldEnd = activeSectorX + COOP.x + COOP.doorXEnd;
-          res = this.pushOutBox(x, z, cMinX - r, doorWorldStart + 0.12, cMaxZ - wallThick - r, cMaxZ + wallThick + r);
-          x = res.x; z = res.z;
-          res = this.pushOutBox(x, z, doorWorldEnd - 0.12, cMaxX + r, cMaxZ - wallThick - r, cMaxZ + wallThick + r);
-          x = res.x; z = res.z;
-
-          if (!COOP.isOpen) {
-            res = this.pushOutBox(x, z, doorWorldStart - r, doorWorldEnd + r, cMaxZ - wallThick - r, cMaxZ + wallThick + r);
-            x = res.x; z = res.z;
-          }
+          const minX = currentRoofX - ROOF_HALF + 0.55;
+          const maxX = currentRoofX + ROOF_HALF - 0.55;
+          const minZ = currentRoofZ - ROOF_HALF + 0.55;
+          const maxZ = currentRoofZ + ROOF_HALF - 0.55;
+          if (x < minX) x = minX;
+          if (x > maxX) x = maxX;
+          if (z < minZ) z = minZ;
+          if (z > maxZ) z = maxZ;
           return { x, z };
         }
 
@@ -1672,27 +1426,23 @@
           const rightVec = new THREE.Vector3(Math.cos(camYaw), 0, -Math.sin(camYaw));
           const wishDir = new THREE.Vector3().addScaledVector(forwardVec, moveForward).addScaledVector(rightVec, moveRight);
 
-          let curX = this.group.position.x;
-          let curZ = this.group.position.z;
           let isMoving = false;
-
-          if (wishDir.lengthSq() > 0.001) {
+          if (wishDir.lengthSq() > 0.002) {
             isMoving = true;
             wishDir.normalize();
-            const stepDist = (5.6 * dt) / 3;
-            for (let s = 0; s < 3; s++) {
-              const res = this.resolveCollisions(curX + wishDir.x * stepDist, curZ + wishDir.z * stepDist);
-              curX = res.x; curZ = res.z;
-            }
+            const bounded = this.resolveRooftopBounds(
+              this.group.position.x + wishDir.x * 5.6 * dt,
+              this.group.position.z + wishDir.z * 5.6 * dt
+            );
+            this.group.position.x = bounded.x;
+            this.group.position.z = bounded.z;
+
             const targetYaw = Math.atan2(wishDir.x, wishDir.z);
             let diff = targetYaw - this.group.rotation.y;
             while (diff > Math.PI) diff -= Math.PI * 2;
             while (diff < -Math.PI) diff += Math.PI * 2;
             this.group.rotation.y += diff * Math.min(1, dt * 16);
           }
-
-          this.group.position.x = curX;
-          this.group.position.z = curZ;
 
           this.velY -= 21.0 * dt;
           this.group.position.y += this.velY * dt;
@@ -1709,144 +1459,185 @@
             const swing = Math.sin(this.walkCycle) * 0.58;
             this.leftLegPivot.rotation.x = swing;
             this.rightLegPivot.rotation.x = -swing;
+            this.leftArmPivot.rotation.x = -swing * 0.6;
+            this.rightArmPivot.rotation.x = swing * 0.6;
           } else {
             this.leftLegPivot.rotation.x *= 0.82;
             this.rightLegPivot.rotation.x *= 0.82;
+            this.leftArmPivot.rotation.x *= 0.82;
+            this.rightArmPivot.rotation.x *= 0.82;
           }
 
           if (gameState.heldPigeon) {
-            gameState.heldPigeon.group.position.copy(this.getPerchWorldPos('hand'));
+            gameState.heldPigeon.group.position.copy(this.getPerchPos());
             gameState.heldPigeon.group.rotation.y = this.group.rotation.y;
-          }
-
-          if (gameState.tamedPigeonId) {
-            const tamedBird = pigeons.find((p) => p.uid === gameState.tamedPigeonId);
-            if (tamedBird && tamedBird.state === 'TAMED_PERCHED') {
-              tamedBird.group.position.copy(this.getPerchWorldPos(gameState.tamedPerchMode));
-              tamedBird.group.rotation.y = this.group.rotation.y;
-            }
           }
         }
       }
 
       player = new PlayerCharacter();
 
-      // Remote Players + Full Rooftops + Their Flying/Ground Pigeons
-      const remotePlayers = new Map(); // id -> { data, roofObj, charGroup, doorPivot, birdMeshes[] }
-
-      function clearRemoteBirds(entry) {
-        if (!entry || !Array.isArray(entry.birdMeshes)) return;
-        entry.birdMeshes.forEach((m) => scene.remove(m));
-        entry.birdMeshes = [];
-      }
-
-      function renderRemotePigeons(entry, pData) {
-        clearRemoteBirds(entry);
-        const list = Array.isArray(pData.pigeons) ? pData.pigeons : [];
-        list.forEach((bp, idx) => {
-          const br = BREEDS.find((b) => b.id === bp.breedId) || BREEDS[idx % BREEDS.length];
-          const bg = new THREE.Group();
-          const body = new THREE.Mesh(
-            new THREE.SphereGeometry(0.16, 12, 10).scale(0.84, 0.9, 1.5),
-            new THREE.MeshStandardMaterial({ color: br.body })
-          );
-          body.position.y = 0.25;
-          const wL = new THREE.Mesh(new THREE.BoxGeometry(0.45, 0.02, 0.22), new THREE.MeshStandardMaterial({ color: br.wing }));
-          wL.position.set(0.22, 0.27, 0.03);
-          const wR = new THREE.Mesh(new THREE.BoxGeometry(0.45, 0.02, 0.22), new THREE.MeshStandardMaterial({ color: br.wing }));
-          wR.position.set(-0.22, 0.27, 0.03);
-          bg.add(body, wL, wR);
-
-          const isFlyingAir = bp.state === 'FLYING' || bp.state === 'LANDING';
-          if (!isFlyingAir) {
-            const label = createLabelSprite(bp.customName ? `${bp.customName} • ${br.name}` : br.name, 'rgba(15,15,22,0.84)', '#38bdf8');
-            label.position.set(0, 0.72, 0);
-            bg.add(label);
-          }
-
-          bg.position.set(
-            typeof bp.x === 'number' ? bp.x : (pData.roofX || 0),
-            typeof bp.y === 'number' ? bp.y : ROOF_Y,
-            typeof bp.z === 'number' ? bp.z : (pData.roofZ || 0)
-          );
-          bg.rotation.y = bp.yaw || 0;
-          scene.add(bg);
-          entry.birdMeshes.push(bg);
-        });
-      }
+      // Remote Players + Full Rooftops + Coops + Birds in Online World
+      const remotePlayers = new Map();
 
       function upsertRemotePlayer(pData) {
         if (!pData || !pData.id) return;
         let entry = remotePlayers.get(pData.id);
         if (!entry) {
-          const roofObj = createFullRooftopStructure(false);
-          roofObj.group.position.set(pData.roofX || 0, 0, pData.roofZ || 0);
-          scene.add(roofObj.group);
+          const rx = pData.roofX || 0;
+          const rz = pData.roofZ || 0;
+          const rHouse = new THREE.Group();
+          rHouse.position.set(rx, 0, rz);
+          buildFullRooftopStructure(rHouse, !!pData.doorOpen);
+          scene.add(rHouse);
 
-          const charGroup = new THREE.Group();
-          const cBody = new THREE.Mesh(new THREE.BoxGeometry(0.5, 1.45, 0.32), new THREE.MeshStandardMaterial({ color: 0x0284c7 }));
-          cBody.position.y = 0.85;
-          const cHead = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.35, 0.35), new THREE.MeshStandardMaterial({ color: 0xd2a176 }));
-          cHead.position.y = 1.78;
-          const tag = createLabelSprite(`${pData.name || 'لاعب'} • سطح #${pData.slot || '?'}`, 'rgba(12,74,110,0.9)', '#38bdf8');
-          tag.position.set(0, 2.25, 0);
-          charGroup.add(cBody, cHead, tag);
-          scene.add(charGroup);
+          const pMesh = new THREE.Group();
+          const body = new THREE.Mesh(new THREE.BoxGeometry(0.5, 1.45, 0.32), new THREE.MeshStandardMaterial({ color: 0x0284c7 }));
+          body.position.y = 0.85;
+          const head = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.36, 0.36), new THREE.MeshStandardMaterial({ color: 0xd2a176 }));
+          head.position.y = 1.78;
+          const hair = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.12, 0.38), new THREE.MeshStandardMaterial({ color: 0x111115 }));
+          hair.position.set(0, 1.96, 0);
+          const tag = createNameSprite(`${pData.name || 'لاعب'} (سطح #${pData.slot || '?'})`, 'rgba(12, 74, 110, 0.88)', '#38bdf8');
+          tag.position.set(0, 2.32, 0);
+          pMesh.add(body, head, hair, tag);
+          scene.add(pMesh);
 
-          entry = { data: pData, roofObj, charGroup, birdMeshes: [] };
+          entry = {
+            data: pData,
+            house: rHouse,
+            mesh: pMesh,
+            remoteBirds: []
+          };
           remotePlayers.set(pData.id, entry);
         }
 
-        entry.data = Object.assign({}, entry.data, pData);
-        entry.roofObj.group.position.set(entry.data.roofX || 0, 0, entry.data.roofZ || 0);
-        if (entry.roofObj.doorPivot) {
-          entry.roofObj.doorPivot.rotation.y = entry.data.coopOpen ? -Math.PI * 0.62 : 0;
+        entry.data = Object.assign(entry.data, pData);
+        entry.house.position.set(entry.data.roofX || 0, 0, entry.data.roofZ || 0);
+        entry.mesh.position.set(entry.data.x || 0, entry.data.y || ROOF_Y, entry.data.z || 0);
+        entry.mesh.rotation.y = entry.data.yaw || 0;
+
+        if (Array.isArray(pData.pigeons)) {
+          while (entry.remoteBirds.length > pData.pigeons.length) {
+            const old = entry.remoteBirds.pop();
+            scene.remove(old.group);
+          }
+          pData.pigeons.forEach((bp, idx) => {
+            let rb = entry.remoteBirds[idx];
+            const br = BREEDS.find((x) => x.id === bp.breedId) || BREEDS[idx % BREEDS.length];
+            if (!rb) {
+              const vis = createBirdVisuals(br, !!bp.isChick);
+              const lbl = createNameSprite(bp.name || br.name);
+              lbl.position.set(0, 0.72, 0);
+              vis.group.add(lbl);
+              scene.add(vis.group);
+              rb = { group: vis.group, leftWing: vis.leftWing, rightWing: vis.rightWing, lbl, breedId: br.id };
+              entry.remoteBirds[idx] = rb;
+            }
+            rb.group.position.set(bp.x, bp.y, bp.z);
+            rb.group.rotation.y = bp.yaw || 0;
+            rb.lbl.visible = !bp.flying;
+            if (bp.flying) {
+              const wAng = Math.sin(performance.now() * 0.018 + idx) * 0.75;
+              rb.leftWing.rotation.set(0, 0, wAng);
+              rb.rightWing.rotation.set(0, 0, -wAng);
+            } else {
+              rb.leftWing.rotation.set(0.05, -0.14, -1.48);
+              rb.rightWing.rotation.set(0.05, 0.14, 1.48);
+            }
+          });
         }
-        entry.charGroup.position.set(entry.data.x || 0, entry.data.y || ROOF_Y, entry.data.z || 0);
-        entry.charGroup.rotation.y = entry.data.yaw || 0;
-        renderRemotePigeons(entry, entry.data);
       }
 
       function removeRemotePlayer(id) {
         const entry = remotePlayers.get(id);
         if (entry) {
-          clearRemoteBirds(entry);
-          scene.remove(entry.roofObj.group);
-          scene.remove(entry.charGroup);
+          scene.remove(entry.house);
+          scene.remove(entry.mesh);
+          entry.remoteBirds.forEach((rb) => scene.remove(rb.group));
           remotePlayers.delete(id);
         }
       }
 
-      function enterVisitSector(targetInfo) {
-        visitingPlayer = targetInfo;
-        activeSectorX = targetInfo.roofX || 0;
-        activeSectorZ = targetInfo.roofZ || 0;
-        player.group.position.set(activeSectorX + 1.0, ROOF_Y, activeSectorZ + 5.0);
+      function setActiveRooftop(rx, rz, hostName = null) {
+        const dx = rx - currentRoofX;
+        const dz = rz - currentRoofZ;
+        currentRoofX = rx;
+        currentRoofZ = rz;
+        visitingHostName = hostName;
+
+        player.group.position.x += dx;
+        player.group.position.z += dz;
+        const bounded = player.resolveRooftopBounds(player.group.position.x, player.group.position.z);
+        player.group.position.x = bounded.x;
+        player.group.position.z = bounded.z;
         updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-        showToast(`أنت الآن تزور سطح #${targetInfo.slot} (${targetInfo.name})`);
       }
 
-      function returnToOwnRoof() {
-        visitingPlayer = null;
-        activeSectorX = myRoofX;
-        activeSectorZ = myRoofZ;
-        player.group.position.set(myRoofX + 1.2, ROOF_Y, myRoofZ + 5.2);
-        updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-        showToast('عدت إلى سطحك الخاص');
+      // Chat & Visit UI
+      const chatBox = document.getElementById('online-chat-box');
+      const chatToggleBtn = document.getElementById('chat-toggle-btn');
+      const chatMessagesEl = document.getElementById('chat-messages');
+
+      chatToggleBtn.addEventListener('click', () => {
+        const isOpen = chatBox.style.display === 'flex';
+        chatBox.style.display = isOpen ? 'none' : 'flex';
+        chatToggleBtn.textContent = isOpen ? 'الدردشة ▾' : 'إخفاء الدردشة ▴';
+      });
+
+      function appendChatMessage(fromName, text, fromId = null) {
+        const row = document.createElement('div');
+        row.className = 'chat-row';
+        const span = document.createElement('span');
+        span.textContent = `${fromName}: ${text}`;
+        row.appendChild(span);
+
+        if (fromId && remotePlayers.has(fromId)) {
+          const vBtn = document.createElement('button');
+          vBtn.className = 'visit-mini-btn';
+          vBtn.type = 'button';
+          vBtn.textContent = 'طلب زيارة سطحه';
+          vBtn.onclick = () => sendVisitRequest(fromId, fromName);
+          row.appendChild(vBtn);
+        }
+        chatMessagesEl.appendChild(row);
+        chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
       }
 
-      document.getElementById('btn-visit-back').addEventListener('click', returnToOwnRoof);
-
-      // WebSocket Client
       let wsClient = null;
-      let pendingVisitRequest = null;
+      let myOnlineId = null;
+
+      function sendVisitRequest(targetId, targetName) {
+        if (!wsClient || wsClient.readyState !== WebSocket.OPEN) {
+          showToast('يلزم اتصال أونلاين لطلب زيارة سطح.');
+          return;
+        }
+        wsClient.send(JSON.stringify({ type: 'VISIT_REQUEST', targetId }));
+        showToast(`تم إرسال طلب زيارة سطح ${targetName}`);
+      }
+
+      const visitPromptEl = document.getElementById('visit-prompt');
+      const visitPromptText = document.getElementById('visit-prompt-text');
+
+      document.getElementById('btn-visit-accept').addEventListener('click', () => {
+        if (pendingVisitRequest && wsClient && wsClient.readyState === WebSocket.OPEN) {
+          wsClient.send(JSON.stringify({ type: 'VISIT_RESPONSE', visitorId: pendingVisitRequest.fromId, accepted: true }));
+        }
+        pendingVisitRequest = null;
+        visitPromptEl.style.display = 'none';
+      });
+
+      document.getElementById('btn-visit-decline').addEventListener('click', () => {
+        if (pendingVisitRequest && wsClient && wsClient.readyState === WebSocket.OPEN) {
+          wsClient.send(JSON.stringify({ type: 'VISIT_RESPONSE', visitorId: pendingVisitRequest.fromId, accepted: false }));
+        }
+        pendingVisitRequest = null;
+        visitPromptEl.style.display = 'none';
+      });
 
       function connectOnlineServer() {
         try {
           wsClient = new WebSocket(SERVER_URL);
-          wsClient.addEventListener('open', () => {
-            showToast('متصل بسيرفر مملكة الحمام الأونلاين (100 لاعب)');
-          });
           wsClient.addEventListener('message', (ev) => {
             let msg;
             try { msg = JSON.parse(ev.data); } catch (e) { return; }
@@ -1854,23 +1645,20 @@
             if (msg.type === 'WELCOME') {
               onlineCount = msg.onlineCount || 1;
               if (msg.self) {
-                const dx = (msg.self.roofX || 0) - myRoofX;
-                const dz = (msg.self.roofZ || 0) - myRoofZ;
-                myRoofX = msg.self.roofX || 0;
-                myRoofZ = msg.self.roofZ || 0;
+                myOnlineId = msg.self.id;
                 mySlot = msg.self.slot || 1;
-                if (!visitingPlayer) {
-                  activeSectorX = myRoofX;
-                  activeSectorZ = myRoofZ;
-                }
-                mainRoofObj.group.position.set(myRoofX, 0, myRoofZ);
-                player.group.position.x += dx;
-                player.group.position.z += dz;
-                pigeons.forEach((p) => {
-                  p.group.position.x += dx;
-                  p.group.position.z += dz;
-                  p.targetPos.x += dx;
-                  p.targetPos.z += dz;
+                homeRoofX = msg.self.roofX || 0;
+                homeRoofZ = msg.self.roofZ || 0;
+                myHouseGroup.position.set(homeRoofX, 0, homeRoofZ);
+                waterBowlGroup.position.set(-2.2, ROOF_Y, 2.4);
+                currentRoofX = homeRoofX;
+                currentRoofZ = homeRoofZ;
+                player.group.position.set(homeRoofX + 1.2, ROOF_Y, homeRoofZ + 5.2);
+                pigeons.forEach((p, idx) => {
+                  const lx = p.isInsideCoop ? COOP.x + ((idx % 4) - 1.5) * 1.1 : -2.0 + ((idx % 4) - 1.5) * 1.8;
+                  const lz = p.isInsideCoop ? COOP.z + (Math.floor(idx / 4) - 1) * 1.1 : 3.2;
+                  p.group.position.set(homeRoofX + lx, ROOF_Y, homeRoofZ + lz);
+                  p.targetPos.copy(p.group.position);
                 });
               }
               if (Array.isArray(msg.players)) msg.players.forEach(upsertRemotePlayer);
@@ -1878,16 +1666,13 @@
               updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
             } else if (msg.type === 'PLAYER_JOINED') {
               onlineCount = msg.onlineCount || onlineCount + 1;
-              upsertRemotePlayer(msg.player);
+              if (msg.player) upsertRemotePlayer(msg.player);
               if (Array.isArray(msg.leaderboard)) leaderboardData = msg.leaderboard;
               updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
             } else if (msg.type === 'PLAYER_STATE') {
-              upsertRemotePlayer(msg);
+              if (msg.player) upsertRemotePlayer(msg.player);
             } else if (msg.type === 'PLAYER_LEFT') {
               onlineCount = msg.onlineCount || Math.max(1, onlineCount - 1);
-              if (visitingPlayer && visitingPlayer.id === msg.id) {
-                returnToOwnRoof();
-              }
               removeRemotePlayer(msg.id);
               if (Array.isArray(msg.leaderboard)) leaderboardData = msg.leaderboard;
               updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
@@ -1895,32 +1680,27 @@
               onlineCount = msg.onlineCount || onlineCount;
               if (Array.isArray(msg.leaderboard)) leaderboardData = msg.leaderboard;
               updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-            } else if (msg.type === 'REWARD_GRANTED') {
+            } else if (msg.type === 'LAUNCH_REWARD_APPROVED') {
               if (typeof msg.coins === 'number') {
                 gameState.coins = msg.coins;
                 updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
                 saveGameAuto();
+                showToast(`إقلاع السرب! مكافأة +${msg.reward || 25} د.ع`);
               }
             } else if (msg.type === 'VISIT_REQUEST') {
               pendingVisitRequest = msg;
-              document.getElementById('visit-req-text').textContent = `يريد (${msg.visitorName} - سطح #${msg.visitorSlot}) زيارة سطحك، هل توافق؟`;
-              document.getElementById('visit-request-modal').style.display = 'flex';
-            } else if (msg.type === 'VISIT_RESULT') {
-              if (msg.accepted) {
-                enterVisitSector({
-                  id: msg.targetId,
-                  name: msg.targetName,
-                  slot: msg.targetSlot,
-                  roofX: msg.roofX,
-                  roofZ: msg.roofZ
-                });
-              } else {
-                showToast(`رفض (${msg.targetName}) طلب زيارة السطح.`);
-              }
-            } else if (msg.type === 'WHISTLE_SIGNAL') {
-              showToast(`صفارة من ${msg.fromName} (سطح #${msg.slot})`);
+              visitPromptText.textContent = `يريد (${msg.fromName}) زيارة سطحك`;
+              visitPromptEl.style.display = 'flex';
+            } else if (msg.type === 'VISIT_ACCEPTED') {
+              const targetX = typeof msg.roofX === 'number' ? msg.roofX : currentRoofX;
+              const targetZ = typeof msg.roofZ === 'number' ? msg.roofZ : currentRoofZ;
+              setActiveRooftop(targetX, targetZ, msg.hostName || `سطح #${msg.hostSlot}`);
+              showToast(`تم قبول الزيارة! أنت الآن على سطح ${msg.hostName}`);
+            } else if (msg.type === 'VISIT_DECLINED') {
+              showToast(`رفض (${msg.hostName}) طلب الزيارة`);
             } else if (msg.type === 'CHAT_MSG') {
-              appendChatMessage(`${msg.fromName} (#${msg.slot})`, msg.text);
+              appendChatMessage(msg.fromName, msg.text, msg.fromId || null);
+              showToast(`${msg.fromName}: ${msg.text}`);
             }
           });
           wsClient.addEventListener('close', () => {
@@ -1941,17 +1721,14 @@
           z: player.group.position.z,
           yaw: player.group.rotation.y,
           skin: gameState.currentSkin,
-          coopOpen: COOP.isOpen,
-          coins: Math.max(0, Math.floor(gameState.coins)),
+          coins: Math.floor(gameState.coins),
           flyingCount,
-          pigeons: pigeons.slice(0, 35).map((p) => ({
-            uid: p.uid,
+          doorOpen: COOP.isOpen,
+          pigeons: pigeons.map((p) => ({
             breedId: p.breed.id,
-            customName: p.customName,
+            name: p.getDisplayName(),
+            flying: p.state === 'FLYING' || p.state === 'LANDING',
             isChick: p.isChick,
-            growth: p.growth,
-            isTamed: p.isTamed,
-            state: p.state,
             x: p.group.position.x,
             y: p.group.position.y,
             z: p.group.position.z,
@@ -1960,25 +1737,20 @@
         }));
       }
 
-      // Save & Load
+      // Save / Load
       function saveGameAuto() {
         try {
           localStorage.setItem(SAVE_KEY, JSON.stringify({
-            coins: Math.max(0, Math.floor(gameState.coins)),
+            coins: Math.floor(gameState.coins),
             feeds: gameState.feeds,
             waters: gameState.waters,
-            coopLevel: gameState.coopLevel,
-            flockHealth: gameState.flockHealth,
             ownedSkins: gameState.ownedSkins,
             currentSkin: gameState.currentSkin,
-            tamedPigeonId: gameState.tamedPigeonId,
-            tamedPerchMode: gameState.tamedPerchMode,
             pigeons: pigeons.map((p) => ({
               uid: p.uid,
               breedId: p.breed.id,
               customName: p.customName,
               isChick: p.isChick,
-              growth: p.growth,
               isTamed: p.isTamed,
               isInsideCoop: p.isInsideCoop
             }))
@@ -1991,10 +1763,9 @@
           const raw = localStorage.getItem(SAVE_KEY);
           if (!raw) return false;
           const d = JSON.parse(raw);
-          if (typeof d.coins === 'number') gameState.coins = Math.max(0, d.coins);
+          if (typeof d.coins === 'number') gameState.coins = d.coins;
           if (d.feeds) gameState.feeds = Object.assign(gameState.feeds, d.feeds);
           if (d.waters) gameState.waters = Object.assign(gameState.waters, d.waters);
-          if (typeof d.coopLevel === 'number') gameState.coopLevel = d.coopLevel;
           if (Array.isArray(d.ownedSkins)) gameState.ownedSkins = d.ownedSkins;
           if (d.currentSkin) {
             gameState.currentSkin = d.currentSkin;
@@ -2015,56 +1786,52 @@
         for (let i = 0; i < 12; i++) {
           pigeons.push(new Pigeon(i, BREEDS[i % BREEDS.length], { isInsideCoop: true }));
         }
-        spawnEggInCoop(BREEDS[0], COOP.x - 1.2, COOP.z - 1.4, 24);
       }
 
-      // Action Handlers (Money Glitch Fixed: cooldown + only reward on actual ground/coop launch)
+      // Action Buttons (No Coin Glitch)
       const heldBarEl = document.getElementById('held-bird-bar');
       const heldTitleEl = document.getElementById('held-bird-title');
 
       document.getElementById('btn-launch').addEventListener('click', () => {
-        const now = Date.now();
-        let launchedCount = 0;
+        let launchedAny = false;
         pigeons.forEach((p) => {
-          if (p.commandLaunch()) launchedCount++;
+          if (!p.isChick && p.state !== 'FLYING' && p.state !== 'HELD') {
+            p.commandLaunch();
+            launchedAny = true;
+          }
         });
-        playWhistle('launch');
-
-        if (launchedCount > 0) {
-          if (now - lastLaunchClickTime >= 4000) {
-            lastLaunchClickTime = now;
-            gameState.coins += 100;
-            if (wsClient && wsClient.readyState === WebSocket.OPEN) {
-              wsClient.send(JSON.stringify({ type: 'CLAIM_LAUNCH_REWARD', launchedCount }));
-            }
-            showToast(`إقلاع (${launchedCount}) طير! وحصلت +100 د.ع`);
-          } else {
-            showToast(`تم إقلاع (${launchedCount}) طير`);
-          }
-          updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-          saveGameAuto();
-          if (wsClient && wsClient.readyState === WebSocket.OPEN) {
-            wsClient.send(JSON.stringify({ type: 'WHISTLE_SIGNAL', action: 'launch' }));
-          }
-        } else {
-          showToast('لا يوجد حمام جاهز للإقلاع حالياً.');
+        if (!launchedAny) {
+          showToast('السرب طائر بالفعل أو لا توجد طيور جاهزة للإقلاع.');
+          return;
         }
+        const now = Date.now();
+        if (wsClient && wsClient.readyState === WebSocket.OPEN) {
+          wsClient.send(JSON.stringify({ type: 'CLAIM_LAUNCH_REWARD' }));
+        } else if (now - gameState.lastFlightRewardTime >= 20000) {
+          gameState.lastFlightRewardTime = now;
+          gameState.coins += 25;
+          saveGameAuto();
+          showToast('إقلاع السرب! (+25 د.ع)');
+        } else {
+          showToast('تم إقلاع السرب.');
+        }
+        updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
       });
 
       document.getElementById('btn-land').addEventListener('click', () => {
         pigeons.forEach((p) => { if (p.state === 'FLYING') p.commandLand(); });
-        gameState.flightElapsed = 0;
-        gameState.falconWarned = false;
-        gameState.falconActive = false;
-        falconGroup.visible = false;
-        playWhistle('land');
         showToast('صفارة نزول! السرب ينزل إلى السطح.');
       });
 
       document.getElementById('btn-exit-all').addEventListener('click', () => {
         COOP.isOpen = true;
         document.getElementById('stat-door').textContent = 'مفتوح';
-        pigeons.forEach((p) => { if (p.isInsideCoop) p.commandExitCoop(false); });
+        pigeons.forEach((p) => {
+          if (p.isInsideCoop && p.state === 'WALK') {
+            p.isInsideCoop = false;
+            p.targetPos.set(homeRoofX - 2.0 + (Math.random() - 0.5) * 7, ROOF_Y, homeRoofZ + 3.5);
+          }
+        });
         showToast('تم فتح باب القفص وخروج الحمام.');
       });
 
@@ -2079,8 +1846,8 @@
         if (!key) { showToast('لا يوجد علف! اشترِ من السوق.'); return; }
         gameState.feeds[key] -= 1;
         gameState.activeFeedPile = {
-          lx: player.group.position.x - myRoofX,
-          lz: player.group.position.z - myRoofZ,
+          lx: player.group.position.x - homeRoofX,
+          lz: player.group.position.z - homeRoofZ,
           timer: 16
         };
         pigeons.forEach((p) => { if (p.state === 'FLYING') p.commandLand(); });
@@ -2094,10 +1861,8 @@
         const key = order.find((k) => (gameState.waters[k] || 0) > 0);
         if (!key) { showToast('لا يوجد ماي! اشترِ من السوق.'); return; }
         gameState.waters[key] -= 1;
-        if (waterSurface) {
-          waterSurface.material.color.setHex(WATER_TYPES[key].color);
-          waterSurface.visible = true;
-        }
+        waterSurface.material.color.setHex(WATER_TYPES[key].color);
+        waterSurface.visible = true;
         gameState.activeWaterPile = { timer: 20 };
         updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
         saveGameAuto();
@@ -2106,13 +1871,12 @@
 
       document.getElementById('btn-grab').addEventListener('click', () => {
         if (gameState.heldPigeon) return;
-        const nearest = pigeons.find((p) => p.state !== 'FLYING' && p.group.position.distanceTo(player.group.position) < 3.6);
-        if (!nearest) { showToast('اقترب من طير على السطح للزمه!'); return; }
+        const nearest = pigeons.find((p) => p.state !== 'FLYING' && p.group.position.distanceTo(player.group.position) < 3.4);
+        if (!nearest) { showToast('اقترب من طير للزمه.'); return; }
         gameState.heldPigeon = nearest;
         nearest.state = 'HELD';
         nearest.isInsideCoop = false;
-        nearest.syncNameVisibility();
-        heldTitleEl.textContent = `ماسك: ${nearest.getDisplayName()} — ${nearest.breed.info}`;
+        heldTitleEl.textContent = `ماسك طير: ${nearest.getDisplayName()}`;
         heldBarEl.style.display = 'flex';
       });
 
@@ -2122,8 +1886,8 @@
         p.group.position.set(player.group.position.x + 0.7, ROOF_Y, player.group.position.z + 0.7);
         p.targetPos.copy(p.group.position);
         p.state = 'WALK';
-        p.syncNameVisibility();
-        p.foldWingsTightly();
+        p.foldWings();
+        p.updateNameVisibility();
         gameState.heldPigeon = null;
         heldBarEl.style.display = 'none';
       });
@@ -2135,25 +1899,21 @@
         gameState.heldPigeon = null;
         heldBarEl.style.display = 'none';
         p.startSkyFlight();
-        playWhistle('launch');
       });
 
-      function setTameMode(mode) {
+      document.getElementById('btn-tame-shoulder').addEventListener('click', () => {
         const p = gameState.heldPigeon;
         if (!p || p.isChick) return;
-        pigeons.forEach((o) => { if (o !== p) o.isTamed = false; });
+        pigeons.forEach((o) => { if (o !== p) { o.isTamed = false; o.refreshNameLabel(); } });
         p.isTamed = true;
         p.state = 'TAMED_PERCHED';
         gameState.tamedPigeonId = p.uid;
-        gameState.tamedPerchMode = mode;
-        p.refreshLabel();
+        p.refreshNameLabel();
+        p.updateNameVisibility();
         gameState.heldPigeon = null;
         heldBarEl.style.display = 'none';
         saveGameAuto();
-      }
-
-      document.getElementById('btn-tame-hand').addEventListener('click', () => setTameMode('hand'));
-      document.getElementById('btn-tame-shoulder').addEventListener('click', () => setTameMode('shoulder'));
+      });
 
       const renameModal = document.getElementById('rename-modal');
       const renameInput = document.getElementById('rename-input');
@@ -2166,49 +1926,67 @@
       document.getElementById('btn-save-rename').addEventListener('click', () => {
         if (gameState.heldPigeon) {
           gameState.heldPigeon.customName = renameInput.value.trim();
-          gameState.heldPigeon.refreshLabel();
-          heldTitleEl.textContent = `ماسك: ${gameState.heldPigeon.getDisplayName()}`;
+          gameState.heldPigeon.refreshNameLabel();
+          gameState.heldPigeon.updateNameVisibility();
+          heldTitleEl.textContent = `ماسك طير: ${gameState.heldPigeon.getDisplayName()}`;
         }
         renameModal.style.display = 'none';
         saveGameAuto();
       });
 
-      document.getElementById('btn-call-tame').addEventListener('click', () => {
-        const tamed = pigeons.find((p) => p.uid === gameState.tamedPigeonId || p.isTamed);
-        if (!tamed) { showToast('روّض طيراً أولاً ثم صِح له.'); return; }
-        tamed.state = 'TAMED_FLY_TO_PLAYER';
-        playWhistle('land');
-      });
-
       document.getElementById('btn-jump').addEventListener('click', () => player.jump());
 
-      // Bird Cam
-      const btnBirdCam = document.getElementById('btn-birdcam');
-      const birdCamBar = document.getElementById('birdcam-bar');
-      const birdCamLabel = document.getElementById('birdcam-label');
-      let isFirstPerson = false;
+      // Visit Rooftop Modal (Never auto-snaps back to home roof)
+      const visitModal = document.getElementById('visit-modal');
+      const visitListEl = document.getElementById('visit-players-list');
 
-      function setBirdCamMode(active) {
-        gameState.birdCamActive = active && pigeons.length > 0;
-        btnBirdCam.classList.toggle('active', gameState.birdCamActive);
-        btnBirdCam.textContent = gameState.birdCamActive ? 'رجوع' : 'كاميرا الطير';
-        birdCamBar.style.display = gameState.birdCamActive ? 'flex' : 'none';
-        if (gameState.birdCamActive) {
-          const b = pigeons[gameState.birdCamIndex % pigeons.length];
-          birdCamLabel.textContent = `${b.getDisplayName()} • ${b.breed.info}`;
+      document.getElementById('btn-visit-roof').addEventListener('click', () => {
+        visitListEl.innerHTML = '';
+        if (visitingHostName) {
+          const retRow = document.createElement('div');
+          retRow.className = 'shop-item';
+          retRow.innerHTML = `<div class="shop-info"><h4>أنت حالياً تزور: ${visitingHostName}</h4><p>العودة إلى سطحك الخاص</p></div>`;
+          const retBtn = document.createElement('button');
+          retBtn.className = 'buy-btn sell-btn';
+          retBtn.type = 'button';
+          retBtn.textContent = 'رجوع لسطحي';
+          retBtn.onclick = () => {
+            setActiveRooftop(homeRoofX, homeRoofZ, null);
+            visitModal.style.display = 'none';
+            showToast('عدت إلى سطحك.');
+          };
+          retRow.appendChild(retBtn);
+          visitListEl.appendChild(retRow);
         }
-      }
 
-      btnBirdCam.addEventListener('click', () => setBirdCamMode(!gameState.birdCamActive));
-      document.getElementById('btn-birdcam-exit').addEventListener('click', () => setBirdCamMode(false));
-      document.getElementById('btn-birdcam-next').addEventListener('click', () => {
-        if (!pigeons.length) return;
-        gameState.birdCamIndex = (gameState.birdCamIndex + 1) % pigeons.length;
-        const b = pigeons[gameState.birdCamIndex];
-        birdCamLabel.textContent = `${b.getDisplayName()} • ${b.breed.info}`;
+        const list = Array.from(remotePlayers.values());
+        if (list.length === 0) {
+          const empty = document.createElement('div');
+          empty.className = 'shop-item';
+          empty.innerHTML = `<div class="shop-info"><h4>لا يوجد لاعبون آخرون متصلون حالياً</h4><p>أرسل رسالة في الدردشة أو انتظر دخول لاعبين.</p></div>`;
+          visitListEl.appendChild(empty);
+        } else {
+          list.forEach((entry) => {
+            const row = document.createElement('div');
+            row.className = 'shop-item';
+            row.innerHTML = `<div class="shop-info"><h4>${entry.data.name || 'لاعب'} (سطح #${entry.data.slot || '?'})</h4><p>الرصيد: ${entry.data.coins || 0} د.ع</p></div>`;
+            const btn = document.createElement('button');
+            btn.className = 'buy-btn';
+            btn.type = 'button';
+            btn.textContent = 'طلب زيارة';
+            btn.onclick = () => {
+              visitModal.style.display = 'none';
+              sendVisitRequest(entry.data.id, entry.data.name || 'لاعب');
+            };
+            row.appendChild(btn);
+            visitListEl.appendChild(row);
+          });
+        }
+        visitModal.style.display = 'flex';
       });
+      document.getElementById('btn-close-visit').addEventListener('click', () => { visitModal.style.display = 'none'; });
 
-      // Market Modal (Unchanged Market Items & Prices)
+      // Market Modal (Unchanged Structure + Every Bird Breed With Info)
       const marketModal = document.getElementById('market-modal');
       const marketListEl = document.getElementById('market-items-list');
       let currentMarketTab = 'birds';
@@ -2217,13 +1995,13 @@
         currentMarketTab = tab;
         document.querySelectorAll('.tab-btn').forEach((b) => b.classList.toggle('active', b.dataset.tab === tab));
         marketListEl.innerHTML = '';
-        document.getElementById('market-coins').textContent = Math.max(0, Math.floor(gameState.coins));
+        document.getElementById('market-coins').textContent = Math.floor(gameState.coins);
 
         if (tab === 'birds') {
           BREEDS.forEach((b) => {
             const row = document.createElement('div');
             row.className = 'shop-item';
-            row.innerHTML = `<div class="shop-info"><h4>حمام ${b.name}</h4><p>شراء: ${b.price} د.ع • بيع: ${b.sellPrice} د.ع<br>${b.info}</p></div><div style="display:flex;gap:5px;"><button class="buy-btn" type="button">شراء</button><button class="buy-btn sell-btn" type="button">بيع</button></div>`;
+            row.innerHTML = `<div class="shop-info"><h4>حمام ${b.name}</h4><p>${b.info} • شراء: ${b.price} د.ع • بيع: ${b.sellPrice} د.ع</p></div><div style="display:flex;gap:4px;"><button class="buy-btn" type="button">شراء</button><button class="buy-btn sell-btn" type="button">بيع</button></div>`;
             const [buyBtn, sellBtn] = row.querySelectorAll('button');
             buyBtn.onclick = () => {
               if (gameState.coins < b.price) { showToast('رصيدك غير كافٍ!'); return; }
@@ -2314,71 +2092,22 @@
       document.getElementById('btn-close-market').addEventListener('click', () => { marketModal.style.display = 'none'; });
       document.querySelectorAll('.tab-btn').forEach((b) => { b.addEventListener('click', () => renderMarketTab(b.dataset.tab)); });
 
-      // Leaderboard & Visit Rooftop Modal
       const lbModal = document.getElementById('leaderboard-modal');
       const lbList = document.getElementById('leaderboard-list');
-
-      function renderOnlinePlayersList() {
-        lbList.innerHTML = '';
-        const remotes = Array.from(remotePlayers.values()).map((e) => e.data);
-        if (remotes.length === 0) {
-          const selfRow = document.createElement('div');
-          selfRow.className = 'shop-item';
-          selfRow.innerHTML = `<div class="shop-info"><h4>أنت (سطح #${mySlot})</h4><p>الرصيد: ${Math.floor(gameState.coins)} د.ع • طائر بالسماء: ${pigeons.filter((p) => p.state === 'FLYING').length}</p></div>`;
-          lbList.appendChild(selfRow);
-          return;
-        }
-        remotes.forEach((rp) => {
-          const row = document.createElement('div');
-          row.className = 'shop-item';
-          row.innerHTML = `<div class="shop-info"><h4>${rp.name || 'لاعب'} (سطح #${rp.slot || '?'})</h4><p>الرصيد: ${rp.coins || 0} د.ع • طائر بالسماء: ${rp.flyingCount || 0}</p></div><button class="buy-btn equip-btn" type="button">طلب زيارة</button>`;
-          row.querySelector('button').onclick = () => {
-            if (!wsClient || wsClient.readyState !== WebSocket.OPEN) return;
-            wsClient.send(JSON.stringify({ type: 'VISIT_REQUEST', targetId: rp.id }));
-            lbModal.style.display = 'none';
-            showToast(`تم إرسال طلب زيارة إلى (${rp.name})...`);
-          };
-          lbList.appendChild(row);
-        });
-      }
-
       document.getElementById('btn-leaderboard').addEventListener('click', () => {
-        renderOnlinePlayersList();
+        lbList.innerHTML = '';
+        const list = leaderboardData.length > 0
+          ? leaderboardData
+          : [{ name: `أنت (سطح #${mySlot})`, coins: Math.floor(gameState.coins), flyingCount: pigeons.filter((p) => p.state === 'FLYING').length }];
+        list.forEach((item, idx) => {
+          const r = document.createElement('div');
+          r.className = 'shop-item';
+          r.innerHTML = `<div class="shop-info"><h4>#${idx + 1} ${item.name}</h4><p>طائر بالسماء: ${item.flyingCount || 0}</p></div><div style="color:#facc15;font-weight:800;font-size:10px;">${item.coins} د.ع</div>`;
+          lbList.appendChild(r);
+        });
         lbModal.style.display = 'flex';
       });
       document.getElementById('btn-close-leaderboard').addEventListener('click', () => { lbModal.style.display = 'none'; });
-
-      // Visit Request Accept / Reject
-      const visitReqModal = document.getElementById('visit-request-modal');
-      document.getElementById('btn-close-visit-req').addEventListener('click', () => { visitReqModal.style.display = 'none'; });
-      document.getElementById('btn-accept-visit').addEventListener('click', () => {
-        if (pendingVisitRequest && wsClient && wsClient.readyState === WebSocket.OPEN) {
-          wsClient.send(JSON.stringify({
-            type: 'VISIT_RESPONSE',
-            visitorId: pendingVisitRequest.visitorId,
-            accepted: true
-          }));
-        }
-        pendingVisitRequest = null;
-        visitReqModal.style.display = 'none';
-      });
-      document.getElementById('btn-reject-visit').addEventListener('click', () => {
-        if (pendingVisitRequest && wsClient && wsClient.readyState === WebSocket.OPEN) {
-          wsClient.send(JSON.stringify({
-            type: 'VISIT_RESPONSE',
-            visitorId: pendingVisitRequest.visitorId,
-            accepted: false
-          }));
-        }
-        pendingVisitRequest = null;
-        visitReqModal.style.display = 'none';
-      });
-
-      // Chat Toggle & Send
-      const chatPanel = document.getElementById('online-chat-panel');
-      document.getElementById('btn-toggle-chat').addEventListener('click', () => {
-        chatPanel.style.display = chatPanel.style.display === 'flex' ? 'none' : 'flex';
-      });
 
       const chatInput = document.getElementById('online-chat-input');
       document.getElementById('online-chat-send').addEventListener('click', () => {
@@ -2387,24 +2116,30 @@
         if (wsClient && wsClient.readyState === WebSocket.OPEN) {
           wsClient.send(JSON.stringify({ type: 'CHAT_MSG', text: txt }));
         } else {
-          appendChatMessage('أنت', txt);
+          appendChatMessage('أنت', txt, null);
         }
         chatInput.value = '';
       });
 
+      let isFirstPerson = false;
       document.getElementById('btn-view').addEventListener('click', (e) => {
         isFirstPerson = !isFirstPerson;
-        e.target.textContent = isFirstPerson ? 'المنظور: أول' : 'المنظور: ثالث';
+        e.target.textContent = isFirstPerson ? 'منظور: أول' : 'منظور: ثالث';
         player.group.visible = !isFirstPerson;
       });
 
-      // Multi-touch Joystick (isolated by touch identifier)
+      // Multi-touch safe Joystick (independent touchIdentifier)
       const joyZone = document.getElementById('joystick-zone');
       const joyKnob = document.getElementById('joystick-knob');
-      let joyActive = false, joyTouchId = null, joyX = 0, joyY = 0;
+      let joyTouchId = null;
+      let joyX = 0;
+      let joyY = 0;
 
-      function updateJoyKnob(dx, dy) {
+      function updateJoyFromTouch(t) {
+        const rect = joyZone.getBoundingClientRect();
         const maxR = 26;
+        const dx = t.clientX - (rect.left + rect.width / 2);
+        const dy = t.clientY - (rect.top + rect.height / 2);
         const clamped = Math.min(Math.hypot(dx, dy), maxR);
         const ang = Math.atan2(dy, dx);
         const kx = Math.cos(ang) * clamped;
@@ -2416,42 +2151,67 @@
 
       joyZone.addEventListener('touchstart', (e) => {
         e.preventDefault();
-        e.stopPropagation();
-        if (joyActive) return;
+        if (joyTouchId !== null) return;
         const t = e.changedTouches[0];
-        joyActive = true;
+        if (!t) return;
         joyTouchId = t.identifier;
-        const rect = joyZone.getBoundingClientRect();
-        updateJoyKnob(t.clientX - (rect.left + rect.width / 2), t.clientY - (rect.top + rect.height / 2));
+        updateJoyFromTouch(t);
       }, { passive: false });
 
       window.addEventListener('touchmove', (e) => {
-        if (!joyActive) return;
-        for (let i = 0; i < e.changedTouches.length; i++) {
-          const t = e.changedTouches[i];
+        if (joyTouchId === null) return;
+        for (let i = 0; i < e.touches.length; i++) {
+          const t = e.touches[i];
           if (t.identifier === joyTouchId) {
-            const rect = joyZone.getBoundingClientRect();
-            updateJoyKnob(t.clientX - (rect.left + rect.width / 2), t.clientY - (rect.top + rect.height / 2));
+            updateJoyFromTouch(t);
             break;
           }
         }
       }, { passive: false });
 
-      function releaseJoyTouch(e) {
-        if (!joyActive) return;
+      function clearJoyTouch(e) {
+        if (joyTouchId === null) return;
         for (let i = 0; i < e.changedTouches.length; i++) {
           if (e.changedTouches[i].identifier === joyTouchId) {
-            joyActive = false;
             joyTouchId = null;
-            updateJoyKnob(0, 0);
+            joyX = 0;
+            joyY = 0;
+            joyKnob.style.transform = 'translate(0px, 0px)';
             break;
           }
         }
       }
-      window.addEventListener('touchend', releaseJoyTouch);
-      window.addEventListener('touchcancel', releaseJoyTouch);
+      window.addEventListener('touchend', clearJoyTouch);
+      window.addEventListener('touchcancel', clearJoyTouch);
 
-      // Keyboard
+      // Multi-finger safe Camera Orbit on Canvas (tracks its own pointerId independently)
+      let camYaw = 0.0;
+      let camPitch = 0.25;
+      let camPointerId = null;
+      let lastCamX = 0;
+      let lastCamY = 0;
+
+      canvas.addEventListener('pointerdown', (e) => {
+        if (camPointerId !== null) return;
+        camPointerId = e.pointerId;
+        lastCamX = e.clientX;
+        lastCamY = e.clientY;
+      });
+
+      window.addEventListener('pointermove', (e) => {
+        if (e.pointerId !== camPointerId) return;
+        camYaw -= (e.clientX - lastCamX) * 0.0065;
+        camPitch = Math.max(-0.9, Math.min(1.1, camPitch + (e.clientY - lastCamY) * 0.0055));
+        lastCamX = e.clientX;
+        lastCamY = e.clientY;
+      });
+
+      function releaseCamPointer(e) {
+        if (e.pointerId === camPointerId) camPointerId = null;
+      }
+      window.addEventListener('pointerup', releaseCamPointer);
+      window.addEventListener('pointercancel', releaseCamPointer);
+
       const keys = {};
       window.addEventListener('keydown', (e) => {
         if (document.activeElement === renameInput || document.activeElement === chatInput) return;
@@ -2460,38 +2220,17 @@
       });
       window.addEventListener('keyup', (e) => { keys[e.code] = false; });
 
-      // Camera Drag on Canvas only (multi-touch safe)
-      let camYaw = 0.0, camPitch = 0.25, camDrag = false, camPointerId = null, lastCamX = 0, lastCamY = 0;
-      canvas.addEventListener('pointerdown', (e) => {
-        if (camDrag) return;
-        camDrag = true;
-        camPointerId = e.pointerId;
-        lastCamX = e.clientX;
-        lastCamY = e.clientY;
-      });
-      window.addEventListener('pointermove', (e) => {
-        if (!camDrag || e.pointerId !== camPointerId) return;
-        camYaw -= (e.clientX - lastCamX) * 0.0065;
-        camPitch = Math.max(-0.95, Math.min(1.15, camPitch + (e.clientY - lastCamY) * 0.0055));
-        lastCamX = e.clientX;
-        lastCamY = e.clientY;
-      });
-      function stopCamDrag(e) {
-        if (camDrag && e.pointerId === camPointerId) {
-          camDrag = false;
-          camPointerId = null;
-        }
-      }
-      window.addEventListener('pointerup', stopCamDrag);
-      window.addEventListener('pointercancel', stopCamDrag);
-
       window.addEventListener('resize', () => {
         camera.aspect = (window.innerWidth || 1280) / (window.innerHeight || 720);
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth || 1280, window.innerHeight || 720);
       });
 
-      let prevTime = performance.now(), elapsed = 0, hudSync = 0, netSync = 0, saveSync = 0;
+      let prevTime = performance.now();
+      let elapsed = 0;
+      let hudSync = 0;
+      let netSync = 0;
+      let saveSync = 0;
 
       function animate(now) {
         requestAnimationFrame(animate);
@@ -2499,13 +2238,8 @@
         prevTime = now;
         elapsed += dt;
 
-        for (let i = 0; i < clouds.length; i++) {
-          clouds[i].position.x += dt * 0.85;
-          if (clouds[i].position.x > 350) clouds[i].position.x = -350;
-        }
-
-        if (doorPivot) {
-          doorPivot.rotation.y += ((COOP.isOpen ? -Math.PI * 0.62 : 0) - doorPivot.rotation.y) * Math.min(1, dt * 8);
+        if (myRoofParts.doorPivot) {
+          myRoofParts.doorPivot.rotation.y += ((COOP.isOpen ? -Math.PI * 0.62 : 0) - myRoofParts.doorPivot.rotation.y) * Math.min(1, dt * 8);
         }
 
         if (gameState.activeFeedPile) {
@@ -2515,28 +2249,13 @@
         if (gameState.activeWaterPile) {
           gameState.activeWaterPile.timer -= dt;
           if (gameState.activeWaterPile.timer <= 0) {
-            if (waterSurface) waterSurface.visible = false;
+            waterSurface.visible = false;
             gameState.activeWaterPile = null;
           }
         }
 
-        for (let i = gameState.eggs.length - 1; i >= 0; i--) {
-          const egg = gameState.eggs[i];
-          egg.timer -= dt;
-          if (egg.timer <= 0) {
-            scene.remove(egg.mesh);
-            gameState.eggs.splice(i, 1);
-            const b = BREEDS.find((br) => br.id === egg.breedId) || BREEDS[0];
-            const chick = new Pigeon(pigeons.length, b, { isChick: true, growth: 5, isInsideCoop: true });
-            chick.group.position.set(myRoofX + egg.lx, ROOF_Y, myRoofZ + egg.lz);
-            chick.targetPos.copy(chick.group.position);
-            pigeons.push(chick);
-            showToast(`فقست بيضة وطلع فرخ (${b.name})!`);
-            saveGameAuto();
-          }
-        }
-
-        let moveForward = -joyY, moveRight = joyX;
+        let moveForward = -joyY;
+        let moveRight = joyX;
         if (keys['KeyW'] || keys['ArrowUp']) moveForward += 1;
         if (keys['KeyS'] || keys['ArrowDown']) moveForward -= 1;
         if (keys['KeyD'] || keys['ArrowRight']) moveRight += 1;
@@ -2549,62 +2268,7 @@
           if (pigeons[i].state === 'FLYING') flyingCount++;
         }
 
-        // Eagle every 60s
-        gameState.eagleCycleTimer += dt;
-        if (gameState.eagleCycleTimer >= 60 && gameState.eagleActiveTimer <= 0) {
-          gameState.eagleCycleTimer = 0;
-          gameState.eagleActiveTimer = 14;
-          eagleGroup.visible = true;
-          showToast('نسر ظهر في السماء!');
-        }
-        if (gameState.eagleActiveTimer > 0) {
-          gameState.eagleActiveTimer -= dt;
-          const eAng = -elapsed * 1.15;
-          eagleGroup.position.set(myRoofX + Math.cos(eAng) * 23, 32 + Math.sin(elapsed * 2) * 2.2, myRoofZ + Math.sin(eAng) * 23);
-          eagleGroup.rotation.y = -eAng + Math.PI;
-          if (gameState.eagleActiveTimer <= 0) eagleGroup.visible = false;
-        }
-
-        // Falcon after 10 minutes of flying
-        if (flyingCount > 0) {
-          gameState.flightElapsed += dt;
-          if (gameState.flightElapsed >= 540 && !gameState.falconWarned) {
-            gameState.falconWarned = true;
-            showToast('تنبيه: شاهين قريب! نزّل طيورك قبل الهجوم.');
-          }
-          if (gameState.flightElapsed >= 600) {
-            gameState.falconActive = true;
-            falconGroup.visible = true;
-            const fAng = elapsed * 0.9;
-            falconGroup.position.set(myRoofX + Math.cos(fAng) * 18, 27 + Math.sin(elapsed * 2.2) * 2.5, myRoofZ + Math.sin(fAng) * 18);
-            falconGroup.rotation.y = -fAng;
-            gameState.falconStrikeTimer += dt;
-            if (gameState.falconStrikeTimer >= 12) {
-              gameState.falconStrikeTimer = 0;
-              const vIdx = pigeons.findIndex((p) => p.state === 'FLYING' && !p.isTamed);
-              if (vIdx !== -1 && pigeons.length > 3) {
-                const victim = pigeons.splice(vIdx, 1)[0];
-                scene.remove(victim.group);
-                showToast(`الشاهين أخذ طير (${victim.getDisplayName()})!`);
-              }
-            }
-          }
-        } else {
-          gameState.flightElapsed = 0;
-          gameState.falconWarned = false;
-          gameState.falconActive = false;
-          gameState.falconStrikeTimer = 0;
-          falconGroup.visible = false;
-        }
-
-        if (gameState.birdCamActive && pigeons.length > 0) {
-          const b = pigeons[gameState.birdCamIndex % pigeons.length];
-          const bPos = b.group.position;
-          const horiz = Math.cos(camPitch * 0.6) * 2.6;
-          const vert = Math.sin(camPitch * 0.6) * 2.6 + 0.65;
-          camera.position.lerp(new THREE.Vector3(bPos.x + Math.sin(camYaw) * horiz, Math.max(0.5, bPos.y + vert), bPos.z + Math.cos(camYaw) * horiz), Math.min(1, dt * 12));
-          camera.lookAt(bPos.x, bPos.y + 0.25, bPos.z);
-        } else if (isFirstPerson) {
+        if (isFirstPerson) {
           camera.position.set(player.group.position.x, player.group.position.y + 1.66, player.group.position.z);
           const horizLook = Math.cos(camPitch) * 12;
           const vertLook = -Math.sin(camPitch) * 12;
@@ -2616,24 +2280,39 @@
         } else {
           const horiz = Math.cos(camPitch) * 6.2;
           const vert = Math.sin(camPitch) * 6.2 + 1.35;
-          camera.position.lerp(new THREE.Vector3(player.group.position.x + Math.sin(camYaw) * horiz, Math.max(ROOF_Y + 0.35, player.group.position.y + vert), player.group.position.z + Math.cos(camYaw) * horiz), Math.min(1, dt * 14));
-          const skyBoost = camPitch < 0 ? (-camPitch) * 14.0 : 0;
-          camera.lookAt(player.group.position.x - Math.sin(camYaw) * skyBoost * 0.45, player.group.position.y + 1.25 + skyBoost, player.group.position.z - Math.cos(camYaw) * skyBoost * 0.45);
+          camera.position.lerp(
+            new THREE.Vector3(
+              player.group.position.x + Math.sin(camYaw) * horiz,
+              Math.max(ROOF_Y + 0.35, player.group.position.y + vert),
+              player.group.position.z + Math.cos(camYaw) * horiz
+            ),
+            Math.min(1, dt * 14)
+          );
+          camera.lookAt(player.group.position.x, player.group.position.y + 1.25, player.group.position.z);
         }
 
         hudSync += dt;
-        if (hudSync >= 0.25) { hudSync = 0; updateHudStats(flyingCount); }
+        if (hudSync >= 0.25) {
+          hudSync = 0;
+          updateHudStats(flyingCount);
+        }
 
         netSync += dt;
-        if (netSync >= 0.1) { netSync = 0; sendOnlineState(flyingCount); }
+        if (netSync >= 0.1) {
+          netSync = 0;
+          sendOnlineState(flyingCount);
+        }
 
         saveSync += dt;
-        if (saveSync >= 12) { saveSync = 0; saveGameAuto(); }
+        if (saveSync >= 12) {
+          saveSync = 0;
+          saveGameAuto();
+        }
 
         renderer.render(scene, camera);
       }
 
-      updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
+      updateHudStats(0);
       requestAnimationFrame(animate);
     }
   </script>

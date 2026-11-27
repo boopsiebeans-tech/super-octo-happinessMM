@@ -34,6 +34,7 @@
       display: block;
       z-index: 1;
       background: #87b5d6;
+      touch-action: none;
     }
 
     .hud-top {
@@ -44,7 +45,7 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 5px;
+      gap: 4px;
       z-index: 120;
       pointer-events: none;
     }
@@ -79,7 +80,7 @@
       justify-content: flex-end;
       align-items: center;
       gap: 3px;
-      max-width: 75%;
+      max-width: 76%;
       pointer-events: auto;
     }
 
@@ -124,84 +125,95 @@
       color: #fef3c7;
     }
 
+    .hud-btn.birdmarket-btn {
+      background: linear-gradient(155deg, #064e3b 0%, #059669 80%);
+      border-color: #6ee7b7;
+      color: #ecfdf5;
+    }
+
+    .hud-btn.wheel-btn {
+      background: linear-gradient(155deg, #4c1d95 0%, #7c3aed 80%);
+      border-color: #ddd6fe;
+      color: #fff;
+    }
+
+    .hud-btn.visit-btn {
+      background: linear-gradient(155deg, #312e81 0%, #4f46e5 80%);
+      border-color: #a5b4fc;
+      color: #fff;
+    }
+
     #chat-toggle-btn {
       position: fixed;
-      top: 50px;
+      top: 48px;
       left: 6px;
       z-index: 130;
       background: rgba(14, 14, 18, 0.9);
       border: 1px solid #38bdf8;
       color: #e0f2fe;
       font-family: 'Cairo', sans-serif;
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 800;
-      padding: 2px 8px;
-      border-radius: 7px;
+      padding: 2px 7px;
+      border-radius: 6px;
       cursor: pointer;
     }
 
-    #online-chat-box {
+    #chat-panel {
       position: fixed;
-      top: 74px;
+      top: 70px;
       left: 6px;
-      width: 205px;
+      width: 196px;
+      max-width: 56vw;
+      z-index: 135;
       display: none;
       flex-direction: column;
-      gap: 4px;
-      z-index: 135;
-      background: rgba(14, 14, 18, 0.92);
-      border: 1px solid rgba(56, 189, 248, 0.7);
-      border-radius: 8px;
-      padding: 5px;
+      gap: 3px;
+      pointer-events: auto;
     }
 
     #chat-messages {
-      max-height: 70px;
+      max-height: 76px;
       overflow-y: auto;
+      background: rgba(12, 12, 18, 0.86);
+      border: 1px solid rgba(56, 189, 248, 0.55);
+      border-radius: 8px;
+      padding: 4px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .chat-line {
       font-size: 8.5px;
-      color: #f1f5f9;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+      line-height: 1.3;
+      color: #f3f4f6;
+      word-break: break-word;
     }
 
-    .chat-row {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 2px 5px;
-      border-radius: 4px;
-    }
-
-    .visit-mini-btn {
-      align-self: flex-start;
-      background: #0284c7;
-      border: none;
-      color: #fff;
-      font-family: 'Cairo', sans-serif;
-      font-size: 8px;
+    .chat-author {
+      color: #38bdf8;
       font-weight: 800;
-      padding: 1px 5px;
-      border-radius: 4px;
-      cursor: pointer;
     }
 
-    .chat-input-wrap {
+    #online-chat-bar {
       display: flex;
+      align-items: center;
       gap: 3px;
+      background: rgba(14, 14, 18, 0.92);
+      border: 1px solid rgba(56, 189, 248, 0.65);
+      border-radius: 7px;
+      padding: 2px 5px;
     }
 
     #online-chat-input {
       flex: 1;
       min-width: 0;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 5px;
-      padding: 2px 5px;
+      background: transparent;
+      border: none;
       color: #fff;
       font-family: 'Cairo', sans-serif;
-      font-size: 9px;
+      font-size: 8.5px;
       outline: none;
     }
 
@@ -210,79 +222,94 @@
       border: none;
       color: #fff;
       font-family: 'Cairo', sans-serif;
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 800;
       padding: 2px 6px;
       border-radius: 5px;
       cursor: pointer;
     }
 
-    #visit-prompt {
+    #visit-request-banner {
       position: fixed;
-      top: 82px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(15, 23, 42, 0.96);
-      border: 1.5px solid #38bdf8;
-      border-radius: 9px;
-      padding: 5px 9px;
-      z-index: 180;
+      top: 76px;
+      right: 8px;
+      background: rgba(17, 17, 25, 0.96);
+      border: 1.5px solid #818cf8;
+      border-radius: 10px;
+      padding: 6px 9px;
+      z-index: 165;
       display: none;
-      align-items: center;
-      gap: 6px;
-      color: #fff;
+      flex-direction: column;
+      gap: 4px;
+      max-width: 240px;
+    }
+
+    #visit-request-text {
+      color: #e0e7ff;
       font-size: 9.5px;
       font-weight: 800;
     }
 
+    .visit-req-actions {
+      display: flex;
+      gap: 5px;
+    }
+
     #toast-msg {
       position: fixed;
-      top: 52px;
+      top: 50px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(15, 15, 20, 0.94);
+      background: rgba(15, 15, 20, 0.95);
       border: 1px solid #facc15;
       color: #fef08a;
       font-size: 9.5px;
       font-weight: 800;
-      padding: 3px 10px;
-      border-radius: 12px;
+      padding: 3px 11px;
+      border-radius: 14px;
       z-index: 150;
       pointer-events: none;
       opacity: 0;
       transition: opacity 0.2s ease;
-      max-width: 88vw;
+      max-width: 90vw;
       text-align: center;
     }
 
     #held-bird-bar {
       position: fixed;
-      bottom: 108px;
+      bottom: 104px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(14, 14, 18, 0.94);
-      border: 1px solid #dc2626;
-      border-radius: 9px;
-      padding: 4px 7px;
+      background: rgba(14, 14, 18, 0.95);
+      border: 1.2px solid #dc2626;
+      border-radius: 10px;
+      padding: 5px 8px;
       display: none;
       flex-direction: column;
       align-items: center;
       gap: 3px;
       z-index: 140;
-      max-width: 94vw;
+      max-width: 95vw;
     }
 
     #held-bird-title {
       color: #fca5a5;
-      font-size: 9px;
+      font-size: 9.5px;
       font-weight: 800;
+    }
+
+    #held-bird-info {
+      color: #fde68a;
+      font-size: 8.5px;
+      font-weight: 700;
+      text-align: center;
     }
 
     .held-actions {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 3px;
+      gap: 4px;
     }
 
     .held-act-btn {
@@ -293,7 +320,7 @@
       font-size: 8.5px;
       font-weight: 800;
       padding: 2px 6px;
-      border-radius: 5px;
+      border-radius: 6px;
       cursor: pointer;
     }
 
@@ -304,8 +331,8 @@
       width: 78px;
       height: 78px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(20, 20, 24, 0.45) 0%, rgba(127, 29, 29, 0.48) 100%);
-      border: 1.5px solid rgba(220, 38, 38, 0.8);
+      background: radial-gradient(circle, rgba(20, 20, 24, 0.5) 0%, rgba(127, 29, 29, 0.5) 100%);
+      border: 1.5px solid rgba(220, 38, 38, 0.85);
       z-index: 120;
       touch-action: none;
     }
@@ -329,7 +356,7 @@
       right: 6px;
       bottom: 8px;
       display: grid;
-      grid-template-columns: repeat(2, minmax(66px, auto));
+      grid-template-columns: repeat(2, minmax(72px, auto));
       gap: 3px;
       z-index: 120;
       pointer-events: auto;
@@ -337,7 +364,7 @@
     }
 
     .act-btn {
-      min-width: 66px;
+      min-width: 72px;
       height: 24px;
       padding: 1px 5px;
       border-radius: 6px;
@@ -376,7 +403,7 @@
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(8, 8, 12, 0.84);
+      background: rgba(8, 8, 12, 0.85);
       backdrop-filter: blur(4px);
       display: none;
       align-items: center;
@@ -387,8 +414,8 @@
 
     .market-card {
       width: 100%;
-      max-width: 460px;
-      max-height: 84vh;
+      max-width: 470px;
+      max-height: 85vh;
       background: linear-gradient(165deg, #121217 0%, #26090c 100%);
       border: 1.5px solid #dc2626;
       border-radius: 13px;
@@ -409,7 +436,7 @@
     }
 
     .market-title {
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 900;
       color: #f87171;
     }
@@ -425,7 +452,7 @@
       border: 1px solid #fca5a5;
       color: #fff;
       font-family: 'Cairo', sans-serif;
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 800;
       padding: 2px 8px;
       border-radius: 6px;
@@ -446,7 +473,7 @@
       border: 1px solid rgba(255, 255, 255, 0.16);
       color: #e5e7eb;
       font-family: 'Cairo', sans-serif;
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 800;
       padding: 3px 8px;
       border-radius: 6px;
@@ -476,11 +503,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
     }
 
     .shop-info h4 {
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 800;
       color: #f9fafb;
     }
@@ -496,7 +523,7 @@
       border: 1px solid #fbbf24;
       color: #fff;
       font-family: 'Cairo', sans-serif;
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 800;
       padding: 3px 7px;
       border-radius: 6px;
@@ -514,7 +541,7 @@
       border-color: #93c5fd;
     }
 
-    .rename-input {
+    .field-input {
       width: 100%;
       padding: 6px 8px;
       border-radius: 7px;
@@ -522,10 +549,50 @@
       background: #18181b;
       color: #fff;
       font-family: 'Cairo', sans-serif;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
       text-align: center;
       outline: none;
+    }
+
+    .wheel-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 6px;
+    }
+
+    .wheel-disc {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 3px solid #facc15;
+      background: conic-gradient(
+        #dc2626 0deg 72deg,
+        #0284c7 72deg 144deg,
+        #059669 144deg 216deg,
+        #d97706 216deg 288deg,
+        #7c3aed 288deg 360deg
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 2.2s cubic-bezier(0.18, 0.85, 0.25, 1);
+    }
+
+    .wheel-center {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #111827;
+      border: 2px solid #fef08a;
+      color: #fef08a;
+      font-size: 9px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   </style>
 </head>
@@ -534,7 +601,7 @@
 
   <div class="hud-top">
     <div class="brand-badge">
-      <div class="brand-title">PIGEON KINGDOM ONLINE</div>
+      <div class="brand-title">PIGEON KINGDOM</div>
       <div class="brand-sub" id="hud-skin-label">سطح #1 • مطيرجي بغدادي</div>
     </div>
 
@@ -543,9 +610,12 @@
       <div class="hud-pill gold">الرصيد: <span id="stat-coins">250</span> د.ع</div>
       <div class="hud-pill">السرب: <span id="stat-flying">0</span>/<span id="stat-total">12</span></div>
       <div class="hud-pill">علف: <span id="stat-feed">5</span> | ماي: <span id="stat-water">3</span></div>
-      <div class="hud-pill">الباب: <span id="stat-door">مغلق</span></div>
-      <button id="btn-visit-roof" class="hud-btn" type="button">زيارة سطح</button>
-      <button id="btn-leaderboard" class="hud-btn" type="button">الترتيب</button>
+      <div class="hud-pill">تمن: <span id="stat-taman">0</span> | جوكر: <span id="stat-joker">0</span></div>
+      <button id="btn-visit" class="hud-btn visit-btn" type="button">زيارة سطح</button>
+      <button id="btn-return-home" class="hud-btn visit-btn" type="button" style="display:none;">رجوع لسطحي</button>
+      <button id="btn-kick-visitor" class="hud-btn" type="button" style="display:none;">طرد زائر</button>
+      <button id="btn-wheel" class="hud-btn wheel-btn" type="button">عجلة الحظ</button>
+      <button id="btn-bird-market" class="hud-btn birdmarket-btn" type="button">سوق الطيور</button>
       <button id="btn-market" class="hud-btn market-btn" type="button">السوق</button>
       <button id="btn-view" class="hud-btn" type="button">منظور: ثالث</button>
     </div>
@@ -553,29 +623,35 @@
 
   <button id="chat-toggle-btn" type="button">الدردشة ▾</button>
 
-  <div id="online-chat-box">
-    <div id="chat-messages"></div>
-    <div class="chat-input-wrap">
-      <input id="online-chat-input" type="text" maxlength="80" placeholder="اكتب رسالة..." />
+  <div id="chat-panel">
+    <div id="chat-messages">
+      <div class="chat-line"><span class="chat-author">النظام:</span> أهلاً بك في مملكة الحمام!</div>
+    </div>
+    <div id="online-chat-bar">
+      <input id="online-chat-input" type="text" maxlength="90" placeholder="اكتب رسالة..." />
       <button id="online-chat-send" type="button">إرسال</button>
     </div>
   </div>
 
-  <div id="visit-prompt">
-    <span id="visit-prompt-text">طلب زيارة سطح</span>
-    <button id="btn-visit-accept" class="buy-btn sell-btn" type="button">قبول</button>
-    <button id="btn-visit-decline" class="buy-btn" type="button">رفض</button>
+  <div id="visit-request-banner">
+    <div id="visit-request-text">لاعب يطلب زيارة سطحك</div>
+    <div class="visit-req-actions">
+      <button id="btn-accept-visit" class="buy-btn sell-btn" type="button">موافقة</button>
+      <button id="btn-reject-visit" class="buy-btn" type="button">رفض</button>
+    </div>
   </div>
 
   <div id="toast-msg"></div>
 
   <div id="held-bird-bar">
-    <div id="held-bird-title">ماسك طير</div>
+    <div id="held-bird-title">طير: زاجل</div>
+    <div id="held-bird-info">النوع: زاجل • الحالة: ممسوك • النمو: 100%</div>
     <div class="held-actions">
       <button id="btn-put-ground" class="held-act-btn" type="button">حطّه بالكاع</button>
       <button id="btn-release-fly" class="held-act-btn" type="button">طيّره بالسماء</button>
       <button id="btn-tame-shoulder" class="held-act-btn" type="button">أليف عل جتف</button>
       <button id="btn-rename-bird" class="held-act-btn" type="button">تسمية</button>
+      <button id="btn-list-bird" class="held-act-btn" type="button">عرض بسوق الطيور</button>
     </div>
   </div>
 
@@ -584,62 +660,111 @@
   </div>
 
   <div class="action-cluster">
-    <button id="btn-launch" class="act-btn" type="button">إقلاع</button>
-    <button id="btn-land" class="act-btn" type="button">نزول</button>
-    <button id="btn-exit-all" class="act-btn" type="button">إخراج الكل</button>
-    <button id="btn-door" class="act-btn" type="button">باب القفص</button>
+    <button id="btn-launch" class="act-btn" type="button">إقلاع طيور</button>
+    <button id="btn-land" class="act-btn" type="button">نزول الطيور</button>
+    <button id="btn-exit-all" class="act-btn" type="button">خروج الكل</button>
+    <button id="btn-enter-all" class="act-btn" type="button">إدخال الكل</button>
     <button id="btn-feed" class="act-btn feed-btn" type="button">ذب علف</button>
     <button id="btn-water" class="act-btn water-btn" type="button">سقي ماي</button>
-    <button id="btn-grab" class="act-btn grab-btn" type="button">لزم طير</button>
+    <button id="btn-grab" class="act-btn grab-btn" type="button">لزم / مواصفات</button>
     <button id="btn-jump" class="act-btn" type="button">قفز</button>
   </div>
 
+  <!-- Launch Coop Selector Modal -->
+  <div id="launch-modal" class="modal-overlay">
+    <div class="market-card" style="max-width: 340px;">
+      <div class="market-header">
+        <div class="market-title">اختر القفص للإقلاع</div>
+        <button id="btn-close-launch" class="close-market" type="button">إغلاق</button>
+      </div>
+      <div class="market-body" id="launch-coop-options"></div>
+    </div>
+  </div>
+
+  <!-- Wheel Modal -->
+  <div id="wheel-modal" class="modal-overlay">
+    <div class="market-card" style="max-width: 340px;">
+      <div class="market-header">
+        <div class="market-title">عجلة الحظ</div>
+        <button id="btn-close-wheel" class="close-market" type="button">إغلاق</button>
+      </div>
+      <div class="market-body wheel-box">
+        <div id="wheel-disc" class="wheel-disc">
+          <div class="wheel-center">الحظ</div>
+        </div>
+        <div id="wheel-result" style="font-size:10px;color:#fde68a;text-align:center;">
+          الجوائز: تمن • جوكر • ماي • طير • 500 فلوس
+        </div>
+        <button id="btn-spin-wheel" class="buy-btn sell-btn" style="width:100%;padding:6px;" type="button">لف العجلة</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Player-to-Player Bird Market Modal -->
+  <div id="bird-market-modal" class="modal-overlay">
+    <div class="market-card">
+      <div class="market-header">
+        <div class="market-title">سوق الطيور (بيع وشراء بين اللاعبين)</div>
+        <button id="btn-close-bird-market" class="close-market" type="button">إغلاق</button>
+      </div>
+      <div class="market-body" id="bird-market-list"></div>
+    </div>
+  </div>
+
+  <!-- List Bird For Sale Modal -->
+  <div id="list-bird-modal" class="modal-overlay">
+    <div class="market-card" style="max-width: 340px;">
+      <div class="market-header">
+        <div class="market-title">عرض الطير في سوق الطيور</div>
+        <button id="btn-close-list-bird" class="close-market" type="button">إلغاء</button>
+      </div>
+      <div class="market-body">
+        <div id="list-bird-preview" style="font-size:9.5px;color:#fde68a;"></div>
+        <input id="list-bird-price" class="field-input" type="number" min="10" max="50000" value="120" placeholder="سعر الطير بالدينار..." />
+        <button id="btn-confirm-list-bird" class="buy-btn sell-btn" style="width:100%;padding:6px;" type="button">نشر في سوق الطيور</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Market Modal -->
   <div id="market-modal" class="modal-overlay">
     <div class="market-card">
       <div class="market-header">
-        <div class="market-title">سوق الغزل والملابس والأعلاف</div>
+        <div class="market-title">سوق السطح والقفص والحمام</div>
         <div class="market-balance">رصيدك: <span id="market-coins">250</span> د.ع</div>
         <button id="btn-close-market" class="close-market" type="button">إغلاق</button>
       </div>
       <div class="market-tabs">
-        <button class="tab-btn active" data-tab="birds" type="button">بيع وشراء الحمام</button>
-        <button class="tab-btn" data-tab="feed" type="button">الأعلاف والماي</button>
-        <button class="tab-btn" data-tab="skins" type="button">سكنات المطيرجية</button>
-        <button class="tab-btn" data-tab="coop" type="button">أقفاص وأدوية</button>
+        <button class="tab-btn active" data-tab="birds" type="button">شراء حمام (سلالة)</button>
+        <button class="tab-btn" data-tab="upgrades" type="button">سطح وقفص وعش</button>
+        <button class="tab-btn" data-tab="feed" type="button">علف وماي</button>
+        <button class="tab-btn" data-tab="skins" type="button">السكنات</button>
       </div>
       <div class="market-body" id="market-items-list"></div>
     </div>
   </div>
 
-  <div id="leaderboard-modal" class="modal-overlay">
-    <div class="market-card" style="max-width: 380px;">
-      <div class="market-header">
-        <div class="market-title">ترتيب اللاعبين أونلاين</div>
-        <button id="btn-close-leaderboard" class="close-market" type="button">إغلاق</button>
-      </div>
-      <div class="market-body" id="leaderboard-list"></div>
-    </div>
-  </div>
-
+  <!-- Visit Rooftop Modal -->
   <div id="visit-modal" class="modal-overlay">
-    <div class="market-card" style="max-width: 380px;">
+    <div class="market-card" style="max-width: 390px;">
       <div class="market-header">
-        <div class="market-title">زيارة أسطح اللاعبين</div>
+        <div class="market-title">زيارة سطح لاعب آخر</div>
         <button id="btn-close-visit" class="close-market" type="button">إغلاق</button>
       </div>
       <div class="market-body" id="visit-players-list"></div>
     </div>
   </div>
 
+  <!-- Rename Pigeon Modal -->
   <div id="rename-modal" class="modal-overlay">
-    <div class="market-card" style="max-width: 320px;">
+    <div class="market-card" style="max-width: 330px;">
       <div class="market-header">
         <div class="market-title">تسمية الطير</div>
         <button id="btn-close-rename" class="close-market" type="button">إلغاء</button>
       </div>
       <div class="market-body">
-        <input id="rename-input" class="rename-input" type="text" maxlength="18" placeholder="اسم الطير..." />
-        <button id="btn-save-rename" class="buy-btn" style="width:100%; padding:6px;" type="button">حفظ الاسم</button>
+        <input id="rename-input" class="field-input" type="text" maxlength="18" placeholder="اكتب اسم الطير..." />
+        <button id="btn-save-rename" class="buy-btn" style="width:100%;padding:6px;" type="button">حفظ الاسم</button>
       </div>
     </div>
   </div>
@@ -650,10 +775,7 @@
         if (!window.THREE) return;
         initPigeonKingdomOnline();
       }
-      if (window.THREE) {
-        bootGame();
-        return;
-      }
+      if (window.THREE) { bootGame(); return; }
       const s1 = document.createElement('script');
       s1.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
       s1.onload = bootGame;
@@ -667,14 +789,14 @@
     })();
 
     function initPigeonKingdomOnline() {
-      const SAVE_KEY = 'pigeon_kingdom_online_v3';
+      const SAVE_KEY = 'pigeon_kingdom_online_v4';
       const SERVER_URL = 'wss://super-octo-happinessmm-production.up.railway.app';
       const canvas = document.getElementById('game-canvas');
       const SKY_COLOR = 0x87b5d6;
 
       const scene = new THREE.Scene();
       scene.background = new THREE.Color(SKY_COLOR);
-      scene.fog = new THREE.FogExp2(SKY_COLOR, 0.0012);
+      scene.fog = new THREE.FogExp2(SKY_COLOR, 0.0011);
 
       const camera = new THREE.PerspectiveCamera(
         56,
@@ -690,10 +812,9 @@
         renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: false });
       }
       renderer.setClearColor(SKY_COLOR, 1);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.65));
       renderer.setSize(window.innerWidth || 1280, window.innerHeight || 720);
       renderer.shadowMap.enabled = true;
-      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       renderer.render(scene, camera);
 
       const toastEl = document.getElementById('toast-msg');
@@ -702,143 +823,90 @@
         toastEl.textContent = text;
         toastEl.style.opacity = '1';
         clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => {
-          toastEl.style.opacity = '0';
-        }, 3000);
+        toastTimer = setTimeout(() => { toastEl.style.opacity = '0'; }, 3000);
       }
 
       const BREEDS = [
-        {
-          id: 'zajil',
-          name: 'زاجل',
-          price: 75,
-          sellPrice: 50,
-          body: 0x64748b,
-          wing: 0x334155,
-          neck: 0x0f766e,
-          eye: 0xf97316,
-          speed: 12.8,
-          info: 'سريع جداً بالتحليق لمسافات بعيدة ودقيق بالعودة للسطح.'
-        },
-        {
-          id: 'ahmar',
-          name: 'أحمر',
-          price: 85,
-          sellPrice: 55,
-          body: 0x991b1b,
-          wing: 0x7f1d1d,
-          neck: 0xb45309,
-          eye: 0xfacc15,
-          speed: 11.9,
-          info: 'ريش قرمزي متين وقوة تحمل عالية في الجو.'
-        },
-        {
-          id: 'lawat',
-          name: 'لوات',
-          price: 95,
-          sellPrice: 65,
-          body: 0x1e293b,
-          wing: 0xf8fafc,
-          neck: 0x0f172a,
-          eye: 0x38bdf8,
-          speed: 12.3,
-          info: 'مناوراته الجوية رشيقة ويستجيب بسرعة للصفارة.'
-        },
-        {
-          id: 'arafel',
-          name: 'أرافل',
-          price: 90,
-          sellPrice: 60,
-          body: 0xb45309,
-          wing: 0xfef3c7,
-          neck: 0x78350f,
-          eye: 0xfacc15,
-          speed: 11.7,
-          info: 'ألوان حنطية مميزة وهادئ على أرض السطح والقفص.'
-        },
-        {
-          id: 'abyad',
-          name: 'أبيض صافي',
-          price: 80,
-          sellPrice: 52,
-          body: 0xf8fafc,
-          wing: 0xe2e8f0,
-          neck: 0xffffff,
-          eye: 0x111827,
-          speed: 11.3,
-          info: 'واضح في السماء ومحبوب في أسراب الاستعراض.'
-        }
+        { id: 'zajil', name: 'زاجل', price: 75, sellPrice: 50, body: 0x64748b, wing: 0x334155, neck: 0x0f766e, eye: 0xf97316, speed: 12.8, spec: 'تحليق سريع وعودة دقيقة' },
+        { id: 'arafel', name: 'أرافل', price: 90, sellPrice: 60, body: 0xb45309, wing: 0xfef3c7, neck: 0x78350f, eye: 0xfacc15, speed: 11.9, spec: 'لون حنطي مميز وثبات عالٍ' },
+        { id: 'ahmar', name: 'أحمر', price: 85, sellPrice: 55, body: 0x991b1b, wing: 0x7f1d1d, neck: 0xb45309, eye: 0xfacc15, speed: 12.1, spec: 'ريش أحمر متين وتحمل جيد' },
+        { id: 'lawat', name: 'لوات', price: 95, sellPrice: 65, body: 0x1e293b, wing: 0xf8fafc, neck: 0x0f172a, eye: 0x38bdf8, speed: 12.4, spec: 'مناورات رشيقة في الجو' },
+        { id: 'abyad', name: 'أبيض صافي', price: 80, sellPrice: 52, body: 0xf8fafc, wing: 0xe2e8f0, neck: 0xffffff, eye: 0x111827, speed: 11.4, spec: 'واضح بالسماء ومحبوب بالأسراب' }
       ];
 
       const FEED_TYPES = {
         qamh: { id: 'qamh', name: 'قمح', price: 30, qty: 5, desc: 'علف قمح لتجميع الحمام وتسريع نمو الأفراخ' },
-        adas: { id: 'adas', name: 'عدس', price: 45, qty: 5, desc: 'بروتين عالي يسرّع نمو الأفراخ الصغار' },
-        taman: { id: 'taman', name: 'تمن عنبر', price: 65, qty: 5, desc: 'غذاء فاخر يرفع صحة السرب ونشاطه' },
-        mashboosh: { id: 'mashboosh', name: 'حنطة مشبوش 😂', price: 85, qty: 5, desc: 'خلطة مشبوش تخلي الحمام يطير بقوة' }
+        taman: { id: 'taman', name: 'تمن عنبر', price: 65, qty: 5, desc: 'تمن فاخر يزيد نشاط السرب' }
       };
 
       const WATER_TYPES = {
-        bori: { id: 'bori', name: 'ماي بوري', price: 20, qty: 5, color: 0x38bdf8, desc: 'ماي بوري يروي عطش الطيور' },
-        helo: { id: 'helo', name: 'ماي حلو', price: 40, qty: 5, color: 0x0ea5e9, desc: 'ماي حلو نقي يزيد نشاط السرب' },
-        zamzam: { id: 'zamzam', name: 'ماي زمزم', price: 75, qty: 5, color: 0x67e8f9, desc: 'ماي زمزم يرفع صحة السرب' }
+        bori: { id: 'bori', name: 'ماي بوري', price: 20, qty: 5, color: 0x38bdf8, desc: 'ماي بوري يروي الطيور على السطح' }
       };
 
       const SKINS = [
-        { id: 'baghdadi', name: 'مطيرجي بغدادي', price: 0, desc: 'دشداشة بيضاء + سترة قرمزية + عرقجين وعقال' },
-        { id: 'fanila', name: 'أبو الفانيلة واللباس', price: 90, desc: 'فانيلة علاگة بيضاء + لباس بيتي' },
-        { id: 'basrawi', name: 'مطيرجي بصراوي', price: 140, desc: 'دشداشة كحلية + يشماغ أحمر وأبيض' },
-        { id: 'champion', name: 'بطل السطوح الذهبي', price: 210, desc: 'سترة سوداء وحمراء فاخرة' }
+        { id: 'baghdadi', name: 'مطيرجي بغدادي', price: 0, desc: 'دشداشة بيضاء + سترة قرمزية + عقال' },
+        { id: 'basrawi', name: 'مطيرجي بصراوي', price: 140, desc: 'دشداشة كحلية + يشماغ وعقال' },
+        { id: 'champion', name: 'بطل السطوح', price: 210, desc: 'سترة سوداء وحمراء فاخرة' }
       ];
 
       const ROOF_Y = 12.0;
-      const ROOF_HALF = 12.0;
-
       let mySlot = 1;
-      let homeRoofX = 0;
-      let homeRoofZ = 0;
-      let currentRoofX = 0;
-      let currentRoofZ = 0;
-      let visitingHostName = null;
+      let myRoofX = 0;
+      let myRoofZ = 0;
       let onlineCount = 1;
-      let leaderboardData = [];
-      let pendingVisitRequest = null;
+      let pendingVisitRequester = null;
+      let currentVisitorId = null;
+      let visitingTarget = null;
+      let marketListings = [];
 
       const gameState = {
         coins: 250,
-        feeds: { qamh: 5, adas: 0, taman: 0, mashboosh: 0 },
-        waters: { bori: 3, helo: 0, zamzam: 0 },
-        flockHealth: 100,
+        lastLaunchRewardTime: 0,
+        feeds: { qamh: 5, taman: 0 },
+        waters: { bori: 3 },
+        jokers: 0,
+        nests: 0,
+        roofExpandLevel: 0, // each level adds +4m size
+        coopExpandLevel: 0, // each level adds +1.4m size
+        hasSecondCoop: false,
         ownedSkins: ['baghdadi'],
         currentSkin: 'baghdadi',
         heldPigeon: null,
         tamedPigeonId: null,
         activeFeedPile: null,
-        activeWaterPile: null,
-        lastFlightRewardTime: 0
+        activeWaterPile: null
       };
 
-      const pigeons = [];
-      let player = null;
-
-      function getTotalFeed() {
-        return (gameState.feeds.qamh || 0) + (gameState.feeds.adas || 0) + (gameState.feeds.taman || 0) + (gameState.feeds.mashboosh || 0);
+      function getRoofHalf() {
+        return 12.0 + gameState.roofExpandLevel * 2.0;
       }
 
-      function getTotalWater() {
-        return (gameState.waters.bori || 0) + (gameState.waters.helo || 0) + (gameState.waters.zamzam || 0);
+      function getCoop1Metrics() {
+        return {
+          x: 2.0,
+          z: -4.2,
+          w: 7.0 + gameState.coopExpandLevel * 1.4,
+          d: 5.5 + gameState.coopExpandLevel * 1.1,
+          h: 3.2
+        };
       }
 
-      function updateHudStats(flyingCount = 0) {
-        document.getElementById('stat-online').textContent = onlineCount;
-        document.getElementById('stat-coins').textContent = Math.floor(gameState.coins);
-        document.getElementById('market-coins').textContent = Math.floor(gameState.coins);
-        document.getElementById('stat-feed').textContent = getTotalFeed();
-        document.getElementById('stat-water').textContent = getTotalWater();
-        document.getElementById('stat-flying').textContent = flyingCount;
-        document.getElementById('stat-total').textContent = pigeons.length;
-        const skinObj = SKINS.find((s) => s.id === gameState.currentSkin) || SKINS[0];
-        const roofLabel = visitingHostName ? `زيارة سطح ${visitingHostName}` : `سطح #${mySlot}`;
-        document.getElementById('hud-skin-label').textContent = `${roofLabel} • ${skinObj.name}`;
+      function getCoop2Metrics() {
+        return {
+          x: -5.2,
+          z: -4.8,
+          w: 7.2,
+          d: 5.6,
+          h: 3.3
+        };
+      }
+
+      function getActiveWorldRoofX() {
+        return visitingTarget ? visitingTarget.roofX : myRoofX;
+      }
+
+      function getActiveWorldRoofZ() {
+        return visitingTarget ? visitingTarget.roofZ : myRoofZ;
       }
 
       const hemiLight = new THREE.HemisphereLight(0xf0f9ff, 0x786c5e, 0.9);
@@ -850,66 +918,24 @@
       dirLight.castShadow = true;
       scene.add(dirLight);
 
-      function createRoofTileTexture() {
-        const c = document.createElement('canvas');
-        c.width = 256; c.height = 256;
-        const ctx = c.getContext('2d');
-        ctx.fillStyle = '#c49a6c'; ctx.fillRect(0, 0, 256, 256);
-        ctx.strokeStyle = '#9c754b'; ctx.lineWidth = 3;
-        for (let i = 0; i <= 256; i += 64) {
-          ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 256); ctx.stroke();
-          ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(256, i); ctx.stroke();
-        }
-        const tex = new THREE.CanvasTexture(c);
-        tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-        tex.repeat.set(9, 9);
-        return tex;
-      }
+      const groundMesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(2600, 2600),
+        new THREE.MeshStandardMaterial({ color: 0x57534e, roughness: 0.92 })
+      );
+      groundMesh.rotation.x = -Math.PI / 2;
+      groundMesh.receiveShadow = true;
+      scene.add(groundMesh);
 
-      function createBrickTexture() {
+      function createBirdLabelSprite(text, isTamed) {
         const c = document.createElement('canvas');
-        c.width = 256; c.height = 256;
+        c.width = 320;
+        c.height = 76;
         const ctx = c.getContext('2d');
-        ctx.fillStyle = '#b88b5a'; ctx.fillRect(0, 0, 256, 256);
-        ctx.fillStyle = '#a47748';
-        for (let y = 0; y < 256; y += 32) {
-          const offset = (y / 32) % 2 === 0 ? 0 : 32;
-          for (let x = -32; x < 256; x += 64) {
-            ctx.fillRect(x + offset + 2, y + 2, 60, 28);
-          }
-        }
-        const tex = new THREE.CanvasTexture(c);
-        tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-        tex.repeat.set(4, 3);
-        return tex;
-      }
-
-      function createWireMeshTexture() {
-        const c = document.createElement('canvas');
-        c.width = 128; c.height = 128;
-        const ctx = c.getContext('2d');
-        ctx.clearRect(0, 0, 128, 128);
-        ctx.strokeStyle = 'rgba(40, 40, 46, 0.72)';
-        ctx.lineWidth = 2;
-        for (let i = -128; i < 256; i += 16) {
-          ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i + 128, 128); ctx.stroke();
-          ctx.beginPath(); ctx.moveTo(i + 128, 0); ctx.lineTo(i, 128); ctx.stroke();
-        }
-        const tex = new THREE.CanvasTexture(c);
-        tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-        tex.repeat.set(6, 4);
-        return tex;
-      }
-
-      function createNameSprite(text, bgColor = 'rgba(15, 15, 22, 0.84)', borderColor = '#ef4444') {
-        const c = document.createElement('canvas');
-        c.width = 320; c.height = 76;
-        const ctx = c.getContext('2d');
-        ctx.fillStyle = bgColor;
+        ctx.fillStyle = isTamed ? 'rgba(6, 78, 59, 0.88)' : 'rgba(15, 15, 22, 0.84)';
         ctx.beginPath();
         ctx.roundRect(14, 10, 292, 54, 18);
         ctx.fill();
-        ctx.strokeStyle = borderColor;
+        ctx.strokeStyle = isTamed ? '#34d399' : '#ef4444';
         ctx.lineWidth = 3;
         ctx.stroke();
         ctx.fillStyle = '#ffffff';
@@ -924,184 +950,118 @@
         return sprite;
       }
 
-      const groundMesh = new THREE.Mesh(
-        new THREE.PlaneGeometry(2400, 2400),
-        new THREE.MeshStandardMaterial({ color: 0x57534e, roughness: 0.92 })
-      );
-      groundMesh.rotation.x = -Math.PI / 2;
-      groundMesh.receiveShadow = true;
-      scene.add(groundMesh);
-
-      const brickMat = new THREE.MeshStandardMaterial({ map: createBrickTexture(), roughness: 0.85 });
-      const tileMat = new THREE.MeshStandardMaterial({ map: createRoofTileTexture(), roughness: 0.8 });
+      const brickMat = new THREE.MeshStandardMaterial({ color: 0xb88b5a, roughness: 0.85 });
+      const tileMat = new THREE.MeshStandardMaterial({ color: 0xc49a6c, roughness: 0.8 });
       const steelMat = new THREE.MeshStandardMaterial({ color: 0xd6ccb8, metalness: 0.3, roughness: 0.45 });
-      const wireMat = new THREE.MeshStandardMaterial({ map: createWireMeshTexture(), transparent: true, side: THREE.DoubleSide });
-
-      const COOP = {
-        x: 2.0,
-        z: -4.2,
-        w: 7.0,
-        d: 5.5,
-        h: 3.2,
-        isOpen: false,
-        doorXStart: -1.35,
-        doorXEnd: 0.25
-      };
-
-      function buildFullRooftopStructure(targetGroup, isOpenRef) {
-        const body = new THREE.Mesh(new THREE.BoxGeometry(24, ROOF_Y, 24), brickMat);
-        body.position.set(0, ROOF_Y / 2, 0);
-        body.receiveShadow = true;
-        targetGroup.add(body);
-
-        const floor = new THREE.Mesh(new THREE.BoxGeometry(24.2, 0.3, 24.2), tileMat);
-        floor.position.set(0, ROOF_Y - 0.12, 0);
-        floor.receiveShadow = true;
-        targetGroup.add(floor);
-
-        const wallH = 1.15;
-        const wallT = 0.45;
-        const nWall = new THREE.Mesh(new THREE.BoxGeometry(24.4, wallH, wallT), brickMat);
-        nWall.position.set(0, ROOF_Y + wallH / 2, -11.8);
-        const sWall = new THREE.Mesh(new THREE.BoxGeometry(24.4, wallH, wallT), brickMat);
-        sWall.position.set(0, ROOF_Y + wallH / 2, 11.8);
-        const eWall = new THREE.Mesh(new THREE.BoxGeometry(wallT, wallH, 24.0), brickMat);
-        eWall.position.set(11.8, ROOF_Y + wallH / 2, 0);
-        const wWall1 = new THREE.Mesh(new THREE.BoxGeometry(wallT, wallH, 16.0), brickMat);
-        wWall1.position.set(-11.8, ROOF_Y + wallH / 2, -4.0);
-        const wWall2 = new THREE.Mesh(new THREE.BoxGeometry(wallT, wallH, 5.0), brickMat);
-        wWall2.position.set(-11.8, ROOF_Y + wallH / 2, 9.5);
-        targetGroup.add(nWall, sWall, eWall, wWall1, wWall2);
-
-        const cg = new THREE.Group();
-        cg.position.set(COOP.x, ROOF_Y, COOP.z);
-        const cRoof = new THREE.Mesh(new THREE.BoxGeometry(COOP.w + 0.5, 0.16, COOP.d + 0.5), steelMat);
-        cRoof.position.set(0, COOP.h + 0.08, 0);
-        const backW = new THREE.Mesh(new THREE.BoxGeometry(COOP.w, COOP.h, 0.14), steelMat);
-        backW.position.set(0, COOP.h / 2, -COOP.d / 2);
-        const lW = new THREE.Mesh(new THREE.PlaneGeometry(COOP.d, COOP.h), wireMat);
-        lW.position.set(-COOP.w / 2, COOP.h / 2, 0);
-        lW.rotation.y = Math.PI / 2;
-        const rW = new THREE.Mesh(new THREE.PlaneGeometry(COOP.d, COOP.h), wireMat);
-        rW.position.set(COOP.w / 2, COOP.h / 2, 0);
-        rW.rotation.y = Math.PI / 2;
-
-        const frontZ = COOP.d / 2;
-        const leftFrontW = COOP.w / 2 + COOP.doorXStart;
-        const leftFront = new THREE.Mesh(new THREE.BoxGeometry(leftFrontW, COOP.h, 0.14), steelMat);
-        leftFront.position.set(-COOP.w / 2 + leftFrontW / 2, COOP.h / 2, frontZ);
-
-        const rightFrontW = COOP.w / 2 - COOP.doorXEnd;
-        const rightFront = new THREE.Mesh(new THREE.BoxGeometry(rightFrontW, COOP.h, 0.14), steelMat);
-        rightFront.position.set(COOP.doorXEnd + rightFrontW / 2, COOP.h / 2, frontZ);
-
-        const doorW = COOP.doorXEnd - COOP.doorXStart;
-        const doorPivot = new THREE.Group();
-        doorPivot.position.set(COOP.doorXStart, 0, frontZ);
-        const doorMesh = new THREE.Mesh(new THREE.BoxGeometry(doorW, 2.2, 0.1), steelMat);
-        doorMesh.position.set(doorW / 2, 1.1, 0);
-        doorPivot.add(doorMesh);
-        doorPivot.rotation.y = isOpenRef ? -Math.PI * 0.62 : 0;
-
-        cg.add(cRoof, backW, lW, rW, leftFront, rightFront, doorPivot);
-        targetGroup.add(cg);
-
-        return { doorPivot };
-      }
+      const coop2SteelMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.4, roughness: 0.4 });
+      const nestMat = new THREE.MeshStandardMaterial({ color: 0x92400e, roughness: 0.9 });
 
       const myHouseGroup = new THREE.Group();
       scene.add(myHouseGroup);
-      const myRoofParts = buildFullRooftopStructure(myHouseGroup, COOP.isOpen);
 
-      const waterBowlGroup = new THREE.Group();
-      waterBowlGroup.position.set(-2.2, ROOF_Y, 2.4);
-      const bowlRim = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.55, 0.45, 0.18, 20),
-        new THREE.MeshStandardMaterial({ color: 0x991b1b, roughness: 0.4 })
-      );
-      bowlRim.position.y = 0.09;
-      const waterSurface = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.49, 0.49, 0.04, 20),
-        new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.15 })
-      );
-      waterSurface.position.y = 0.17;
-      waterSurface.visible = false;
-      waterBowlGroup.add(bowlRim, waterSurface);
-      myHouseGroup.add(waterBowlGroup);
+      let roofFloorMesh = null;
+      let coop1Group = null;
+      let coop2Group = null;
+      let nestsGroup = null;
+      let waterSurface = null;
 
-      function createBirdVisuals(breed, isChick) {
-        const g = new THREE.Group();
-        const bodyMat = new THREE.MeshStandardMaterial({ color: isChick ? 0xfde68a : breed.body, roughness: 0.55 });
-        const wingMat = new THREE.MeshStandardMaterial({ color: isChick ? 0xfcd34d : breed.wing, roughness: 0.5 });
-        const neckMat = new THREE.MeshStandardMaterial({ color: isChick ? 0xfef3c7 : breed.neck, roughness: 0.42, metalness: 0.15 });
-        const legMat = new THREE.MeshStandardMaterial({ color: 0xe11d48, roughness: 0.5 });
-        const clawMat = new THREE.MeshStandardMaterial({ color: 0x18181b, roughness: 0.6 });
-        const eyeMat = new THREE.MeshBasicMaterial({ color: breed.eye });
-        const pupilMat = new THREE.MeshBasicMaterial({ color: 0x09090b });
-        const beakMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.4 });
+      function rebuildMyRooftopVisuals() {
+        while (myHouseGroup.children.length > 0) myHouseGroup.remove(myHouseGroup.children[0]);
+        const half = getRoofHalf();
+        const size = half * 2;
 
-        const torso = new THREE.Mesh(new THREE.SphereGeometry(0.165, 16, 14), bodyMat);
-        torso.scale.set(0.84, 0.9, 1.5);
-        torso.position.set(0, 0.25, 0);
-        g.add(torso);
+        const body = new THREE.Mesh(new THREE.BoxGeometry(size, ROOF_Y, size), brickMat);
+        body.position.set(0, ROOF_Y / 2, 0);
+        body.receiveShadow = true;
+        myHouseGroup.add(body);
 
-        const headGroup = new THREE.Group();
-        headGroup.position.set(0, 0.36, 0.13);
-        g.add(headGroup);
+        roofFloorMesh = new THREE.Mesh(new THREE.BoxGeometry(size + 0.2, 0.3, size + 0.2), tileMat);
+        roofFloorMesh.position.set(0, ROOF_Y - 0.12, 0);
+        roofFloorMesh.receiveShadow = true;
+        myHouseGroup.add(roofFloorMesh);
 
-        const head = new THREE.Mesh(new THREE.SphereGeometry(0.082, 14, 14), neckMat);
-        head.position.set(0, 0.08, 0.04);
-        headGroup.add(head);
+        const wallH = 1.15;
+        const wallT = 0.45;
+        const nWall = new THREE.Mesh(new THREE.BoxGeometry(size + 0.4, wallH, wallT), brickMat);
+        nWall.position.set(0, ROOF_Y + wallH / 2, -half + 0.2);
+        const sWall = new THREE.Mesh(new THREE.BoxGeometry(size + 0.4, wallH, wallT), brickMat);
+        sWall.position.set(0, ROOF_Y + wallH / 2, half - 0.2);
+        const eWall = new THREE.Mesh(new THREE.BoxGeometry(wallT, wallH, size), brickMat);
+        eWall.position.set(half - 0.2, ROOF_Y + wallH / 2, 0);
+        const wWall = new THREE.Mesh(new THREE.BoxGeometry(wallT, wallH, size), brickMat);
+        wWall.position.set(-half + 0.2, ROOF_Y + wallH / 2, 0);
+        myHouseGroup.add(nWall, sWall, eWall, wWall);
 
-        [-1, 1].forEach((side) => {
-          const eye = new THREE.Mesh(new THREE.SphereGeometry(0.022, 10, 10), eyeMat);
-          eye.position.set(side * 0.066, 0.09, 0.062);
-          const pupil = new THREE.Mesh(new THREE.SphereGeometry(0.012, 8, 8), pupilMat);
-          pupil.position.set(side * 0.077, 0.09, 0.066);
-          headGroup.add(eye, pupil);
-        });
+        // Coop 1
+        const c1 = getCoop1Metrics();
+        coop1Group = new THREE.Group();
+        coop1Group.position.set(c1.x, ROOF_Y, c1.z);
+        const c1Roof = new THREE.Mesh(new THREE.BoxGeometry(c1.w + 0.4, 0.16, c1.d + 0.4), steelMat);
+        c1Roof.position.y = c1.h + 0.08;
+        const c1Back = new THREE.Mesh(new THREE.BoxGeometry(c1.w, c1.h, 0.14), steelMat);
+        c1Back.position.set(0, c1.h / 2, -c1.d / 2);
+        const c1Left = new THREE.Mesh(new THREE.BoxGeometry(0.14, c1.h, c1.d), steelMat);
+        c1Left.position.set(-c1.w / 2, c1.h / 2, 0);
+        const c1Right = new THREE.Mesh(new THREE.BoxGeometry(0.14, c1.h, c1.d), steelMat);
+        c1Right.position.set(c1.w / 2, c1.h / 2, 0);
+        const c1FrontL = new THREE.Mesh(new THREE.BoxGeometry(c1.w * 0.42, c1.h, 0.14), steelMat);
+        c1FrontL.position.set(-c1.w * 0.29, c1.h / 2, c1.d / 2);
+        const c1FrontR = new THREE.Mesh(new THREE.BoxGeometry(c1.w * 0.42, c1.h, 0.14), steelMat);
+        c1FrontR.position.set(c1.w * 0.29, c1.h / 2, c1.d / 2);
+        coop1Group.add(c1Roof, c1Back, c1Left, c1Right, c1FrontL, c1FrontR);
+        myHouseGroup.add(coop1Group);
 
-        const beak = new THREE.Mesh(new THREE.ConeGeometry(0.02, 0.084, 8), beakMat);
-        beak.rotation.x = Math.PI / 2 + 0.14;
-        beak.position.set(0, 0.066, 0.15);
-        headGroup.add(beak);
+        // Coop 2 (when bought)
+        if (gameState.hasSecondCoop) {
+          const c2 = getCoop2Metrics();
+          coop2Group = new THREE.Group();
+          coop2Group.position.set(c2.x, ROOF_Y, c2.z);
+          const c2Roof = new THREE.Mesh(new THREE.BoxGeometry(c2.w + 0.5, 0.18, c2.d + 0.5), coop2SteelMat);
+          c2Roof.position.y = c2.h + 0.09;
+          const c2Back = new THREE.Mesh(new THREE.BoxGeometry(c2.w, c2.h, 0.16), coop2SteelMat);
+          c2Back.position.set(0, c2.h / 2, -c2.d / 2);
+          const c2Left = new THREE.Mesh(new THREE.BoxGeometry(0.16, c2.h, c2.d), coop2SteelMat);
+          c2Left.position.set(-c2.w / 2, c2.h / 2, 0);
+          const c2Right = new THREE.Mesh(new THREE.BoxGeometry(0.16, c2.h, c2.d), coop2SteelMat);
+          c2Right.position.set(c2.w / 2, c2.h / 2, 0);
+          const c2FrontL = new THREE.Mesh(new THREE.BoxGeometry(c2.w * 0.42, c2.h, 0.16), coop2SteelMat);
+          c2FrontL.position.set(-c2.w * 0.29, c2.h / 2, c2.d / 2);
+          const c2FrontR = new THREE.Mesh(new THREE.BoxGeometry(c2.w * 0.42, c2.h, 0.16), coop2SteelMat);
+          c2FrontR.position.set(c2.w * 0.29, c2.h / 2, c2.d / 2);
+          coop2Group.add(c2Roof, c2Back, c2Left, c2Right, c2FrontL, c2FrontR);
+          myHouseGroup.add(coop2Group);
+        }
 
-        const tail = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.018, 0.28), wingMat);
-        tail.position.set(0, 0.21, -0.28);
-        g.add(tail);
+        // Nests
+        nestsGroup = new THREE.Group();
+        for (let i = 0; i < gameState.nests; i++) {
+          const nest = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.25, 0.14, 14), nestMat);
+          nest.position.set(c1.x - 1.5 + (i % 4) * 0.9, ROOF_Y + 0.07, c1.z - 0.6 + Math.floor(i / 4) * 0.8);
+          nestsGroup.add(nest);
+        }
+        myHouseGroup.add(nestsGroup);
 
-        const leftLeg = new THREE.Group();
-        leftLeg.position.set(0.056, 0.15, 0.01);
-        const lShin = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.01, 0.15, 6), legMat);
-        lShin.position.y = -0.075;
-        const lFoot = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.014, 0.07), clawMat);
-        lFoot.position.set(0, -0.145, 0.015);
-        leftLeg.add(lShin, lFoot);
+        // Water bowl
+        const bowlRim = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.55, 0.45, 0.18, 20),
+          new THREE.MeshStandardMaterial({ color: 0x991b1b, roughness: 0.4 })
+        );
+        bowlRim.position.set(4.5, ROOF_Y + 0.09, 2.4);
+        waterSurface = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.49, 0.49, 0.04, 20),
+          new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.15 })
+        );
+        waterSurface.position.set(4.5, ROOF_Y + 0.17, 2.4);
+        waterSurface.visible = !!gameState.activeWaterPile;
+        myHouseGroup.add(bowlRim, waterSurface);
 
-        const rightLeg = new THREE.Group();
-        rightLeg.position.set(-0.056, 0.15, 0.01);
-        const rShin = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.01, 0.15, 6), legMat);
-        rShin.position.y = -0.075;
-        const rFoot = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.014, 0.07), clawMat);
-        rFoot.position.set(0, -0.145, 0.015);
-        rightLeg.add(rShin, rFoot);
-        g.add(leftLeg, rightLeg);
-
-        const leftWing = new THREE.Group();
-        leftWing.position.set(0.11, 0.27, 0.03);
-        const lwMesh = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.022, 0.23), wingMat);
-        lwMesh.position.x = 0.12;
-        leftWing.add(lwMesh);
-
-        const rightWing = new THREE.Group();
-        rightWing.position.set(-0.11, 0.27, 0.03);
-        const rwMesh = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.022, 0.23), wingMat);
-        rwMesh.position.x = -0.12;
-        rightWing.add(rwMesh);
-        g.add(leftWing, rightWing);
-
-        return { group: g, leftWing, rightWing };
+        myHouseGroup.position.set(myRoofX, 0, myRoofZ);
       }
+
+      rebuildMyRooftopVisuals();
+
+      const pigeons = [];
+      let player = null;
 
       class Pigeon {
         constructor(index, forcedBreed = null, options = {}) {
@@ -1109,20 +1069,67 @@
           this.breed = forcedBreed || BREEDS[index % BREEDS.length];
           this.customName = options.customName || '';
           this.isChick = !!options.isChick;
+          this.growth = this.isChick ? (typeof options.growth === 'number' ? options.growth : 15) : 100;
           this.isTamed = !!options.isTamed;
+          this.coopId = options.coopId === 2 && gameState.hasSecondCoop ? 2 : 1;
 
-          const vis = createBirdVisuals(this.breed, this.isChick);
-          this.group = vis.group;
-          this.leftWing = vis.leftWing;
-          this.rightWing = vis.rightWing;
+          this.group = new THREE.Group();
+          const bodyMat = new THREE.MeshStandardMaterial({ color: this.isChick ? 0xfde68a : this.breed.body, roughness: 0.52 });
+          const wingMat = new THREE.MeshStandardMaterial({ color: this.isChick ? 0xfcd34d : this.breed.wing, roughness: 0.48 });
+          const neckMat = new THREE.MeshStandardMaterial({ color: this.isChick ? 0xfef3c7 : this.breed.neck, roughness: 0.38 });
+          const legMat = new THREE.MeshStandardMaterial({ color: 0xe11d48, roughness: 0.45 });
+          const beakMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.35 });
 
-          this.nameSprite = null;
-          this.refreshNameLabel();
+          const torso = new THREE.Mesh(new THREE.SphereGeometry(0.16, 16, 14), bodyMat);
+          torso.scale.set(0.86, 0.92, 1.48);
+          torso.position.set(0, 0.24, -0.02);
+          this.group.add(torso);
+
+          const headGroup = new THREE.Group();
+          headGroup.position.set(0, 0.36, 0.14);
+          const head = new THREE.Mesh(new THREE.SphereGeometry(0.078, 14, 14), neckMat);
+          head.position.set(0, 0.085, 0.03);
+          const eyeL = new THREE.Mesh(new THREE.SphereGeometry(0.02, 8, 8), new THREE.MeshBasicMaterial({ color: this.breed.eye }));
+          eyeL.position.set(0.064, 0.095, 0.056);
+          const eyeR = eyeL.clone();
+          eyeR.position.x = -0.064;
+          const beak = new THREE.Mesh(new THREE.ConeGeometry(0.019, 0.082, 8), beakMat);
+          beak.rotation.x = Math.PI / 2 + 0.16;
+          beak.position.set(0, 0.068, 0.145);
+          headGroup.add(head, eyeL, eyeR, beak);
+          this.group.add(headGroup);
+
+          const tail = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.016, 0.28), wingMat);
+          tail.position.set(0, 0.21, -0.29);
+          this.group.add(tail);
+
+          const legL = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.01, 0.14, 8), legMat);
+          legL.position.set(0.056, 0.09, 0.01);
+          const legR = legL.clone();
+          legR.position.x = -0.056;
+          this.group.add(legL, legR);
+
+          this.leftWing = new THREE.Group();
+          this.leftWing.position.set(0.105, 0.27, 0.03);
+          const lwPanel = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.02, 0.2), wingMat);
+          lwPanel.position.x = 0.17;
+          this.leftWing.add(lwPanel);
+
+          this.rightWing = new THREE.Group();
+          this.rightWing.position.set(-0.105, 0.27, 0.03);
+          const rwPanel = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.02, 0.2), wingMat);
+          rwPanel.position.x = -0.17;
+          this.rightWing.add(rwPanel);
+          this.group.add(this.leftWing, this.rightWing);
+
+          this.labelSprite = null;
+          this.refreshLabel();
 
           this.isInsideCoop = options.isInsideCoop !== undefined ? options.isInsideCoop : true;
-          const lx = this.isInsideCoop ? COOP.x + (Math.random() - 0.5) * (COOP.w - 1.4) : -2.0 + (Math.random() - 0.5) * 9.0;
-          const lz = this.isInsideCoop ? COOP.z + (Math.random() - 0.5) * (COOP.d - 1.4) : 3.0 + (Math.random() - 0.5) * 7.0;
-          this.group.position.set(homeRoofX + lx, ROOF_Y, homeRoofZ + lz);
+          const cm = this.coopId === 2 ? getCoop2Metrics() : getCoop1Metrics();
+          const lx = this.isInsideCoop ? cm.x + (Math.random() - 0.5) * (cm.w - 1.4) : 1.0 + (Math.random() - 0.5) * 8.0;
+          const lz = this.isInsideCoop ? cm.z + (Math.random() - 0.5) * (cm.d - 1.4) : 3.2 + (Math.random() - 0.5) * 6.0;
+          this.group.position.set(myRoofX + lx, ROOF_Y, myRoofZ + lz);
           scene.add(this.group);
 
           this.state = 'WALK';
@@ -1133,109 +1140,129 @@
           this.cruiseAlt = 24 + (index % 6) * 2.2;
           this.flapPhase = Math.random() * Math.PI * 2;
           this.idleTimer = Math.random() * 2.0;
-          this.foldWings();
+          this.foldWingsTightly();
+          this.updateNameVisibility();
         }
 
         getDisplayName() {
           const base = this.customName ? `${this.customName} (${this.breed.name})` : this.breed.name;
-          if (this.isChick) return `فرخ ${base}`;
+          if (this.isChick) return `فرخ ${base} ${Math.floor(this.growth)}%`;
           if (this.isTamed) return `★ ${base}`;
           return base;
         }
 
-        refreshNameLabel() {
-          if (this.nameSprite) {
-            this.group.remove(this.nameSprite);
-            this.nameSprite = null;
-          }
-          this.nameSprite = createNameSprite(
-            this.getDisplayName(),
-            this.isTamed ? 'rgba(6, 78, 59, 0.88)' : 'rgba(15, 15, 22, 0.82)',
-            this.isTamed ? '#34d399' : '#ef4444'
-          );
-          this.nameSprite.position.set(0, 0.72, 0);
-          this.group.add(this.nameSprite);
+        getSpecsText() {
+          const loc = this.state === 'FLYING' ? 'بالسماء' : this.state === 'LANDING' ? 'ينزل' : this.isInsideCoop ? `قفص #${this.coopId}` : 'على السطح';
+          return `النوع: ${this.breed.name} • القفص: #${this.coopId} • الحالة: ${loc} • السرعة: ${this.breed.speed} • ${this.breed.spec}`;
+        }
+
+        refreshLabel() {
+          if (this.labelSprite) this.group.remove(this.labelSprite);
+          this.labelSprite = createBirdLabelSprite(this.getDisplayName(), this.isTamed);
+          this.labelSprite.position.set(0, 0.72, 0);
+          this.group.add(this.labelSprite);
+          this.updateNameVisibility();
         }
 
         updateNameVisibility() {
-          if (!this.nameSprite) return;
-          const onGround = this.state !== 'FLYING' && this.state !== 'LANDING';
-          this.nameSprite.visible = onGround;
+          if (!this.labelSprite) return;
+          // Show name ONLY when on ground/coop/perched, hide when flying or landing
+          const isFlyingOrLanding = this.state === 'FLYING' || this.state === 'LANDING';
+          this.labelSprite.visible = !isFlyingOrLanding;
         }
 
-        foldWings() {
+        foldWingsTightly() {
           this.leftWing.rotation.set(0.05, -0.14, -1.48);
           this.rightWing.rotation.set(0.05, 0.14, 1.48);
         }
 
-        flapWings(ang) {
-          this.leftWing.rotation.set(0, 0, ang);
-          this.rightWing.rotation.set(0, 0, -ang);
+        spreadWingsForFlight(flapAngle) {
+          this.leftWing.rotation.set(0.08, 0.12, flapAngle);
+          this.rightWing.rotation.set(0.08, -0.12, -flapAngle);
         }
 
         startSkyFlight() {
-          if (this.isChick) return;
+          if (this.isChick) return false;
           this.state = 'FLYING';
           this.isInsideCoop = false;
-          this.orbitAngle = Math.atan2(this.group.position.z - homeRoofZ, this.group.position.x - homeRoofX);
-          this.velocity.set((Math.random() - 0.5) * 4.5, 6.2, (Math.random() - 0.5) * 4.5);
           this.updateNameVisibility();
-        }
-
-        commandLaunch() {
-          if (this.isChick || this.state === 'FLYING' || this.state === 'HELD') return;
-          if (this.isInsideCoop && !COOP.isOpen) {
-            COOP.isOpen = true;
-            document.getElementById('stat-door').textContent = 'مفتوح';
-          }
-          this.startSkyFlight();
+          this.orbitAngle = Math.atan2(this.group.position.z - myRoofZ, this.group.position.x - myRoofX);
+          this.velocity.set((Math.random() - 0.5) * 4.5, 6.0, (Math.random() - 0.5) * 4.5);
+          return true;
         }
 
         commandLand() {
-          if (this.state === 'WALK' || this.state === 'HELD') return;
+          if (this.state === 'WALK' || this.state === 'HELD' || this.state === 'TAMED_PERCHED') return;
           this.state = 'LANDING';
-          this.targetPos.set(
-            homeRoofX - 3.0 + (Math.random() - 0.5) * 10,
-            ROOF_Y,
-            homeRoofZ + 3.2 + (Math.random() - 0.5) * 7.5
-          );
           this.updateNameVisibility();
+          this.targetPos.set(myRoofX + (Math.random() - 0.5) * 8, ROOF_Y, myRoofZ + 3.2 + (Math.random() - 0.5) * 6);
+        }
+
+        toNetworkSnapshot() {
+          return {
+            uid: this.uid,
+            breedId: this.breed.id,
+            customName: this.customName,
+            isChick: this.isChick,
+            growth: this.growth,
+            isTamed: this.isTamed,
+            coopId: this.coopId,
+            state: this.state,
+            x: this.group.position.x,
+            y: this.group.position.y,
+            z: this.group.position.z,
+            yaw: this.group.rotation.y,
+            flapPhase: this.flapPhase
+          };
         }
 
         update(dt, elapsed, allPigeons) {
           this.updateNameVisibility();
 
+          if (this.isChick) {
+            this.growth = Math.min(100, this.growth + dt * (1.0 + gameState.nests * 0.25));
+            const s = 0.55 + (this.growth / 100) * 0.45;
+            this.group.scale.set(s, s, s);
+            if (this.growth >= 100) {
+              this.isChick = false;
+              this.group.scale.set(1, 1, 1);
+              this.refreshLabel();
+            }
+          }
+
           if (this.state === 'HELD' || this.state === 'TAMED_PERCHED') {
-            this.foldWings();
+            this.foldWingsTightly();
             return;
           }
 
           this.flapPhase += dt * 16.5;
 
           if (this.state === 'WALK') {
-            this.foldWings();
+            this.foldWingsTightly();
             if (gameState.activeFeedPile && !this.isInsideCoop) {
               const ang = (this.flapPhase * 0.37) % (Math.PI * 2);
               this.targetPos.set(
-                homeRoofX + gameState.activeFeedPile.lx + Math.cos(ang) * 0.9,
+                myRoofX + gameState.activeFeedPile.lx + Math.cos(ang) * 0.9,
                 ROOF_Y,
-                homeRoofZ + gameState.activeFeedPile.lz + Math.sin(ang) * 0.9
+                myRoofZ + gameState.activeFeedPile.lz + Math.sin(ang) * 0.9
               );
             } else {
               this.idleTimer -= dt;
               if (this.idleTimer <= 0) {
                 this.idleTimer = 1.6 + Math.random() * 2.2;
                 if (this.isInsideCoop) {
+                  const cm = this.coopId === 2 && gameState.hasSecondCoop ? getCoop2Metrics() : getCoop1Metrics();
                   this.targetPos.set(
-                    homeRoofX + COOP.x + (Math.random() - 0.5) * (COOP.w - 1.3),
+                    myRoofX + cm.x + (Math.random() - 0.5) * (cm.w - 1.2),
                     ROOF_Y,
-                    homeRoofZ + COOP.z + (Math.random() - 0.5) * (COOP.d - 1.3)
+                    myRoofZ + cm.z + (Math.random() - 0.5) * (cm.d - 1.2)
                   );
                 } else {
+                  const maxR = Math.max(4, getRoofHalf() - 2.5);
                   this.targetPos.set(
-                    homeRoofX - 3.0 + (Math.random() - 0.5) * 11,
+                    myRoofX + (Math.random() - 0.5) * maxR * 1.4,
                     ROOF_Y,
-                    homeRoofZ + 3.0 + (Math.random() - 0.5) * 8.5
+                    myRoofZ + 2.5 + (Math.random() - 0.5) * 5.0
                   );
                 }
               }
@@ -1245,14 +1272,14 @@
             toTarget.y = 0;
             if (toTarget.length() > 0.12) {
               toTarget.normalize();
-              this.group.position.addScaledVector(toTarget, dt * (this.isChick ? 0.75 : 1.2));
+              this.group.position.addScaledVector(toTarget, dt * 1.2);
               this.group.rotation.y = Math.atan2(toTarget.x, toTarget.z);
             }
           } else if (this.state === 'FLYING') {
-            this.flapWings(Math.sin(this.flapPhase) * 0.78);
+            this.spreadWingsForFlight(Math.sin(this.flapPhase) * 0.78);
             this.orbitAngle += dt * 0.42;
-            const tx = homeRoofX + Math.cos(this.orbitAngle) * this.orbitRadius;
-            const tz = homeRoofZ + Math.sin(this.orbitAngle) * this.orbitRadius;
+            const tx = myRoofX + Math.cos(this.orbitAngle) * this.orbitRadius;
+            const tz = myRoofZ + Math.sin(this.orbitAngle) * this.orbitRadius;
             const ty = this.cruiseAlt + Math.sin(elapsed * 1.6 + this.orbitAngle * 2) * 1.8;
 
             const seek = new THREE.Vector3(tx, ty, tz).sub(this.group.position).multiplyScalar(1.5);
@@ -1276,12 +1303,12 @@
               this.group.rotation.y = Math.atan2(this.velocity.x, this.velocity.z);
             }
           } else if (this.state === 'LANDING') {
-            this.flapWings(Math.sin(this.flapPhase * 1.2) * 0.7);
+            this.spreadWingsForFlight(Math.sin(this.flapPhase * 1.2) * 0.7);
             const dir = this.targetPos.clone().sub(this.group.position);
             if (dir.length() < 0.25) {
               this.group.position.copy(this.targetPos);
               this.state = 'WALK';
-              this.foldWings();
+              this.foldWingsTightly();
               this.updateNameVisibility();
             } else {
               dir.normalize();
@@ -1295,7 +1322,7 @@
       class PlayerCharacter {
         constructor() {
           this.group = new THREE.Group();
-          this.group.position.set(homeRoofX + 1.2, ROOF_Y, homeRoofZ + 5.2);
+          this.group.position.set(myRoofX + 1.2, ROOF_Y, myRoofZ + 5.2);
           scene.add(this.group);
           this.velY = 0;
           this.isGrounded = true;
@@ -1307,13 +1334,10 @@
           while (this.group.children.length > 0) this.group.remove(this.group.children[0]);
           const skinMat = new THREE.MeshStandardMaterial({ color: 0xd2a176, roughness: 0.65 });
           const hairMat = new THREE.MeshStandardMaterial({ color: 0x111115, roughness: 0.8 });
-          const eyeWhiteMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
-          const pupilMat = new THREE.MeshBasicMaterial({ color: 0x18181b });
           const whiteMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.72 });
           const redMat = new THREE.MeshStandardMaterial({ color: 0x991b1b, roughness: 0.6 });
           const navyMat = new THREE.MeshStandardMaterial({ color: 0x1e3a8a, roughness: 0.65 });
           const blackMat = new THREE.MeshStandardMaterial({ color: 0x18181b, roughness: 0.65 });
-          const pajamaMat = new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.8 });
 
           const headGroup = new THREE.Group();
           headGroup.position.set(0, 1.58, 0);
@@ -1324,23 +1348,15 @@
 
           const hair = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.13, 0.38), hairMat);
           hair.position.set(0, 0.18, -0.01);
-          const backHair = new THREE.Mesh(new THREE.BoxGeometry(0.37, 0.24, 0.08), hairMat);
-          backHair.position.set(0, 0.06, -0.16);
-          headGroup.add(hair, backHair);
+          headGroup.add(hair);
 
-          [-1, 1].forEach((side) => {
-            const ew = new THREE.Mesh(new THREE.BoxGeometry(0.065, 0.045, 0.02), eyeWhiteMat);
-            ew.position.set(side * 0.085, 0.02, 0.185);
-            const pu = new THREE.Mesh(new THREE.BoxGeometry(0.032, 0.035, 0.024), pupilMat);
-            pu.position.set(side * 0.085, 0.02, 0.19);
-            headGroup.add(ew, pu);
-          });
+          const eyeL = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.04, 0.02), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+          eyeL.position.set(0.085, 0.02, 0.185);
+          const eyeR = eyeL.clone();
+          eyeR.position.x = -0.085;
+          headGroup.add(eyeL, eyeR);
 
-          const nose = new THREE.Mesh(new THREE.BoxGeometry(0.045, 0.065, 0.05), skinMat);
-          nose.position.set(0, -0.02, 0.195);
-          headGroup.add(nose);
-
-          if (skinId === 'baghdadi') {
+          if (skinId === 'baghdadi' || skinId === 'basrawi') {
             const agal = new THREE.Mesh(new THREE.TorusGeometry(0.19, 0.024, 8, 20), blackMat);
             agal.rotation.x = Math.PI / 2;
             agal.position.set(0, 0.21, 0);
@@ -1348,9 +1364,6 @@
           }
 
           const torsoMat = skinId === 'basrawi' ? navyMat : skinId === 'champion' ? blackMat : whiteMat;
-          const legMat = skinId === 'fanila' ? pajamaMat : skinId === 'basrawi' ? navyMat : skinId === 'champion' ? blackMat : whiteMat;
-          const sleeveMat = skinId === 'fanila' ? skinMat : torsoMat;
-
           const torso = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.72, 0.28), torsoMat);
           torso.position.y = 1.04;
           this.group.add(torso);
@@ -1363,20 +1376,20 @@
 
           this.leftArmPivot = new THREE.Group();
           this.leftArmPivot.position.set(0.33, 1.32, 0);
-          this.leftArmPivot.add(new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.56, 0.15), sleeveMat).translateY(-0.28));
+          this.leftArmPivot.add(new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.56, 0.15), torsoMat).translateY(-0.28));
 
           this.rightArmPivot = new THREE.Group();
           this.rightArmPivot.position.set(-0.33, 1.32, 0);
-          this.rightArmPivot.add(new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.56, 0.15), sleeveMat).translateY(-0.28));
+          this.rightArmPivot.add(new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.56, 0.15), torsoMat).translateY(-0.28));
           this.group.add(this.leftArmPivot, this.rightArmPivot);
 
           this.leftLegPivot = new THREE.Group();
           this.leftLegPivot.position.set(0.13, 0.70, 0);
-          this.leftLegPivot.add(new THREE.Mesh(new THREE.BoxGeometry(0.19, 0.66, 0.20), legMat).translateY(-0.33));
+          this.leftLegPivot.add(new THREE.Mesh(new THREE.BoxGeometry(0.19, 0.66, 0.20), torsoMat).translateY(-0.33));
 
           this.rightLegPivot = new THREE.Group();
           this.rightLegPivot.position.set(-0.13, 0.70, 0);
-          this.rightLegPivot.add(new THREE.Mesh(new THREE.BoxGeometry(0.19, 0.66, 0.20), legMat).translateY(-0.33));
+          this.rightLegPivot.add(new THREE.Mesh(new THREE.BoxGeometry(0.19, 0.66, 0.20), torsoMat).translateY(-0.33));
           this.group.add(this.leftLegPivot, this.rightLegPivot);
         }
 
@@ -1393,18 +1406,14 @@
           }
         }
 
-        resolveRooftopBounds(nx, nz) {
-          let x = nx;
-          let z = nz;
-          const minX = currentRoofX - ROOF_HALF + 0.55;
-          const maxX = currentRoofX + ROOF_HALF - 0.55;
-          const minZ = currentRoofZ - ROOF_HALF + 0.55;
-          const maxZ = currentRoofZ + ROOF_HALF - 0.55;
-          if (x < minX) x = minX;
-          if (x > maxX) x = maxX;
-          if (z < minZ) z = minZ;
-          if (z > maxZ) z = maxZ;
-          return { x, z };
+        resolveBounds(nx, nz) {
+          const cx = getActiveWorldRoofX();
+          const cz = getActiveWorldRoofZ();
+          const half = visitingTarget ? 12.0 : getRoofHalf();
+          return {
+            x: Math.max(cx - half + 0.55, Math.min(cx + half - 0.55, nx)),
+            z: Math.max(cz - half + 0.55, Math.min(cz + half - 0.55, nz))
+          };
         }
 
         update(dt, moveForward, moveRight, camYaw) {
@@ -1416,7 +1425,7 @@
           if (wishDir.lengthSq() > 0.002) {
             isMoving = true;
             wishDir.normalize();
-            const bounded = this.resolveRooftopBounds(
+            const bounded = this.resolveBounds(
               this.group.position.x + wishDir.x * 5.6 * dt,
               this.group.position.z + wishDir.z * 5.6 * dt
             );
@@ -1458,6 +1467,13 @@
             gameState.heldPigeon.group.position.copy(this.getPerchPos());
             gameState.heldPigeon.group.rotation.y = this.group.rotation.y;
           }
+          if (gameState.tamedPigeonId) {
+            const tb = pigeons.find((p) => p.uid === gameState.tamedPigeonId);
+            if (tb && tb.state === 'TAMED_PERCHED') {
+              tb.group.position.copy(this.getPerchPos());
+              tb.group.rotation.y = this.group.rotation.y;
+            }
+          }
         }
       }
 
@@ -1469,38 +1485,36 @@
         if (!pData || !pData.id) return;
         let entry = remotePlayers.get(pData.id);
         if (!entry) {
-          const rx = pData.roofX || 0;
-          const rz = pData.roofZ || 0;
           const rHouse = new THREE.Group();
-          rHouse.position.set(rx, 0, rz);
-          buildFullRooftopStructure(rHouse, !!pData.doorOpen);
+          rHouse.position.set(pData.roofX || 0, 0, pData.roofZ || 0);
+          const rBody = new THREE.Mesh(new THREE.BoxGeometry(24, ROOF_Y, 24), brickMat);
+          rBody.position.set(0, ROOF_Y / 2, 0);
+          const rFloor = new THREE.Mesh(new THREE.BoxGeometry(24.2, 0.3, 24.2), tileMat);
+          rFloor.position.set(0, ROOF_Y - 0.12, 0);
+          const rCoop = new THREE.Mesh(new THREE.BoxGeometry(7, 3.2, 5.5), steelMat);
+          rCoop.position.set(2.0, ROOF_Y + 1.6, -4.2);
+          rHouse.add(rBody, rFloor, rCoop);
           scene.add(rHouse);
 
           const pMesh = new THREE.Group();
-          const body = new THREE.Mesh(new THREE.BoxGeometry(0.5, 1.45, 0.32), new THREE.MeshStandardMaterial({ color: 0x0284c7 }));
-          body.position.y = 0.85;
-          const head = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.36, 0.36), new THREE.MeshStandardMaterial({ color: 0xd2a176 }));
-          head.position.y = 1.78;
-          const hair = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.12, 0.38), new THREE.MeshStandardMaterial({ color: 0x111115 }));
-          hair.position.set(0, 1.96, 0);
-          const tag = createNameSprite(`${pData.name || 'لاعب'} (سطح #${pData.slot || '?'})`, 'rgba(12, 74, 110, 0.88)', '#38bdf8');
-          tag.position.set(0, 2.32, 0);
-          pMesh.add(body, head, hair, tag);
+          const pBody = new THREE.Mesh(new THREE.BoxGeometry(0.5, 1.45, 0.32), new THREE.MeshStandardMaterial({ color: 0x0284c7 }));
+          pBody.position.y = 0.85;
+          const pHead = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.36, 0.36), new THREE.MeshStandardMaterial({ color: 0xd2a176 }));
+          pHead.position.y = 1.78;
+          const tag = createBirdLabelSprite(`${pData.name || 'لاعب'} (سطح #${pData.slot || '?'})`, true);
+          tag.position.set(0, 2.25, 0);
+          pMesh.add(pBody, pHead, tag);
           scene.add(pMesh);
 
-          entry = {
-            data: pData,
-            house: rHouse,
-            mesh: pMesh,
-            remoteBirds: []
-          };
+          entry = { data: Object.assign({}, pData), house: rHouse, mesh: pMesh, remoteBirds: [] };
           remotePlayers.set(pData.id, entry);
+        } else {
+          entry.data = Object.assign({}, entry.data, pData);
+          entry.house.position.set(entry.data.roofX || 0, 0, entry.data.roofZ || 0);
         }
 
-        entry.data = Object.assign(entry.data, pData);
-        entry.house.position.set(entry.data.roofX || 0, 0, entry.data.roofZ || 0);
-        entry.mesh.position.set(entry.data.x || 0, entry.data.y || ROOF_Y, entry.data.z || 0);
-        entry.mesh.rotation.y = entry.data.yaw || 0;
+        entry.mesh.position.set(pData.x || 0, pData.y || ROOF_Y, pData.z || 0);
+        entry.mesh.rotation.y = pData.yaw || 0;
 
         if (Array.isArray(pData.pigeons)) {
           while (entry.remoteBirds.length > pData.pigeons.length) {
@@ -1511,24 +1525,32 @@
             let rb = entry.remoteBirds[idx];
             const br = BREEDS.find((x) => x.id === bp.breedId) || BREEDS[idx % BREEDS.length];
             if (!rb) {
-              const vis = createBirdVisuals(br, !!bp.isChick);
-              const lbl = createNameSprite(bp.name || br.name);
-              lbl.position.set(0, 0.72, 0);
-              vis.group.add(lbl);
-              scene.add(vis.group);
-              rb = { group: vis.group, leftWing: vis.leftWing, rightWing: vis.rightWing, lbl, breedId: br.id };
+              const rg = new THREE.Group();
+              const rTorso = new THREE.Mesh(new THREE.SphereGeometry(0.16, 12, 12), new THREE.MeshStandardMaterial({ color: br.body }));
+              rTorso.scale.set(0.86, 0.92, 1.48);
+              rTorso.position.y = 0.24;
+              const rWingL = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.02, 0.18), new THREE.MeshStandardMaterial({ color: br.wing }));
+              rWingL.position.set(0.22, 0.27, 0.03);
+              const rWingR = rWingL.clone();
+              rWingR.position.x = -0.22;
+              const rLbl = createBirdLabelSprite(bp.customName || br.name, !!bp.isTamed);
+              rLbl.position.set(0, 0.72, 0);
+              rg.add(rTorso, rWingL, rWingR, rLbl);
+              scene.add(rg);
+              rb = { group: rg, wingL: rWingL, wingR: rWingR, lbl: rLbl };
               entry.remoteBirds[idx] = rb;
             }
-            rb.group.position.set(bp.x, bp.y, bp.z);
+            rb.group.position.set(bp.x || 0, bp.y || ROOF_Y, bp.z || 0);
             rb.group.rotation.y = bp.yaw || 0;
-            rb.lbl.visible = !bp.flying;
-            if (bp.flying) {
-              const wAng = Math.sin(performance.now() * 0.018 + idx) * 0.75;
-              rb.leftWing.rotation.set(0, 0, wAng);
-              rb.rightWing.rotation.set(0, 0, -wAng);
+            const isFly = bp.state === 'FLYING' || bp.state === 'LANDING';
+            rb.lbl.visible = !isFly;
+            if (isFly) {
+              const ang = Math.sin(bp.flapPhase || performance.now() * 0.015) * 0.7;
+              rb.wingL.rotation.z = ang;
+              rb.wingR.rotation.z = -ang;
             } else {
-              rb.leftWing.rotation.set(0.05, -0.14, -1.48);
-              rb.rightWing.rotation.set(0.05, 0.14, 1.48);
+              rb.wingL.rotation.z = -1.4;
+              rb.wingR.rotation.z = 1.4;
             }
           });
         }
@@ -1542,183 +1564,35 @@
           entry.remoteBirds.forEach((rb) => scene.remove(rb.group));
           remotePlayers.delete(id);
         }
-      }
-
-      function setActiveRooftop(rx, rz, hostName = null) {
-        const dx = rx - currentRoofX;
-        const dz = rz - currentRoofZ;
-        currentRoofX = rx;
-        currentRoofZ = rz;
-        visitingHostName = hostName;
-
-        player.group.position.x += dx;
-        player.group.position.z += dz;
-        const bounded = player.resolveRooftopBounds(player.group.position.x, player.group.position.z);
-        player.group.position.x = bounded.x;
-        player.group.position.z = bounded.z;
-        updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-      }
-
-      const chatBox = document.getElementById('online-chat-box');
-      const chatToggleBtn = document.getElementById('chat-toggle-btn');
-      const chatMessagesEl = document.getElementById('chat-messages');
-
-      chatToggleBtn.addEventListener('click', () => {
-        const isOpen = chatBox.style.display === 'flex';
-        chatBox.style.display = isOpen ? 'none' : 'flex';
-        chatToggleBtn.textContent = isOpen ? 'الدردشة ▾' : 'إخفاء الدردشة ▴';
-      });
-
-      function appendChatMessage(fromName, text, fromId = null) {
-        const row = document.createElement('div');
-        row.className = 'chat-row';
-        const span = document.createElement('span');
-        span.textContent = `${fromName}: ${text}`;
-        row.appendChild(span);
-
-        if (fromId && remotePlayers.has(fromId)) {
-          const vBtn = document.createElement('button');
-          vBtn.className = 'visit-mini-btn';
-          vBtn.type = 'button';
-          vBtn.textContent = 'طلب زيارة سطحه';
-          vBtn.onclick = () => sendVisitRequest(fromId, fromName);
-          row.appendChild(vBtn);
+        if (currentVisitorId === id) currentVisitorId = null;
+        if (visitingTarget && visitingTarget.id === id) {
+          visitingTarget = null;
+          player.group.position.set(myRoofX + 1.2, ROOF_Y, myRoofZ + 5.2);
         }
-        chatMessagesEl.appendChild(row);
-        chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+        updateHud();
       }
 
-      let wsClient = null;
-      let myOnlineId = null;
+      function updateHud() {
+        const flyingCount = pigeons.filter((p) => p.state === 'FLYING').length;
+        const feedSum = (gameState.feeds.qamh || 0) + (gameState.feeds.taman || 0);
+        const waterSum = gameState.waters.bori || 0;
+        document.getElementById('stat-online').textContent = onlineCount;
+        document.getElementById('stat-coins').textContent = Math.floor(gameState.coins);
+        document.getElementById('market-coins').textContent = Math.floor(gameState.coins);
+        document.getElementById('stat-flying').textContent = flyingCount;
+        document.getElementById('stat-total').textContent = pigeons.length;
+        document.getElementById('stat-feed').textContent = feedSum;
+        document.getElementById('stat-water').textContent = waterSum;
+        document.getElementById('stat-taman').textContent = gameState.feeds.taman || 0;
+        document.getElementById('stat-joker').textContent = gameState.jokers || 0;
 
-      function sendVisitRequest(targetId, targetName) {
-        if (!wsClient || wsClient.readyState !== WebSocket.OPEN) {
-          showToast('يلزم اتصال أونلاين لطلب زيارة سطح.');
-          return;
-        }
-        wsClient.send(JSON.stringify({ type: 'VISIT_REQUEST', targetId }));
-        showToast(`تم إرسال طلب زيارة سطح ${targetName}`);
-      }
+        const skinObj = SKINS.find((s) => s.id === gameState.currentSkin) || SKINS[0];
+        document.getElementById('hud-skin-label').textContent = visitingTarget
+          ? `زيارة سطح #${visitingTarget.slot} • ${visitingTarget.name}`
+          : `سطح #${mySlot} • ${skinObj.name}`;
 
-      const visitPromptEl = document.getElementById('visit-prompt');
-      const visitPromptText = document.getElementById('visit-prompt-text');
-
-      document.getElementById('btn-visit-accept').addEventListener('click', () => {
-        if (pendingVisitRequest && wsClient && wsClient.readyState === WebSocket.OPEN) {
-          wsClient.send(JSON.stringify({ type: 'VISIT_RESPONSE', visitorId: pendingVisitRequest.fromId, accepted: true }));
-        }
-        pendingVisitRequest = null;
-        visitPromptEl.style.display = 'none';
-      });
-
-      document.getElementById('btn-visit-decline').addEventListener('click', () => {
-        if (pendingVisitRequest && wsClient && wsClient.readyState === WebSocket.OPEN) {
-          wsClient.send(JSON.stringify({ type: 'VISIT_RESPONSE', visitorId: pendingVisitRequest.fromId, accepted: false }));
-        }
-        pendingVisitRequest = null;
-        visitPromptEl.style.display = 'none';
-      });
-
-      function connectOnlineServer() {
-        try {
-          wsClient = new WebSocket(SERVER_URL);
-          wsClient.addEventListener('message', (ev) => {
-            let msg;
-            try { msg = JSON.parse(ev.data); } catch (e) { return; }
-
-            if (msg.type === 'WELCOME') {
-              onlineCount = msg.onlineCount || 1;
-              if (msg.self) {
-                myOnlineId = msg.self.id;
-                mySlot = msg.self.slot || 1;
-                homeRoofX = msg.self.roofX || 0;
-                homeRoofZ = msg.self.roofZ || 0;
-                myHouseGroup.position.set(homeRoofX, 0, homeRoofZ);
-                waterBowlGroup.position.set(-2.2, ROOF_Y, 2.4);
-                currentRoofX = homeRoofX;
-                currentRoofZ = homeRoofZ;
-                player.group.position.set(homeRoofX + 1.2, ROOF_Y, homeRoofZ + 5.2);
-                pigeons.forEach((p, idx) => {
-                  const lx = p.isInsideCoop ? COOP.x + ((idx % 4) - 1.5) * 1.1 : -2.0 + ((idx % 4) - 1.5) * 1.8;
-                  const lz = p.isInsideCoop ? COOP.z + (Math.floor(idx / 4) - 1) * 1.1 : 3.2;
-                  p.group.position.set(homeRoofX + lx, ROOF_Y, homeRoofZ + lz);
-                  p.targetPos.copy(p.group.position);
-                });
-              }
-              if (Array.isArray(msg.players)) msg.players.forEach(upsertRemotePlayer);
-              if (Array.isArray(msg.leaderboard)) leaderboardData = msg.leaderboard;
-              updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-            } else if (msg.type === 'PLAYER_JOINED') {
-              onlineCount = msg.onlineCount || onlineCount + 1;
-              if (msg.player) upsertRemotePlayer(msg.player);
-              if (Array.isArray(msg.leaderboard)) leaderboardData = msg.leaderboard;
-              updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-            } else if (msg.type === 'PLAYER_STATE') {
-              if (msg.player) upsertRemotePlayer(msg.player);
-            } else if (msg.type === 'PLAYER_LEFT') {
-              onlineCount = msg.onlineCount || Math.max(1, onlineCount - 1);
-              removeRemotePlayer(msg.id);
-              if (Array.isArray(msg.leaderboard)) leaderboardData = msg.leaderboard;
-              updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-            } else if (msg.type === 'LEADERBOARD_SYNC') {
-              onlineCount = msg.onlineCount || onlineCount;
-              if (Array.isArray(msg.leaderboard)) leaderboardData = msg.leaderboard;
-              updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-            } else if (msg.type === 'LAUNCH_REWARD_APPROVED') {
-              if (typeof msg.coins === 'number') {
-                gameState.coins = msg.coins;
-                updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-                saveGameAuto();
-                showToast(`إقلاع السرب! مكافأة +${msg.reward || 25} د.ع`);
-              }
-            } else if (msg.type === 'VISIT_REQUEST') {
-              pendingVisitRequest = msg;
-              visitPromptText.textContent = `يريد (${msg.fromName}) زيارة سطحك`;
-              visitPromptEl.style.display = 'flex';
-            } else if (msg.type === 'VISIT_ACCEPTED') {
-              const targetX = typeof msg.roofX === 'number' ? msg.roofX : currentRoofX;
-              const targetZ = typeof msg.roofZ === 'number' ? msg.roofZ : currentRoofZ;
-              setActiveRooftop(targetX, targetZ, msg.hostName || `سطح #${msg.hostSlot}`);
-              showToast(`تم قبول الزيارة! أنت الآن على سطح ${msg.hostName}`);
-            } else if (msg.type === 'VISIT_DECLINED') {
-              showToast(`رفض (${msg.hostName}) طلب الزيارة`);
-            } else if (msg.type === 'CHAT_MSG') {
-              appendChatMessage(msg.fromName, msg.text, msg.fromId || null);
-              showToast(`${msg.fromName}: ${msg.text}`);
-            }
-          });
-          wsClient.addEventListener('close', () => {
-            onlineCount = 1;
-            updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-          });
-          wsClient.addEventListener('error', () => {});
-        } catch (e) {}
-      }
-      connectOnlineServer();
-
-      function sendOnlineState(flyingCount) {
-        if (!wsClient || wsClient.readyState !== WebSocket.OPEN) return;
-        wsClient.send(JSON.stringify({
-          type: 'STATE_UPDATE',
-          x: player.group.position.x,
-          y: player.group.position.y,
-          z: player.group.position.z,
-          yaw: player.group.rotation.y,
-          skin: gameState.currentSkin,
-          coins: Math.floor(gameState.coins),
-          flyingCount,
-          doorOpen: COOP.isOpen,
-          pigeons: pigeons.map((p) => ({
-            breedId: p.breed.id,
-            name: p.getDisplayName(),
-            flying: p.state === 'FLYING' || p.state === 'LANDING',
-            isChick: p.isChick,
-            x: p.group.position.x,
-            y: p.group.position.y,
-            z: p.group.position.z,
-            yaw: p.group.rotation.y
-          }))
-        }));
+        document.getElementById('btn-return-home').style.display = visitingTarget ? 'inline-block' : 'none';
+        document.getElementById('btn-kick-visitor').style.display = currentVisitorId ? 'inline-block' : 'none';
       }
 
       function saveGameAuto() {
@@ -1727,14 +1601,22 @@
             coins: Math.floor(gameState.coins),
             feeds: gameState.feeds,
             waters: gameState.waters,
+            jokers: gameState.jokers,
+            nests: gameState.nests,
+            roofExpandLevel: gameState.roofExpandLevel,
+            coopExpandLevel: gameState.coopExpandLevel,
+            hasSecondCoop: gameState.hasSecondCoop,
             ownedSkins: gameState.ownedSkins,
             currentSkin: gameState.currentSkin,
+            tamedPigeonId: gameState.tamedPigeonId,
             pigeons: pigeons.map((p) => ({
               uid: p.uid,
               breedId: p.breed.id,
               customName: p.customName,
               isChick: p.isChick,
+              growth: p.growth,
               isTamed: p.isTamed,
+              coopId: p.coopId,
               isInsideCoop: p.isInsideCoop
             }))
           }));
@@ -1749,11 +1631,17 @@
           if (typeof d.coins === 'number') gameState.coins = d.coins;
           if (d.feeds) gameState.feeds = Object.assign(gameState.feeds, d.feeds);
           if (d.waters) gameState.waters = Object.assign(gameState.waters, d.waters);
+          if (typeof d.jokers === 'number') gameState.jokers = d.jokers;
+          if (typeof d.nests === 'number') gameState.nests = d.nests;
+          if (typeof d.roofExpandLevel === 'number') gameState.roofExpandLevel = d.roofExpandLevel;
+          if (typeof d.coopExpandLevel === 'number') gameState.coopExpandLevel = d.coopExpandLevel;
+          if (typeof d.hasSecondCoop === 'boolean') gameState.hasSecondCoop = d.hasSecondCoop;
           if (Array.isArray(d.ownedSkins)) gameState.ownedSkins = d.ownedSkins;
           if (d.currentSkin) {
             gameState.currentSkin = d.currentSkin;
             player.buildSkin(d.currentSkin);
           }
+          rebuildMyRooftopVisuals();
           if (Array.isArray(d.pigeons) && d.pigeons.length > 0) {
             d.pigeons.forEach((sp, idx) => {
               const b = BREEDS.find((br) => br.id === sp.breedId) || BREEDS[idx % BREEDS.length];
@@ -1767,99 +1655,280 @@
 
       if (!loadGameAuto()) {
         for (let i = 0; i < 12; i++) {
-          pigeons.push(new Pigeon(i, BREEDS[i % BREEDS.length], { isInsideCoop: true }));
+          pigeons.push(new Pigeon(i, BREEDS[i % BREEDS.length], { isInsideCoop: true, coopId: 1 }));
         }
       }
 
-      const heldBarEl = document.getElementById('held-bird-bar');
-      const heldTitleEl = document.getElementById('held-bird-title');
+      // Chat open/close toggle
+      const chatToggleBtn = document.getElementById('chat-toggle-btn');
+      const chatPanel = document.getElementById('chat-panel');
+      const chatMessagesEl = document.getElementById('chat-messages');
+      chatToggleBtn.addEventListener('click', () => {
+        const open = chatPanel.style.display === 'flex';
+        chatPanel.style.display = open ? 'none' : 'flex';
+        chatToggleBtn.textContent = open ? 'الدردشة ▾' : 'إخفاء الدردشة ▴';
+      });
 
-      document.getElementById('btn-launch').addEventListener('click', () => {
-        let launchedAny = false;
+      function appendChatMessage(author, text) {
+        const div = document.createElement('div');
+        div.className = 'chat-line';
+        const sp = document.createElement('span');
+        sp.className = 'chat-author';
+        sp.textContent = author + ': ';
+        div.appendChild(sp);
+        div.appendChild(document.createTextNode(text));
+        chatMessagesEl.appendChild(div);
+        chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+      }
+
+      // WebSocket Client
+      let wsClient = null;
+      function connectOnlineServer() {
+        try {
+          wsClient = new WebSocket(SERVER_URL);
+          wsClient.addEventListener('open', () => {
+            showToast('متصل بسيرفر مملكة الحمام الأونلاين!');
+          });
+          wsClient.addEventListener('message', (ev) => {
+            let msg;
+            try { msg = JSON.parse(ev.data); } catch (e) { return; }
+
+            if (msg.type === 'WELCOME') {
+              onlineCount = msg.onlineCount || 1;
+              if (msg.self) {
+                const dx = (msg.self.roofX || 0) - myRoofX;
+                const dz = (msg.self.roofZ || 0) - myRoofZ;
+                myRoofX = msg.self.roofX || 0;
+                myRoofZ = msg.self.roofZ || 0;
+                mySlot = msg.self.slot || 1;
+                myHouseGroup.position.set(myRoofX, 0, myRoofZ);
+                if (!visitingTarget) {
+                  player.group.position.x += dx;
+                  player.group.position.z += dz;
+                }
+                pigeons.forEach((p) => {
+                  p.group.position.x += dx;
+                  p.group.position.z += dz;
+                  p.targetPos.x += dx;
+                  p.targetPos.z += dz;
+                });
+              }
+              if (Array.isArray(msg.players)) msg.players.forEach(upsertRemotePlayer);
+              if (Array.isArray(msg.marketListings)) marketListings = msg.marketListings;
+              updateHud();
+            } else if (msg.type === 'PLAYER_JOINED') {
+              onlineCount = msg.onlineCount || onlineCount + 1;
+              upsertRemotePlayer(msg.player);
+              updateHud();
+            } else if (msg.type === 'PLAYER_STATE') {
+              upsertRemotePlayer(msg);
+            } else if (msg.type === 'PLAYER_LEFT') {
+              onlineCount = msg.onlineCount || Math.max(1, onlineCount - 1);
+              removeRemotePlayer(msg.id);
+              if (Array.isArray(msg.marketListings)) marketListings = msg.marketListings;
+              updateHud();
+            } else if (msg.type === 'CHAT_MSG') {
+              appendChatMessage(`${msg.fromName} #${msg.slot || ''}`, msg.text);
+              showToast(`${msg.fromName}: ${msg.text}`);
+            } else if (msg.type === 'VISIT_REQUEST') {
+              pendingVisitRequester = { fromId: msg.fromId, fromName: msg.fromName || 'لاعب' };
+              document.getElementById('visit-request-text').textContent = `طلب زيارة من (${pendingVisitRequester.fromName})`;
+              document.getElementById('visit-request-banner').style.display = 'flex';
+            } else if (msg.type === 'VISIT_RESPONSE') {
+              if (msg.accepted) {
+                visitingTarget = {
+                  id: msg.fromId,
+                  slot: msg.slot || '?',
+                  name: msg.ownerName || `سطح #${msg.slot || ''}`,
+                  roofX: msg.roofX || 0,
+                  roofZ: msg.roofZ || 0
+                };
+                player.velY = 0;
+                player.group.position.set(visitingTarget.roofX + 1.2, ROOF_Y, visitingTarget.roofZ + 5.2);
+                updateHud();
+                showToast(`أنت الآن في سطح ${visitingTarget.name}`);
+              } else {
+                showToast('تم رفض طلب الزيارة.');
+              }
+            } else if (msg.type === 'KICKED_FROM_ROOF') {
+              visitingTarget = null;
+              player.velY = 0;
+              player.group.position.set(myRoofX + 1.2, ROOF_Y, myRoofZ + 5.2);
+              updateHud();
+              showToast('تمت إعادتك إلى سطحك.');
+            } else if (msg.type === 'MARKET_SYNC') {
+              marketListings = Array.isArray(msg.marketListings) ? msg.marketListings : [];
+              if (document.getElementById('bird-market-modal').style.display === 'flex') {
+                renderBirdMarket();
+              }
+            } else if (msg.type === 'MARKET_BIRD_PURCHASED') {
+              if (msg.bird) {
+                const br = BREEDS.find((x) => x.id === msg.bird.breedId) || BREEDS[0];
+                pigeons.push(new Pigeon(pigeons.length, br, {
+                  uid: msg.bird.uid,
+                  customName: msg.bird.customName,
+                  isChick: msg.bird.isChick,
+                  growth: msg.bird.growth,
+                  isTamed: msg.bird.isTamed,
+                  coopId: 1,
+                  isInsideCoop: false
+                }));
+              }
+              if (typeof msg.newCoins === 'number') gameState.coins = msg.newCoins;
+              updateHud();
+              saveGameAuto();
+              showToast('تم شراء الطير وأصبح في سطحك!');
+            } else if (msg.type === 'MARKET_BIRD_SOLD') {
+              if (msg.soldBirdUid) {
+                const idx = pigeons.findIndex((p) => p.uid === msg.soldBirdUid);
+                if (idx !== -1) {
+                  scene.remove(pigeons[idx].group);
+                  pigeons.splice(idx, 1);
+                }
+              }
+              if (typeof msg.newCoins === 'number') gameState.coins = msg.newCoins;
+              updateHud();
+              saveGameAuto();
+              showToast(`تم بيع طيرك لـ (${msg.buyerName}) ووصلتك ${msg.price} د.ع!`);
+            } else if (msg.type === 'MARKET_ERROR') {
+              showToast(msg.message || 'تعذر إتمام العملية.');
+            }
+          });
+          wsClient.addEventListener('close', () => { onlineCount = 1; updateHud(); });
+          wsClient.addEventListener('error', () => {});
+        } catch (e) {}
+      }
+      connectOnlineServer();
+
+      function sendOnlineState() {
+        if (!wsClient || wsClient.readyState !== WebSocket.OPEN) return;
+        wsClient.send(JSON.stringify({
+          type: 'STATE_UPDATE',
+          x: player.group.position.x,
+          y: player.group.position.y,
+          z: player.group.position.z,
+          yaw: player.group.rotation.y,
+          skin: gameState.currentSkin,
+          coins: Math.floor(gameState.coins),
+          flyingCount: pigeons.filter((p) => p.state === 'FLYING').length,
+          pigeons: pigeons.map((p) => p.toNetworkSnapshot())
+        }));
+      }
+
+      // Launch Coop Choice Modal
+      const launchModal = document.getElementById('launch-modal');
+      const launchOptionsEl = document.getElementById('launch-coop-options');
+
+      function launchBirdsByCoopChoice(choice) {
+        let count = 0;
         pigeons.forEach((p) => {
-          if (!p.isChick && p.state !== 'FLYING' && p.state !== 'HELD') {
-            p.commandLaunch();
-            launchedAny = true;
+          const match = choice === 'all' || (choice === 'coop1' && p.coopId === 1) || (choice === 'coop2' && p.coopId === 2);
+          if (match && !p.isChick && p.state !== 'FLYING' && p.state !== 'HELD') {
+            if (p.startSkyFlight()) count++;
           }
         });
-        if (!launchedAny) {
-          showToast('السرب طائر بالفعل أو لا توجد طيور جاهزة للإقلاع.');
+        const nowSec = performance.now() / 1000;
+        if (count > 0 && nowSec - gameState.lastLaunchRewardTime >= 3.0) {
+          gameState.lastLaunchRewardTime = nowSec;
+          gameState.coins += 25;
+        }
+        updateHud();
+        saveGameAuto();
+        launchModal.style.display = 'none';
+        showToast(count > 0 ? `أقلع ${count} طير إلى السماء!` : 'لا توجد طيور جاهزة للإقلاع في هذا القفص.');
+      }
+
+      document.getElementById('btn-launch').addEventListener('click', () => {
+        if (!gameState.hasSecondCoop) {
+          launchBirdsByCoopChoice('coop1');
           return;
         }
-        const now = Date.now();
-        if (wsClient && wsClient.readyState === WebSocket.OPEN) {
-          wsClient.send(JSON.stringify({ type: 'CLAIM_LAUNCH_REWARD' }));
-        } else if (now - gameState.lastFlightRewardTime >= 20000) {
-          gameState.lastFlightRewardTime = now;
-          gameState.coins += 25;
-          saveGameAuto();
-          showToast('إقلاع السرب! (+25 د.ع)');
-        } else {
-          showToast('تم إقلاع السرب.');
-        }
-        updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
+        launchOptionsEl.innerHTML = '';
+        [
+          { id: 'coop1', title: 'إقلاع طيور القفص الأول (#1)', desc: 'يطير سرب القفص الأول فقط' },
+          { id: 'coop2', title: 'إقلاع طيور القفص الثاني الكبير (#2)', desc: 'يطير سرب القفص الثاني فقط' },
+          { id: 'all', title: 'إقلاع جميع الأقفاص', desc: 'يطير السرب بالكامل' }
+        ].forEach((opt) => {
+          const row = document.createElement('div');
+          row.className = 'shop-item';
+          row.innerHTML = `<div class="shop-info"><h4>${opt.title}</h4><p>${opt.desc}</p></div><button class="buy-btn sell-btn" type="button">إقلاع</button>`;
+          row.querySelector('button').onclick = () => launchBirdsByCoopChoice(opt.id);
+          launchOptionsEl.appendChild(row);
+        });
+        launchModal.style.display = 'flex';
       });
+      document.getElementById('btn-close-launch').addEventListener('click', () => { launchModal.style.display = 'none'; });
 
       document.getElementById('btn-land').addEventListener('click', () => {
         pigeons.forEach((p) => { if (p.state === 'FLYING') p.commandLand(); });
-        showToast('صفارة نزول! السرب ينزل إلى السطح.');
+        showToast('نزول الطيور إلى السطح.');
       });
 
       document.getElementById('btn-exit-all').addEventListener('click', () => {
-        COOP.isOpen = true;
-        document.getElementById('stat-door').textContent = 'مفتوح';
         pigeons.forEach((p) => {
-          if (p.isInsideCoop && p.state === 'WALK') {
+          if (p.state === 'WALK') {
             p.isInsideCoop = false;
-            p.targetPos.set(homeRoofX - 2.0 + (Math.random() - 0.5) * 7, ROOF_Y, homeRoofZ + 3.5);
+            p.targetPos.set(myRoofX + (Math.random() - 0.5) * 9, ROOF_Y, myRoofZ + 3.2 + (Math.random() - 0.5) * 5);
           }
         });
-        showToast('تم فتح باب القفص وخروج الحمام.');
+        showToast('تم إخراج جميع الطيور إلى السطح.');
       });
 
-      document.getElementById('btn-door').addEventListener('click', () => {
-        COOP.isOpen = !COOP.isOpen;
-        document.getElementById('stat-door').textContent = COOP.isOpen ? 'مفتوح' : 'مغلق';
+      document.getElementById('btn-enter-all').addEventListener('click', () => {
+        pigeons.forEach((p) => {
+          if (p.state === 'FLYING') p.commandLand();
+          p.isInsideCoop = true;
+          const cm = p.coopId === 2 && gameState.hasSecondCoop ? getCoop2Metrics() : getCoop1Metrics();
+          p.targetPos.set(
+            myRoofX + cm.x + (Math.random() - 0.5) * (cm.w - 1.2),
+            ROOF_Y,
+            myRoofZ + cm.z + (Math.random() - 0.5) * (cm.d - 1.2)
+          );
+        });
+        showToast('تم إدخال جميع الطيور إلى أقفاصها.');
       });
 
       document.getElementById('btn-feed').addEventListener('click', () => {
-        const order = ['mashboosh', 'taman', 'adas', 'qamh'];
-        const key = order.find((k) => (gameState.feeds[k] || 0) > 0);
-        if (!key) { showToast('لا يوجد علف! اشترِ من السوق.'); return; }
+        const key = (gameState.feeds.taman || 0) > 0 ? 'taman' : (gameState.feeds.qamh || 0) > 0 ? 'qamh' : null;
+        if (!key) { showToast('لا يوجد علف! اشترِ من السوق أو عجلة الحظ.'); return; }
         gameState.feeds[key] -= 1;
-        gameState.activeFeedPile = {
-          lx: player.group.position.x - homeRoofX,
-          lz: player.group.position.z - homeRoofZ,
-          timer: 16
-        };
+        gameState.activeFeedPile = { lx: player.group.position.x - myRoofX, lz: player.group.position.z - myRoofZ, timer: 16 };
         pigeons.forEach((p) => { if (p.state === 'FLYING') p.commandLand(); });
-        updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-        saveGameAuto();
-        showToast(`تم ذب علف (${FEED_TYPES[key].name}).`);
+        updateHud(); saveGameAuto();
+        showToast(`تم ذب (${FEED_TYPES[key].name}).`);
       });
 
       document.getElementById('btn-water').addEventListener('click', () => {
-        const order = ['zamzam', 'helo', 'bori'];
-        const key = order.find((k) => (gameState.waters[k] || 0) > 0);
-        if (!key) { showToast('لا يوجد ماي! اشترِ من السوق.'); return; }
-        gameState.waters[key] -= 1;
-        waterSurface.material.color.setHex(WATER_TYPES[key].color);
-        waterSurface.visible = true;
+        if ((gameState.waters.bori || 0) <= 0) { showToast('لا يوجد ماي! اشترِ من السوق أو عجلة الحظ.'); return; }
+        gameState.waters.bori -= 1;
+        if (waterSurface) waterSurface.visible = true;
         gameState.activeWaterPile = { timer: 20 };
-        updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-        saveGameAuto();
-        showToast(`تم سقي (${WATER_TYPES[key].name}).`);
+        updateHud(); saveGameAuto();
+        showToast('تم سقي الماي للطيور.');
       });
 
+      // Grab + Bird Specs
+      const heldBarEl = document.getElementById('held-bird-bar');
+      const heldTitleEl = document.getElementById('held-bird-title');
+      const heldInfoEl = document.getElementById('held-bird-info');
+
+      function showBirdBar(p) {
+        heldTitleEl.textContent = `طير: ${p.getDisplayName()}`;
+        heldInfoEl.textContent = p.getSpecsText();
+        heldBarEl.style.display = 'flex';
+      }
+
       document.getElementById('btn-grab').addEventListener('click', () => {
-        if (gameState.heldPigeon) return;
-        const nearest = pigeons.find((p) => p.state !== 'FLYING' && p.group.position.distanceTo(player.group.position) < 3.4);
-        if (!nearest) { showToast('اقترب من طير للزمه.'); return; }
+        if (gameState.heldPigeon) {
+          showBirdBar(gameState.heldPigeon);
+          return;
+        }
+        const nearest = pigeons.find((p) => p.state !== 'FLYING' && p.group.position.distanceTo(player.group.position) < 3.6);
+        if (!nearest) { showToast('اقترب من طير للزمه ومعرفة مواصفاته.'); return; }
         gameState.heldPigeon = nearest;
         nearest.state = 'HELD';
         nearest.isInsideCoop = false;
-        heldTitleEl.textContent = `ماسك طير: ${nearest.getDisplayName()}`;
-        heldBarEl.style.display = 'flex';
+        showBirdBar(nearest);
       });
 
       document.getElementById('btn-put-ground').addEventListener('click', () => {
@@ -1868,7 +1937,7 @@
         p.group.position.set(player.group.position.x + 0.7, ROOF_Y, player.group.position.z + 0.7);
         p.targetPos.copy(p.group.position);
         p.state = 'WALK';
-        p.foldWings();
+        p.foldWingsTightly();
         p.updateNameVisibility();
         gameState.heldPigeon = null;
         heldBarEl.style.display = 'none';
@@ -1881,17 +1950,17 @@
         gameState.heldPigeon = null;
         heldBarEl.style.display = 'none';
         p.startSkyFlight();
+        updateHud();
       });
 
       document.getElementById('btn-tame-shoulder').addEventListener('click', () => {
         const p = gameState.heldPigeon;
         if (!p || p.isChick) return;
-        pigeons.forEach((o) => { if (o !== p) { o.isTamed = false; o.refreshNameLabel(); } });
+        pigeons.forEach((o) => { if (o !== p) { o.isTamed = false; o.refreshLabel(); } });
         p.isTamed = true;
         p.state = 'TAMED_PERCHED';
         gameState.tamedPigeonId = p.uid;
-        p.refreshNameLabel();
-        p.updateNameVisibility();
+        p.refreshLabel();
         gameState.heldPigeon = null;
         heldBarEl.style.display = 'none';
         saveGameAuto();
@@ -1908,68 +1977,169 @@
       document.getElementById('btn-save-rename').addEventListener('click', () => {
         if (gameState.heldPigeon) {
           gameState.heldPigeon.customName = renameInput.value.trim();
-          gameState.heldPigeon.refreshNameLabel();
-          gameState.heldPigeon.updateNameVisibility();
-          heldTitleEl.textContent = `ماسك طير: ${gameState.heldPigeon.getDisplayName()}`;
+          gameState.heldPigeon.refreshLabel();
+          showBirdBar(gameState.heldPigeon);
         }
         renameModal.style.display = 'none';
         saveGameAuto();
       });
 
-      document.getElementById('btn-jump').addEventListener('click', () => player.jump());
-
-      const visitModal = document.getElementById('visit-modal');
-      const visitListEl = document.getElementById('visit-players-list');
-
-      document.getElementById('btn-visit-roof').addEventListener('click', () => {
-        visitListEl.innerHTML = '';
-        if (visitingHostName) {
-          const retRow = document.createElement('div');
-          retRow.className = 'shop-item';
-          retRow.innerHTML = `<div class="shop-info"><h4>أنت حالياً تزور: ${visitingHostName}</h4><p>العودة إلى سطحك الخاص</p></div>`;
-          const retBtn = document.createElement('button');
-          retBtn.className = 'buy-btn sell-btn';
-          retBtn.type = 'button';
-          retBtn.textContent = 'رجوع لسطحي';
-          retBtn.onclick = () => {
-            setActiveRooftop(homeRoofX, homeRoofZ, null);
-            visitModal.style.display = 'none';
-            showToast('عدت إلى سطحك.');
-          };
-          retRow.appendChild(retBtn);
-          visitListEl.appendChild(retRow);
+      // List Held Bird in Bird Market
+      const listBirdModal = document.getElementById('list-bird-modal');
+      const listBirdPriceInput = document.getElementById('list-bird-price');
+      document.getElementById('btn-list-bird').addEventListener('click', () => {
+        if (!gameState.heldPigeon) return;
+        document.getElementById('list-bird-preview').textContent = gameState.heldPigeon.getSpecsText();
+        listBirdPriceInput.value = String(gameState.heldPigeon.breed.price || 100);
+        listBirdModal.style.display = 'flex';
+      });
+      document.getElementById('btn-close-list-bird').addEventListener('click', () => { listBirdModal.style.display = 'none'; });
+      document.getElementById('btn-confirm-list-bird').addEventListener('click', () => {
+        const p = gameState.heldPigeon;
+        if (!p) return;
+        const price = Math.max(10, Math.min(50000, Math.floor(Number(listBirdPriceInput.value) || 100)));
+        const payloadBird = {
+          uid: p.uid,
+          breedId: p.breed.id,
+          breedName: p.breed.name,
+          customName: p.customName,
+          isChick: p.isChick,
+          growth: p.growth,
+          isTamed: p.isTamed,
+          speed: p.breed.speed
+        };
+        if (wsClient && wsClient.readyState === WebSocket.OPEN) {
+          wsClient.send(JSON.stringify({ type: 'MARKET_LIST_BIRD', price, bird: payloadBird }));
+          showToast('تم إرسال الطير إلى سوق الطيور!');
+        } else {
+          marketListings.push({
+            listingId: 'local_' + Date.now(),
+            sellerId: 'offline_self',
+            sellerName: 'أنت',
+            sellerSlot: mySlot,
+            price,
+            bird: payloadBird
+          });
+          showToast('تمت إضافة الطير إلى قائمة سوق الطيور.');
         }
+        const idx = pigeons.indexOf(p);
+        if (idx !== -1) {
+          scene.remove(p.group);
+          pigeons.splice(idx, 1);
+        }
+        gameState.heldPigeon = null;
+        heldBarEl.style.display = 'none';
+        listBirdModal.style.display = 'none';
+        updateHud();
+        saveGameAuto();
+      });
 
-        const list = Array.from(remotePlayers.values());
-        if (list.length === 0) {
+      // Bird Market Modal (Buy from other players)
+      const birdMarketModal = document.getElementById('bird-market-modal');
+      const birdMarketListEl = document.getElementById('bird-market-list');
+
+      function renderBirdMarket() {
+        birdMarketListEl.innerHTML = '';
+        if (!marketListings.length) {
           const empty = document.createElement('div');
           empty.className = 'shop-item';
-          empty.innerHTML = `<div class="shop-info"><h4>لا يوجد لاعبون آخرون متصلون حالياً</h4><p>أرسل رسالة في الدردشة أو انتظر دخول لاعبين.</p></div>`;
-          visitListEl.appendChild(empty);
-        } else {
-          list.forEach((entry) => {
-            const row = document.createElement('div');
-            row.className = 'shop-item';
-            row.innerHTML = `<div class="shop-info"><h4>${entry.data.name || 'لاعب'} (سطح #${entry.data.slot || '?'})</h4><p>الرصيد: ${entry.data.coins || 0} د.ع</p></div>`;
-            const btn = document.createElement('button');
-            btn.className = 'buy-btn';
-            btn.type = 'button';
-            btn.textContent = 'طلب زيارة';
-            btn.onclick = () => {
-              visitModal.style.display = 'none';
-              sendVisitRequest(entry.data.id, entry.data.name || 'لاعب');
-            };
-            row.appendChild(btn);
-            visitListEl.appendChild(row);
-          });
+          empty.innerHTML = '<div class="shop-info"><h4>لا توجد طيور معروضة حالياً</h4><p>امسك طيراً واضغط «عرض بسوق الطيور» لعرضه.</p></div>';
+          birdMarketListEl.appendChild(empty);
+          return;
         }
-        visitModal.style.display = 'flex';
-      });
-      document.getElementById('btn-close-visit').addEventListener('click', () => { visitModal.style.display = 'none'; });
+        marketListings.forEach((item) => {
+          const row = document.createElement('div');
+          row.className = 'shop-item';
+          const bName = item.bird.customName ? `${item.bird.customName} (${item.bird.breedName})` : item.bird.breedName;
+          row.innerHTML = `
+            <div class="shop-info">
+              <h4>${bName} — ${item.price} د.ع</h4>
+              <p>البائع: ${item.sellerName} (سطح #${item.sellerSlot}) • السرعة: ${item.bird.speed || 12}</p>
+            </div>
+          `;
+          const btn = document.createElement('button');
+          btn.className = 'buy-btn sell-btn';
+          btn.type = 'button';
+          btn.textContent = 'شراء';
+          btn.onclick = () => {
+            if (gameState.coins < item.price) {
+              showToast('رصيدك غير كافٍ!');
+              return;
+            }
+            if (wsClient && wsClient.readyState === WebSocket.OPEN) {
+              wsClient.send(JSON.stringify({ type: 'MARKET_BUY_BIRD', listingId: item.listingId }));
+            } else {
+              gameState.coins -= item.price;
+              const br = BREEDS.find((x) => x.id === item.bird.breedId) || BREEDS[0];
+              pigeons.push(new Pigeon(pigeons.length, br, {
+                customName: item.bird.customName,
+                isChick: item.bird.isChick,
+                isTamed: item.bird.isTamed,
+                coopId: 1,
+                isInsideCoop: false
+              }));
+              marketListings = marketListings.filter((x) => x.listingId !== item.listingId);
+              updateHud();
+              saveGameAuto();
+              renderBirdMarket();
+              showToast('تم شراء الطير وإضافته إلى سطحك!');
+            }
+          };
+          row.appendChild(btn);
+          birdMarketListEl.appendChild(row);
+        });
+      }
 
+      document.getElementById('btn-bird-market').addEventListener('click', () => {
+        renderBirdMarket();
+        birdMarketModal.style.display = 'flex';
+      });
+      document.getElementById('btn-close-bird-market').addEventListener('click', () => {
+        birdMarketModal.style.display = 'none';
+      });
+
+      // Wheel of Fortune (تمن، جوكر، ماي، طير، فلوس 500)
+      const wheelModal = document.getElementById('wheel-modal');
+      const wheelDisc = document.getElementById('wheel-disc');
+      const wheelResult = document.getElementById('wheel-result');
+      let wheelSpinDeg = 0;
+      let wheelSpinning = false;
+
+      const WHEEL_PRIZES = [
+        { label: '500 فلوس', apply: () => { gameState.coins += 500; return 'ربحت 500 د.ع!'; } },
+        { label: 'تمن عنبر', apply: () => { gameState.feeds.taman = (gameState.feeds.taman || 0) + 5; return 'ربحت 5 أكياس تمن!'; } },
+        { label: 'جوكر', apply: () => { gameState.jokers = (gameState.jokers || 0) + 1; return 'ربحت بطاقة جوكر!'; } },
+        { label: 'ماي', apply: () => { gameState.waters.bori = (gameState.waters.bori || 0) + 5; return 'ربحت 5 حصص ماي!'; } },
+        { label: 'طير مميز', apply: () => {
+          const br = BREEDS[Math.floor(Math.random() * BREEDS.length)];
+          pigeons.push(new Pigeon(pigeons.length, br, { coopId: 1, isInsideCoop: false }));
+          return `ربحت طير (${br.name}) على سطحك!`;
+        } }
+      ];
+
+      document.getElementById('btn-wheel').addEventListener('click', () => { wheelModal.style.display = 'flex'; });
+      document.getElementById('btn-close-wheel').addEventListener('click', () => { wheelModal.style.display = 'none'; });
+      document.getElementById('btn-spin-wheel').addEventListener('click', () => {
+        if (wheelSpinning) return;
+        wheelSpinning = true;
+        const pickIdx = Math.floor(Math.random() * WHEEL_PRIZES.length);
+        wheelSpinDeg += 720 + pickIdx * 72;
+        wheelDisc.style.transform = `rotate(${wheelSpinDeg}deg)`;
+        setTimeout(() => {
+          const msg = WHEEL_PRIZES[pickIdx].apply();
+          wheelResult.textContent = msg;
+          wheelSpinning = false;
+          updateHud();
+          saveGameAuto();
+          showToast(msg);
+        }, 2250);
+      });
+
+      // Main Market (Breed selection + Expand roof + Expand coop + Nest + Second large coop)
       const marketModal = document.getElementById('market-modal');
       const marketListEl = document.getElementById('market-items-list');
       let currentMarketTab = 'birds';
+      let selectedBreedForPurchase = 'zajil';
 
       function renderMarketTab(tab) {
         currentMarketTab = tab;
@@ -1978,18 +2148,33 @@
         document.getElementById('market-coins').textContent = Math.floor(gameState.coins);
 
         if (tab === 'birds') {
+          const breedSelector = document.createElement('div');
+          breedSelector.className = 'shop-item';
+          breedSelector.innerHTML = '<div class="shop-info"><h4>اختر السلالة للشراء أو الإضافة للقفص</h4><p>مثال: زاجل، أرافل، أحمر، لوات، أبيض صافي</p></div>';
+          const sel = document.createElement('select');
+          sel.className = 'buy-btn';
+          BREEDS.forEach((b) => {
+            const opt = document.createElement('option');
+            opt.value = b.id;
+            opt.textContent = `${b.name} (${b.price} د.ع)`;
+            if (b.id === selectedBreedForPurchase) opt.selected = true;
+            sel.appendChild(opt);
+          });
+          sel.onchange = () => { selectedBreedForPurchase = sel.value; };
+          breedSelector.appendChild(sel);
+          marketListEl.appendChild(breedSelector);
+
           BREEDS.forEach((b) => {
             const row = document.createElement('div');
             row.className = 'shop-item';
-            row.innerHTML = `<div class="shop-info"><h4>حمام ${b.name}</h4><p>${b.info} • شراء: ${b.price} د.ع • بيع: ${b.sellPrice} د.ع</p></div><div style="display:flex;gap:4px;"><button class="buy-btn" type="button">شراء</button><button class="buy-btn sell-btn" type="button">بيع</button></div>`;
+            row.innerHTML = `<div class="shop-info"><h4>حمام ${b.name}</h4><p>${b.spec} • شراء: ${b.price} د.ع • بيع: ${b.sellPrice} د.ع</p></div><div style="display:flex;gap:4px;"><button class="buy-btn" type="button">شراء</button><button class="buy-btn sell-btn" type="button">بيع</button></div>`;
             const [buyBtn, sellBtn] = row.querySelectorAll('button');
             buyBtn.onclick = () => {
               if (gameState.coins < b.price) { showToast('رصيدك غير كافٍ!'); return; }
               gameState.coins -= b.price;
-              pigeons.push(new Pigeon(pigeons.length, b, { isInsideCoop: true }));
-              updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-              saveGameAuto();
-              renderMarketTab('birds');
+              const targetCoop = gameState.hasSecondCoop && pigeons.length % 2 === 1 ? 2 : 1;
+              pigeons.push(new Pigeon(pigeons.length, b, { coopId: targetCoop, isInsideCoop: true }));
+              updateHud(); saveGameAuto(); renderMarketTab('birds');
             };
             sellBtn.onclick = () => {
               const idx = pigeons.findIndex((p) => p.breed.id === b.id && !p.isChick);
@@ -1997,10 +2182,72 @@
               scene.remove(pigeons[idx].group);
               pigeons.splice(idx, 1);
               gameState.coins += b.sellPrice;
-              updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-              saveGameAuto();
-              renderMarketTab('birds');
+              updateHud(); saveGameAuto(); renderMarketTab('birds');
             };
+            marketListEl.appendChild(row);
+          });
+        } else if (tab === 'upgrades') {
+          const items = [
+            {
+              title: `تكبير السطح (المستوى ${gameState.roofExpandLevel})`,
+              desc: 'توسيع مساحة السطح والحدود الحرة للعب والطيور',
+              price: 150,
+              btnText: 'تكبير السطح',
+              onBuy: () => {
+                gameState.roofExpandLevel += 1;
+                rebuildMyRooftopVisuals();
+              }
+            },
+            {
+              title: `تكبير القفص الأول (المستوى ${gameState.coopExpandLevel})`,
+              desc: 'توسيع مساحة القفص الأول للحمام',
+              price: 120,
+              btnText: 'تكبير القفص',
+              onBuy: () => {
+                gameState.coopExpandLevel += 1;
+                rebuildMyRooftopVisuals();
+              }
+            },
+            {
+              title: `شراء عش الطيور (لديك: ${gameState.nests})`,
+              desc: 'عش مريح للطيور يسرّع نمو الأفراخ',
+              price: 80,
+              btnText: 'شراء عش',
+              onBuy: () => {
+                gameState.nests += 1;
+                rebuildMyRooftopVisuals();
+              }
+            },
+            {
+              title: gameState.hasSecondCoop ? 'قفص ثاني كبير (مملوك ✓)' : 'شراء قفص ثاني كبير',
+              desc: 'قفص كبير إضافي ويمكن اختياره عند الإقلاع',
+              price: 220,
+              btnText: gameState.hasSecondCoop ? 'مملوك ✓' : 'شراء القفص الثاني',
+              disabled: gameState.hasSecondCoop,
+              onBuy: () => {
+                gameState.hasSecondCoop = true;
+                rebuildMyRooftopVisuals();
+              }
+            }
+          ];
+
+          items.forEach((it) => {
+            const row = document.createElement('div');
+            row.className = 'shop-item';
+            row.innerHTML = `<div class="shop-info"><h4>${it.title}</h4><p>${it.desc}</p></div>`;
+            const btn = document.createElement('button');
+            btn.className = 'buy-btn sell-btn';
+            btn.type = 'button';
+            btn.textContent = it.disabled ? 'مملوك ✓' : `${it.btnText} (${it.price} د.ع)`;
+            btn.onclick = () => {
+              if (it.disabled) return;
+              if (gameState.coins < it.price) { showToast('رصيدك غير كافٍ!'); return; }
+              gameState.coins -= it.price;
+              it.onBuy();
+              updateHud(); saveGameAuto(); renderMarketTab('upgrades');
+              showToast(`تم تنفيذ: ${it.title}`);
+            };
+            row.appendChild(btn);
             marketListEl.appendChild(row);
           });
         } else if (tab === 'feed') {
@@ -2012,9 +2259,7 @@
               if (gameState.coins < ft.price) { showToast('رصيدك غير كافٍ!'); return; }
               gameState.coins -= ft.price;
               gameState.feeds[ft.id] = (gameState.feeds[ft.id] || 0) + ft.qty;
-              updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-              saveGameAuto();
-              renderMarketTab('feed');
+              updateHud(); saveGameAuto(); renderMarketTab('feed');
             };
             marketListEl.appendChild(row);
           });
@@ -2026,9 +2271,7 @@
               if (gameState.coins < wt.price) { showToast('رصيدك غير كافٍ!'); return; }
               gameState.coins -= wt.price;
               gameState.waters[wt.id] = (gameState.waters[wt.id] || 0) + wt.qty;
-              updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-              saveGameAuto();
-              renderMarketTab('feed');
+              updateHud(); saveGameAuto(); renderMarketTab('feed');
             };
             marketListEl.appendChild(row);
           });
@@ -2047,24 +2290,10 @@
               }
               gameState.currentSkin = sk.id;
               player.buildSkin(sk.id);
-              updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-              saveGameAuto();
-              renderMarketTab('skins');
+              updateHud(); saveGameAuto(); renderMarketTab('skins');
             };
             marketListEl.appendChild(row);
           });
-        } else if (tab === 'coop') {
-          const row = document.createElement('div');
-          row.className = 'shop-item';
-          row.innerHTML = `<div class="shop-info"><h4>أدوية وتقوية السرب</h4><p>ترفع نشاط السرب إلى 100%</p></div><button class="buy-btn sell-btn" type="button">شراء (55 د.ع)</button>`;
-          row.querySelector('button').onclick = () => {
-            if (gameState.coins < 55) { showToast('رصيدك غير كافٍ!'); return; }
-            gameState.coins -= 55;
-            gameState.flockHealth = 100;
-            updateHudStats(pigeons.filter((p) => p.state === 'FLYING').length);
-            saveGameAuto();
-          };
-          marketListEl.appendChild(row);
         }
       }
 
@@ -2072,33 +2301,99 @@
       document.getElementById('btn-close-market').addEventListener('click', () => { marketModal.style.display = 'none'; });
       document.querySelectorAll('.tab-btn').forEach((b) => { b.addEventListener('click', () => renderMarketTab(b.dataset.tab)); });
 
-      const lbModal = document.getElementById('leaderboard-modal');
-      const lbList = document.getElementById('leaderboard-list');
-      document.getElementById('btn-leaderboard').addEventListener('click', () => {
-        lbList.innerHTML = '';
-        const list = leaderboardData.length > 0
-          ? leaderboardData
-          : [{ name: `أنت (سطح #${mySlot})`, coins: Math.floor(gameState.coins), flyingCount: pigeons.filter((p) => p.state === 'FLYING').length }];
-        list.forEach((item, idx) => {
-          const r = document.createElement('div');
-          r.className = 'shop-item';
-          r.innerHTML = `<div class="shop-info"><h4>#${idx + 1} ${item.name}</h4><p>طائر بالسماء: ${item.flyingCount || 0}</p></div><div style="color:#facc15;font-weight:800;font-size:10px;">${item.coins} د.ع</div>`;
-          lbList.appendChild(r);
-        });
-        lbModal.style.display = 'flex';
+      // Visit Rooftop Modal
+      const visitModal = document.getElementById('visit-modal');
+      const visitListEl = document.getElementById('visit-players-list');
+      document.getElementById('btn-visit').addEventListener('click', () => {
+        visitListEl.innerHTML = '';
+        const others = Array.from(remotePlayers.values());
+        if (!others.length) {
+          const empty = document.createElement('div');
+          empty.className = 'shop-item';
+          empty.innerHTML = '<div class="shop-info"><h4>لا يوجد لاعبون آخرون متصلون حالياً</h4><p>افتح اللعبة من جهاز آخر للزيارة.</p></div>';
+          visitListEl.appendChild(empty);
+        } else {
+          others.forEach((entry) => {
+            const d = entry.data;
+            const row = document.createElement('div');
+            row.className = 'shop-item';
+            row.innerHTML = `<div class="shop-info"><h4>${d.name || 'لاعب'} (سطح #${d.slot || '?'})</h4><p>الرصيد: ${d.coins || 250} د.ع</p></div><button class="buy-btn equip-btn" type="button">طلب زيارة</button>`;
+            row.querySelector('button').onclick = () => {
+              visitModal.style.display = 'none';
+              if (wsClient && wsClient.readyState === WebSocket.OPEN) {
+                wsClient.send(JSON.stringify({ type: 'VISIT_REQUEST', targetId: d.id }));
+                showToast(`تم إرسال طلب زيارة إلى ${d.name}...`);
+              }
+            };
+            visitListEl.appendChild(row);
+          });
+        }
+        visitModal.style.display = 'flex';
       });
-      document.getElementById('btn-close-leaderboard').addEventListener('click', () => { lbModal.style.display = 'none'; });
+      document.getElementById('btn-close-visit').addEventListener('click', () => { visitModal.style.display = 'none'; });
 
+      document.getElementById('btn-return-home').addEventListener('click', () => {
+        visitingTarget = null;
+        player.velY = 0;
+        player.group.position.set(myRoofX + 1.2, ROOF_Y, myRoofZ + 5.2);
+        updateHud();
+        showToast('رجعت إلى سطحك.');
+      });
+
+      document.getElementById('btn-accept-visit').addEventListener('click', () => {
+        if (!pendingVisitRequester) return;
+        const req = pendingVisitRequester;
+        pendingVisitRequester = null;
+        document.getElementById('visit-request-banner').style.display = 'none';
+        currentVisitorId = req.fromId;
+        updateHud();
+        if (wsClient && wsClient.readyState === WebSocket.OPEN) {
+          wsClient.send(JSON.stringify({
+            type: 'VISIT_RESPONSE',
+            targetId: req.fromId,
+            accepted: true,
+            roofX: myRoofX,
+            roofZ: myRoofZ,
+            slot: mySlot,
+            ownerName: `مطيرجي #${mySlot}`
+          }));
+        }
+      });
+
+      document.getElementById('btn-reject-visit').addEventListener('click', () => {
+        if (!pendingVisitRequester) return;
+        const req = pendingVisitRequester;
+        pendingVisitRequester = null;
+        document.getElementById('visit-request-banner').style.display = 'none';
+        if (wsClient && wsClient.readyState === WebSocket.OPEN) {
+          wsClient.send(JSON.stringify({ type: 'VISIT_RESPONSE', targetId: req.fromId, accepted: false }));
+        }
+      });
+
+      document.getElementById('btn-kick-visitor').addEventListener('click', () => {
+        if (!currentVisitorId) return;
+        const target = currentVisitorId;
+        currentVisitorId = null;
+        updateHud();
+        if (wsClient && wsClient.readyState === WebSocket.OPEN) {
+          wsClient.send(JSON.stringify({ type: 'KICK_VISITOR', targetId: target }));
+        }
+      });
+
+      // Chat send
       const chatInput = document.getElementById('online-chat-input');
-      document.getElementById('online-chat-send').addEventListener('click', () => {
+      function submitChat() {
         const txt = chatInput.value.trim();
         if (!txt) return;
+        appendChatMessage(`أنت #${mySlot}`, txt);
         if (wsClient && wsClient.readyState === WebSocket.OPEN) {
           wsClient.send(JSON.stringify({ type: 'CHAT_MSG', text: txt }));
-        } else {
-          appendChatMessage('أنت', txt, null);
         }
         chatInput.value = '';
+      }
+      document.getElementById('online-chat-send').addEventListener('click', submitChat);
+      chatInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); submitChat(); }
       });
 
       let isFirstPerson = false;
@@ -2108,18 +2403,15 @@
         player.group.visible = !isFirstPerson;
       });
 
-      // Multi-touch safe Joystick (independent touchIdentifier)
+      document.getElementById('btn-jump').addEventListener('click', () => player.jump());
+
+      // Multi-Pointer Joystick & Camera
       const joyZone = document.getElementById('joystick-zone');
       const joyKnob = document.getElementById('joystick-knob');
-      let joyTouchId = null;
-      let joyX = 0;
-      let joyY = 0;
+      let joyPointerId = null, joyX = 0, joyY = 0;
 
-      function updateJoyFromTouch(t) {
-        const rect = joyZone.getBoundingClientRect();
+      function updateJoyKnob(dx, dy) {
         const maxR = 24;
-        const dx = t.clientX - (rect.left + rect.width / 2);
-        const dy = t.clientY - (rect.top + rect.height / 2);
         const clamped = Math.min(Math.hypot(dx, dy), maxR);
         const ang = Math.atan2(dy, dx);
         const kx = Math.cos(ang) * clamped;
@@ -2129,55 +2421,49 @@
         joyY = ky / maxR;
       }
 
-      joyZone.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        if (joyTouchId !== null) return;
-        const t = e.changedTouches[0];
-        if (!t) return;
-        joyTouchId = t.identifier;
-        updateJoyFromTouch(t);
-      }, { passive: false });
-
-      window.addEventListener('touchmove', (e) => {
-        if (joyTouchId === null) return;
-        for (let i = 0; i < e.touches.length; i++) {
-          const t = e.touches[i];
-          if (t.identifier === joyTouchId) {
-            updateJoyFromTouch(t);
-            break;
-          }
-        }
-      }, { passive: false });
-
-      function clearJoyTouch(e) {
-        if (joyTouchId === null) return;
-        for (let i = 0; i < e.changedTouches.length; i++) {
-          if (e.changedTouches[i].identifier === joyTouchId) {
-            joyTouchId = null;
-            joyX = 0;
-            joyY = 0;
-            joyKnob.style.transform = 'translate(0px, 0px)';
-            break;
-          }
-        }
-      }
-      window.addEventListener('touchend', clearJoyTouch);
-      window.addEventListener('touchcancel', clearJoyTouch);
-
-      // Multi-finger safe Camera Orbit on Canvas (independent pointerId)
-      let camYaw = 0.0;
-      let camPitch = 0.25;
-      let camPointerId = null;
-      let lastCamX = 0;
-      let lastCamY = 0;
-
-      canvas.addEventListener('pointerdown', (e) => {
-        if (camPointerId !== null) return;
-        camPointerId = e.pointerId;
-        lastCamX = e.clientX;
-        lastCamY = e.clientY;
+      joyZone.addEventListener('pointerdown', (e) => {
+        e.preventDefault(); e.stopPropagation();
+        if (joyPointerId !== null) return;
+        joyPointerId = e.pointerId;
+        try { joyZone.setPointerCapture(e.pointerId); } catch (err) {}
+        const rect = joyZone.getBoundingClientRect();
+        updateJoyKnob(e.clientX - (rect.left + rect.width / 2), e.clientY - (rect.top + rect.height / 2));
       });
 
+      joyZone.addEventListener('pointermove', (e) => {
+        if (e.pointerId !== joyPointerId) return;
+        e.preventDefault();
+        const rect = joyZone.getBoundingClientRect();
+        updateJoyKnob(e.clientX - (rect.left + rect.width / 2), e.clientY - (rect.top + rect.height / 2));
+      });
+
+      function releaseJoy(e) {
+        if (e.pointerId !== joyPointerId) return;
+        joyPointerId = null;
+        updateJoyKnob(0, 0);
+      }
+      joyZone.addEventListener('pointerup', releaseJoy);
+      joyZone.addEventListener('pointercancel', releaseJoy);
+      window.addEventListener('pointerup', releaseJoy);
+      window.addEventListener('pointercancel', releaseJoy);
+
+      const keys = {};
+      window.addEventListener('keydown', (e) => {
+        if (document.activeElement === renameInput || document.activeElement === chatInput || document.activeElement === listBirdPriceInput) return;
+        keys[e.code] = true;
+        if (e.code === 'Space') player.jump();
+      });
+      window.addEventListener('keyup', (e) => { keys[e.code] = false; });
+
+      let camYaw = 0.0, camPitch = 0.25, camPointerId = null, lastCamX = 0, lastCamY = 0;
+      canvas.addEventListener('pointerdown', (e) => {
+        if (e.pointerId === joyPointerId) return;
+        if (camPointerId === null) {
+          camPointerId = e.pointerId;
+          lastCamX = e.clientX;
+          lastCamY = e.clientY;
+        }
+      });
       window.addEventListener('pointermove', (e) => {
         if (e.pointerId !== camPointerId) return;
         camYaw -= (e.clientX - lastCamX) * 0.0065;
@@ -2185,20 +2471,9 @@
         lastCamX = e.clientX;
         lastCamY = e.clientY;
       });
-
-      function releaseCamPointer(e) {
-        if (e.pointerId === camPointerId) camPointerId = null;
-      }
-      window.addEventListener('pointerup', releaseCamPointer);
-      window.addEventListener('pointercancel', releaseCamPointer);
-
-      const keys = {};
-      window.addEventListener('keydown', (e) => {
-        if (document.activeElement === renameInput || document.activeElement === chatInput) return;
-        keys[e.code] = true;
-        if (e.code === 'Space') player.jump();
-      });
-      window.addEventListener('keyup', (e) => { keys[e.code] = false; });
+      function releaseCam(e) { if (e.pointerId === camPointerId) camPointerId = null; }
+      window.addEventListener('pointerup', releaseCam);
+      window.addEventListener('pointercancel', releaseCam);
 
       window.addEventListener('resize', () => {
         camera.aspect = (window.innerWidth || 1280) / (window.innerHeight || 720);
@@ -2206,21 +2481,13 @@
         renderer.setSize(window.innerWidth || 1280, window.innerHeight || 720);
       });
 
-      let prevTime = performance.now();
-      let elapsed = 0;
-      let hudSync = 0;
-      let netSync = 0;
-      let saveSync = 0;
+      let prevTime = performance.now(), elapsed = 0, hudSync = 0, netSync = 0, saveSync = 0;
 
       function animate(now) {
         requestAnimationFrame(animate);
         const dt = Math.min((now - prevTime) / 1000, 0.05);
         prevTime = now;
         elapsed += dt;
-
-        if (myRoofParts.doorPivot) {
-          myRoofParts.doorPivot.rotation.y += ((COOP.isOpen ? -Math.PI * 0.62 : 0) - myRoofParts.doorPivot.rotation.y) * Math.min(1, dt * 8);
-        }
 
         if (gameState.activeFeedPile) {
           gameState.activeFeedPile.timer -= dt;
@@ -2229,23 +2496,20 @@
         if (gameState.activeWaterPile) {
           gameState.activeWaterPile.timer -= dt;
           if (gameState.activeWaterPile.timer <= 0) {
-            waterSurface.visible = false;
+            if (waterSurface) waterSurface.visible = false;
             gameState.activeWaterPile = null;
           }
         }
 
-        let moveForward = -joyY;
-        let moveRight = joyX;
+        let moveForward = -joyY, moveRight = joyX;
         if (keys['KeyW'] || keys['ArrowUp']) moveForward += 1;
         if (keys['KeyS'] || keys['ArrowDown']) moveForward -= 1;
         if (keys['KeyD'] || keys['ArrowRight']) moveRight += 1;
         if (keys['KeyA'] || keys['ArrowLeft']) moveRight -= 1;
         player.update(dt, moveForward, moveRight, camYaw);
 
-        let flyingCount = 0;
         for (let i = 0; i < pigeons.length; i++) {
           pigeons[i].update(dt, elapsed, pigeons);
-          if (pigeons[i].state === 'FLYING') flyingCount++;
         }
 
         if (isFirstPerson) {
@@ -2272,27 +2536,18 @@
         }
 
         hudSync += dt;
-        if (hudSync >= 0.25) {
-          hudSync = 0;
-          updateHudStats(flyingCount);
-        }
+        if (hudSync >= 0.25) { hudSync = 0; updateHud(); }
 
         netSync += dt;
-        if (netSync >= 0.1) {
-          netSync = 0;
-          sendOnlineState(flyingCount);
-        }
+        if (netSync >= 0.08) { netSync = 0; sendOnlineState(); }
 
         saveSync += dt;
-        if (saveSync >= 12) {
-          saveSync = 0;
-          saveGameAuto();
-        }
+        if (saveSync >= 12) { saveSync = 0; saveGameAuto(); }
 
         renderer.render(scene, camera);
       }
 
-      updateHudStats(0);
+      updateHud();
       requestAnimationFrame(animate);
     }
   </script>
